@@ -1,0 +1,16 @@
+﻿{"id":[{"id":"Dashboard","value":"Beranda"},{"id":"Finger Print","value":"Mesin Absen"},{"id":"Attendance","value":"Absensi"}
+,{"id":"Module Finger Print","value":"Modul Mesin Absensi"},{"id":"Late Attendance List","value":"Daftar Absensi Terlambat"},
+{"id":"Recruitment","value":"Perekrutan"},{"id":"Print Id Card","value":"Cetak Kartu Id"},{"id":"Doc Archive","value":"Dokumen"}
+,{"id":"Multiple Documents","value":"Multi Dokumen"},{"id":"Payroll","value":"Gaji"},{"id":"Print Salary","value":"Cetak Slip Gaji"},
+{"id":"Add Finger Print Employee","value":"Tambah Sidik Jari Karyawan"},{"id":"Application Letter","value":"Surat Lamaran"},
+{"id":"Employee","value":"Karyawan"}
+],
+
+"us":[{"id":"Beranda","value":"Dashboard"},{"id":"Mesin Absen","value":"Finger Print"},{"id":"Absensi","value":"Attendance"}
+,{"id":"Modul Mesin Absensi","value":"Module Finger Print"},{"id":"Daftar Absensi Terlambat","value":"Late Attendance List"},
+{"id":"Perekrutan","value":"Recruitment"},{"id":"Cetak Kartu Id","value":"Print Id Card"},{"id":"Dokumen","value":"Doc Archive"},
+{"id":"Multi Dokumen","value":"Multiple Documents"},{"id":"Gaji","value":"Payroll"},{"id":"Cetak Slip Gaji","value":"Print Salary"},
+{"id":"Tambah Sidik Jari Karyawan","value":"Add Finger Print Employee"},{"id":"Surat Lamaran","value":"Application Letter"},
+{"id":"Karyawan","value":"Employee"}
+]
+}
