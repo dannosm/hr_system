@@ -45,7 +45,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-inline-block">
-                                            <h5 class="text-muted">Total Employee</h5>
+                                            <h5 class="text-muted ">Total <span class="language" >Employee</span></h5>
                                             <h2 class="mb-0"> 1000</h2>
                                         </div>
                                         <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
@@ -64,7 +64,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-inline-block">
-                                            <h5 class="text-muted">Total Absent</h5>
+                                            <h5 class="text-muted ">Total <span class="language" >Absent</span></h5>
                                             <h2 class="mb-0"> 22</h2>
                                         </div>
                                         <div class="float-right icon-circle-medium  icon-box-lg  bg-primary-light mt-1">
@@ -83,7 +83,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-inline-block">
-                                            <h5 class="text-muted">Total Permit</h5>
+                                            <h5 class="text-muted ">Total <span class="language" >Permit</span></h5>
                                             <h2 class="mb-0">14</h2>
                                         </div>
                                         <div class="float-right icon-circle-medium  icon-box-lg  bg-secondary-light mt-1">
@@ -102,7 +102,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-inline-block">
-                                            <h5 class="text-muted">Total Leave</h5>
+                                            <h5 class="text-muted ">Total <span class="language" >Leave</span></h5>
                                             <h2 class="mb-0">10</h2>
                                         </div>
                                         <div class="float-right icon-circle-medium  icon-box-lg  bg-brand-light mt-1">
@@ -124,7 +124,7 @@
                             <!-- ============================================================== -->
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Late Chart</h5>
+                                    <h5 class="card-header language">Late Chart</h5>
                                     <div class="card-body">
                                         <div id="gender_donut" style="height: 230px;"></div>
                                     </div>
@@ -148,7 +148,7 @@
                             <!-- ============================================================== -->
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Permission Chart</h5>
+                                    <h5 class="card-header language">Permission Chart</h5>
                                     <div class="card-body">
                                         <canvas id="chartjs_bar"></canvas>
                                     </div>

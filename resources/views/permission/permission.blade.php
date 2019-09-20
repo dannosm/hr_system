@@ -20,10 +20,10 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">PERMISSION</h4>
+                                        <h4 class="card-header-title language big-text">PERMISSION</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm" id="deleteBtn">Delete</a>
-                                            <a href="{{url('/permission/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i> Add</a>
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a>
+                                            <a href="{{url('/permission/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i><span class="language" > Add</span></a>
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -34,13 +34,13 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="select_all" name="select_all" title="checked all" ></th>
-                            <th>Employee</th>
-                            <th>Category</th>
-                            <th>Date Start</th>
-                            <th>Date End</th>
-                            <th>Days</th>
-                            <th>Decsription</th>
-                            <th>Option</th>
+                            <th class="language">Employee</th>
+                            <th class="language">Category</th>
+                            <th class="language">Date Start</th>
+                            <th class="language">Date End</th>
+                            <th class="language">Days</th>
+                            <th class="language">Description</th>
+                            <th class="language">Option</th>
                         </tr>
                     </thead>
                     <tbody id="list-ready">
@@ -105,7 +105,7 @@ function load_data(){
 
     { data: null, render: function ( data, type, row ) {
             let id = "{{URL::to('/')}}/permission/edit/"+data['id'];
-            return '<a href="'+id+'" class="btn btn-rounded btn-primary">Edit</a>';
+            return '<a href="'+id+'" class="btn btn-rounded btn-primary language">Edit</a>';
         } },
     ],
     "columnDefs": [ {

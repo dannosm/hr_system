@@ -27,6 +27,9 @@
 ,{"id":"Transport Allowance","value":"Tunjangan Transportasi"},{"id":"Commision","value":"Komisi"},{"id":"Out Of Town Allowance","value":"Tunjangan Luar Kota"}
 ,{"id":"View","value":"Lihat"},{"id":"Add Users","value":"Tambah User"},{"id":"Edit Users","value":"Ubah User"},{"id":"Logout","value":"Keluar"}
 
+,{"id":"Absent","value":"Tidak Masuk"},{"id":"Permit","value":"Izin"},{"id":"Late Chart","value":"Grafik Keterlambatan"},{"id":"Permission Chart","value":"Grafik Izin"}
+,{"id":"Category","value":"Kategori"},{"id":"Date Start","value":"Dari Tanggal"},{"id":"Date End","value":"Sampai Tanggal"},{"id":"Days","value":"Hari"}
+,{"id":"Add Permission","value":"Tambah Izin"},{"id":"Edit Permission","value":"Ubah Izin"}
 ],
 
 "us":[{"id":"Beranda","value":"Dashboard"},{"id":"Mesin Absen","value":"Finger Print"},{"id":"Absensi","value":"Attendance"}

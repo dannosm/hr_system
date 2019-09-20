@@ -23,10 +23,10 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">ADD PERMISSION</h4>
+                                        <h4 class="card-header-title language big-text">ADD PERMISSION</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="#" class="btn btn-primary btn-sm" id="saveAdd"><i class="fa fa-save"></i> Save</a>
-                                            <a href="{{url('/permission')}}" class="btn btn-dark btn-sm "><i class="fas fa-sign-out-alt"></i> Back</a>
+                                            <a href="#" class="btn btn-primary btn-sm" id="saveAdd"><i class="fa fa-save"></i> <span class="language" >Save</span></a>
+                                            <a href="{{url('/permission')}}" class="btn btn-dark btn-sm "><i class="fas fa-sign-out-alt"></i> <span class="language" >Back</span></a>
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -34,44 +34,44 @@
                             <div id="loading_alerts" class="col-md-12" align="center"></div>
                             <!--card-body-->
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Employee Name</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Name</label>
                                             <div class="col-9 col-lg-10">
                                                <select class="form-control enter_tab input_validasi select_data" data-nextTab='1' name="employee">
-                                                   <option>Choose</option>
+                                                   <option class="language">Choose</option>
                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Category</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Category</label>
                                             <div class="col-9 col-lg-10">
                                                  <select class="form-control enter_tab input_validasi "  name="category">
-                                                   <option value="">Choose</option>
-                                                   <option value="sick">Sick</option>
-                                                   <option value="permit">Permit</option>
-                                                   <option value="outstation">OutStation</option>
-                                                   <option value="late">Late</option>
-                                                   <option value="leave">Leave</option>
-                                                   <option value="paid_leave">Paid Leave</option>
-                                                   <option value="special_permission">Special Permission</option>
-                                                   <option value="remaining_leave">Remaining Leave</option>
-                                                   <option value="other">other</option>
+                                                   <option value="" class="language">Choose</option>
+                                                   <option value="sick" class="language">Sick</option>
+                                                   <option value="permit" class="language">Permit</option>
+                                                   <option value="outstation" class="language">OutStation</option>
+                                                   <option value="late" class="language">Late</option>
+                                                   <option value="leave" class="language">Leave</option>
+                                                   <option value="paid_leave" class="language">Paid Leave</option>
+                                                   <option value="special_permission" class="language">Special Permission</option>
+                                                   <option value="remaining_leave" class="language">Remaining Leave</option>
+                                                   <option value="other" class="language">other</option>
                                                </select>
                                             </div>
                                         </div>
                                          <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Date Start</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Date Start</label>
                                             <div class="col-9 col-lg-10">
                                              <input type="text" class="form-control enter_tab input_validasi datepicker dateDiff" name="date_start" id="date_start"  autocomplete="off" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Date End</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Date End</label>
                                             <div class="col-9 col-lg-10">
                                             <input type="text" class="form-control enter_tab input_validasi datepicker dateDiff" name="date_end" id="date_end"  autocomplete="off" />
                                             </div>
                                         </div>
                                          <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Days</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Days</label>
                                             <div class="col-9 col-lg-10">
                                               <input type="number" name="days" readonly class="form-control enter_tab input_validasi " id="days"style="width:10%">
                                               
@@ -79,7 +79,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Description</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Description</label>
                                             <div class="col-9 col-lg-10">
                                               <textarea class="form-control enter_tab input_validasi"  name="description"></textarea>
                                             </div>
