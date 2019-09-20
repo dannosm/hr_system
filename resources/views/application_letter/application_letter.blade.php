@@ -20,10 +20,10 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">APPLICATION LETTER</h4>
+                                        <h4 class="card-header-title language big-text">APPLICATION LETTER</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm" id="deleteBtn">Delete</a>
-                                            <a href="{{url('/application-letter/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i> Add</a>
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a>
+                                            <a href="{{url('/application-letter/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i> <span class="language">Add</span></a>
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -34,9 +34,9 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="select_all" name="select_all" title="checked all" ></th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Option</th>
+                            <th class="language">Title</th>
+                            <th class="language">Description</th>
+                            <th class="language">Option</th>
                         </tr>
                     </thead>
                     <tbody id="list-ready">
@@ -96,7 +96,7 @@ function load_data(){
             // Combine the first and last names into a single table field
             let id = "{{URL::to('/')}}/application-letter/edit/"+data['id'];
             let image= "{{URL::to('/')}}/application_letter/"+data['file_name'];
-            return '<a href="javascript:void(0)" class="btn btn-rounded btn-info" onclick="errors.file_download(\''+image+'\')">Download</a>&nbsp;<a href="'+id+'" class="btn btn-rounded btn-primary">Edit</a>';
+            return '<a href="javascript:void(0)" class="btn btn-rounded btn-info language" onclick="errors.file_download(\''+image+'\')">Download</a>&nbsp;<a href="'+id+'" class="btn btn-rounded btn-primary language">Edit</a>';
         } },
     ],
     "columnDefs": [ {

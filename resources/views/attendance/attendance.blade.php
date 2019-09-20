@@ -20,10 +20,10 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">Attendance List</h4>
+                                        <h4 class="card-header-title language">Attendance List</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="#" class="btn btn-success btn-sm"><i class="fas fa-play"></i> Finger Print</a>
-                                            <a href="#" class="btn btn-primary btn-sm "><i class="fas fa-sync-alt"></i> Update Data</a>
+                                            <a href="#" class="btn btn-success btn-sm"><i class="fas fa-play"></i> <span class="language">Finger Print</span></a>
+                                            <a href="#" class="btn btn-primary btn-sm "><i class="fas fa-sync-alt"></i> <span class="language">Update Data</span></a>
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -31,10 +31,10 @@
                                      <table class="table table-striped table-bordered" id="attendace_list">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Check in</th>
-                            <th>Check out</th>
-                            <th>Description</th>
+                            <th class="language">Name</th>
+                            <th class="language">Check In</th>
+                            <th class="language">Check Out</th>
+                            <th class="language">Description</th>
                         </tr>
                     </thead>
                     <tbody id="list-ready">

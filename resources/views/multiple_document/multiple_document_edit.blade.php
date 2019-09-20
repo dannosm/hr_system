@@ -20,11 +20,11 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">EDIT MULTIPLE DOCUMENT</h4>
+                                        <h4 class="card-header-title language big-text">EDIT MULTIPLE DOCUMENT</h4>
 
                                         <div class="toolbar ml-auto">
-                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm" id="saveAdd"><i class="fa fa-save"></i> Save</a>
-                                            <a href="{{url('/multiple-documents')}}" class="btn btn-dark btn-sm "><i class="fas fa-sign-out-alt"></i> Back</a>
+                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm" id="saveAdd"><i class="fa fa-save"></i> <span class="language" >Save</span></a>
+                                            <a href="{{url('/multiple-documents')}}" class="btn btn-dark btn-sm "><i class="fas fa-sign-out-alt"></i> <span class="language" >Back</span></a>
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -36,17 +36,17 @@
 
                                         @csrf      
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Title</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Title</label>
                                             <div class="col-9 col-lg-10">
                                                 <input type="text" class="form-control enter_tab input_validasi " data-nextTab='1' name="title" value="{{$data->title}}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Type</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Type</label>
                                             <div class="col-9 col-lg-10">
                                                 
                                                 <select name="type" class="form-control enter_tab input_validasi " data-nextTab='2' name="type" id="type">
-                                                    <option value="">Choose</option>
+                                                    <option value="" class="language">Choose</option>
                                                     <option value="pdf">PDF</option>
                                                     <option value="doc">DOC</option>
                                                     <option value="csv">CSV</option>
@@ -57,13 +57,13 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Description</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Description</label>
                                             <div class="col-9 col-lg-10">
                                                 <textarea name="description" class="form-control enter_tab input_validasi " data-nextTab='3'>{{$data->description}}</textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Upload File</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Upload File</label>
                                             <div class="col-9 col-lg-10">
                                                 <input type="file" name="files">
                                             </div>

@@ -20,10 +20,10 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">USER MASTER</h4>
+                                        <h4 class="card-header-title language big-text">USERS MASTER</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm" id="deleteBtn">Delete</a>
-                                            <a href="{{url('/users/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i> Add</a>
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a>
+                                            <a href="{{url('/users/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i><span class="language" > Add</span></a>
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -34,10 +34,10 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="select_all" name="select_all" title="checked all" ></th>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Option</th>
+                            <th class="language">Name</th>
+                            <th class="language">Username</th>
+                            <th class="language">Email</th>
+                            <th class="language">Option</th>
                         </tr>
                     </thead>
                     <tbody id="list-ready">
@@ -97,7 +97,7 @@ function load_data(){
     { data: null, render: function ( data, type, row ) {
             // Combine the first and last names into a single table field
             let id = "{{URL::to('/')}}/users/edit/"+data['id'];
-            return '<a href="#" class="btn btn-rounded btn-info">View</a>&nbsp;<a href="'+id+'" class="btn btn-rounded btn-primary">Edit</a>';
+            return '<a href="#" class="btn btn-rounded btn-info language">View</a>&nbsp;<a href="'+id+'" class="btn btn-rounded btn-primary language">Edit</a>';
         } },
     ],
     "columnDefs": [ {

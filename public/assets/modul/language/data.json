@@ -1,0 +1,63 @@
+﻿{"id":[{"id":"Dashboard","value":"Beranda"},{"id":"Finger Print","value":"Mesin Absen"},{"id":"Attendance","value":"Absensi"}
+,{"id":"Module Finger Print","value":"Modul Mesin Absensi"},{"id":"Late Attendance List","value":"Daftar Absensi Terlambat"},
+{"id":"Recruitmen","value":"Perekrutan"},{"id":"Print Id Card","value":"Cetak Kartu Id"},{"id":"Doc Archive","value":"Dokumen"}
+,{"id":"Multiple Documents","value":"Multi Dokumen"},{"id":"Payroll","value":"Gaji"},{"id":"Print Salary","value":"Cetak Slip Gaji"},
+{"id":"Add Finger Print Employee","value":"Tambah Sidik Jari Karyawan"},{"id":"Application Letter","value":"Surat Lamaran"},
+{"id":"Employee","value":"Karyawan"},{"id":"Permission","value":"Izin"},{"id":"Employee","value":"Karyawan"},{"id":"Division","value":"Divisi"},
+{"id":"Position","value":"Jabatan"},{"id":"Loan","value":"Pinjaman"},{"id":"Shift","value":"Shift"},{"id":"General Setting","value":"Pengaturan Umum"},
+{"id":"Users Master","value":"Users Admin"},{"id":"Role","value":"Hak Akses"},{"id":"Config","value":"Pengaturan"},
+{"id":"Name","value":"Nama"},{"id":"Check In","value":"Jam Masuk"},{"id":"Check Out","value":"Jam Keluar"},{"id":"Description","value":"Keterangan"},
+{"id":"Attendance List","value":"Daftar Absensi"},{"id":"Update Data","value":"Perbarui Data"},{"id":"Title","value":"Judul"},
+{"id":"Option","value":"Aksi"},{"id":"Delete","value":"Hapus"},{"id":"Add","value":"Tambah"},{"id":"Edit","value":"Ubah"},
+{"id":"Download","value":"Unduh"},{"id":"Save","value":"Simpan"},{"id":"Back","value":"Kembali"},{"id":"Add Application Letter","value":"Tambah Surat Lamaran"}
+,{"id":"Edit Application Letter","value":"Ubah Surat Lamaran"},{"id":"Type","value":"Tipe"},{"id":"Choose","value":"Pilih"},{"id":"Add Multiple Documents","value":"Tambah Multi Dokumen"}
+,{"id":"Telephone","value":"Telepon"},{"id":"Account","value":"Akun"},{"id":"Add Employee","value":"Tambah Karyawan"},
+{"id":"Gender","value":"Jenis Kelamin"},{"id":"Male","value":"Laki-laki"},{"id":"Female","value":"Perempuan"},{"id":"Leave","value":"Cuti"}
+,{"id":"Profile","value":"Profil"},{"id":"Company","value":"Perusahaan"},{"id":"Salary","value":"Gaji"}
+
+,{"id":"ID Card","value":"KTP"},{"id":"Birth Place","value":"Tempat Lahir"},	{"id":"Birth Day","value":"Tanggal Lahir"}
+,{"id":"Marriage","value":"Status Menikah"},{"id":"Single","value":"Belum Menikah"},{"id":"Married","value":"Menikah"},{"id":"Widow","value":"Duda"}
+,{"id":"Widower","value":"Janda"},{"id":"Bank Name","value":"Nama Bank"},{"id":"Bank Account","value":"Rekening Bank"},{"id":"Country","value":"Negara"}
+,{"id":"Avatar","value":"Foto"},{"id":"Address","value":"Alamat"},{"id":"Religion","value":"Agama"}
+,{"id":"Join At","value":"Tanggal Bergabung"},{"id":"Date Contract","value":"Tanggal Kontrak"},{"id":"Employment","value":"Status Kerja"}
+,{"id":"Permanent","value":"Permanen"},{"id":"Contract","value":"Kontrak"},{"id":"Freelance","value":"Pekerja Lepas"},{"id":"Parttime","value":"Paruh Waktu"}
+,{"id":"Trial","value":"Uji Coba"}
+
+,{"id":"Basic Salary","value":"Gaji Pokok"},{"id":"Position Allowance","value":"Tunjangan Jabatan"},{"id":"Meal Allowance","value":"Tunjangan Makan"}
+,{"id":"Transport Allowance","value":"Tunjangan Transportasi"},{"id":"Commision","value":"Komisi"},{"id":"Out Of Town Allowance","value":"Tunjangan Luar Kota"}
+,{"id":"View","value":"Lihat"},{"id":"Add Users","value":"Tambah User"},{"id":"Edit Users","value":"Ubah User"},{"id":"Logout","value":"Keluar"}
+
+],
+
+"us":[{"id":"Beranda","value":"Dashboard"},{"id":"Mesin Absen","value":"Finger Print"},{"id":"Absensi","value":"Attendance"}
+,{"id":"Modul Mesin Absensi","value":"Module Finger Print"},{"id":"Daftar Absensi Terlambat","value":"Late Attendance List"},
+{"id":"Perekrutan","value":"Recruitmen"},{"id":"Cetak Kartu Id","value":"Print Id Card"},{"id":"Dokumen","value":"Doc Archive"},
+{"id":"Multi Dokumen","value":"Multiple Documents"},{"id":"Gaji","value":"Payroll"},{"id":"Cetak Slip Gaji","value":"Print Salary"},
+{"id":"Tambah Sidik Jari Karyawan","value":"Add Finger Print Employee"},{"id":"Surat Lamaran","value":"Application Letter"},
+{"id":"Karyawan","value":"Employee"},{"id":"Izin","value":"Permission"},{"id":"Divisi","value":"Division"},
+{"id":"Jabatan","value":"Position"},{"id":"Pinjaman","value":"Loan"},{"id":"Shift","value":"Shift"},
+{"id":"Pengaturan Umum","value":"General Setting"},{"id":"Users Admin","value":"Users Master"},{"id":"Hak Akses","value":"Role"},
+{"id":"Pengaturan","value":"Config"},
+{"id":"Nama","value":"Name"},{"id":"Jam Masuk","value":"Check In"},{"id":"Jam Keluar","value":"Check Out"},{"id":"Keterangan","value":"Description"},
+{"id":"Daftar Masuk","value":"Attendance List"},{"id":"Perbarui Data","value":"Update Data"},{"id":"Judul","value":"Title"},{"id":"Aksi","value":"Option"},
+{"id":"Hapus","value":"Delete"},{"id":"Tambah","value":"Add"},{"id":"Ubah","value":"Edit"},{"id":"Undu","value":"Download"},
+{"id":"Simpan","value":"Save"},{"id":"Kembali","value":"Back"},{"id":"Tambah Surat Lamaran","value":"Add Application Letter"},
+{"id":"Ubah Surat Lamaran","value":"Edit Application Letter"},{"id":"Tipe","value":"Type"},{"id":"Pilih","value":"Choose"},
+{"id":"Tambah Multi Dokumen","value":"Add Multiple Documents"},{"id":"Telepon","value":"Telephone"},{"id":"Akun","value":"Account"}
+,{"id":"Tambah Karyawan","value":"Add Employee"},{"id":"Jenis Kelamin","value":"Gender"},{"id":"Laki-laki","value":"Male"},
+{"id":"Perempuan","value":"Female"},{"id":"Cuti","value":"Leave"},{"id":"Gaji","value":"Salary"}
+
+,{"id":"KTP","value":"ID Card"},{"id":"Tempat Lahir","value":"Birth Place"},{"id":"Tanggal Lahir","value":"Birth Day"}
+,{"id":"Status Menikah","value":"Marriage"},{"id":"Belum Menikah","value":"Single"},{"id":"Menikah","value":"Married"},{"id":"Duda","value":"Widow"}
+,{"id":"Janda","value":"Widower"},{"id":"Nama Bank","value":"Bank Name"},{"id":"Rekening Bank","value":"Bank Account"},{"id":"Negara","value":"Country"}
+,{"id":"Foto","value":"Avatar"},{"id":"Alamat","value":"Address"},{"id":"Agama","value":"Religion"}
+,{"id":"Tanggal Bergabung","value":"Join At"},{"id":"Tanggal Kontrak","value":"Date Contract"},{"id":"Status Kerja","value":"Employment"}
+,{"id":"Permanen","value":"Permanent"},{"id":"Kontrak","value":"Contract"},{"id":"Pekerja Lepas","value":"Freelance"},{"id":"Paruh Waktu","value":"Parttime"}
+,{"id":"Uji Coba","value":"Trial"}
+
+,{"id":"Gaji Pokok","value":"Basic Salary"},{"id":"Tunjangan Jabatan","value":"Position Allowance"},{"id":"Tunjangan Makan","value":"Meal Allowance"}
+,{"id":"Tunjangan Transportasi","value":"Transport Allowance"},{"id":"Komisi","value":"Commision"},{"id":"Tunjangan Luar Kota","value":"Out Of Town Allowance"}
+,{"id":"Lihat","value":"View"},{"id":"Tambah User","value":"Add Users"},{"id":"Ubah User","value":"Edit Users"},{"id":"Keluar","value":"Logout"}
+
+]
+}

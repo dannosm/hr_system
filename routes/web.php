@@ -29,6 +29,10 @@ Route::post('/users/get', 'userController@user_get');
 Route::post('/users/save', 'userController@user_save');
 Route::post('/users/update', 'userController@user_update');
 Route::post('/users/delete', 'userController@user_delete');
+Route::post('/users/check_language', 'userController@user_language');
+Route::post('/users/save_language', 'userController@save_language');
+
+
 
 //employee
 Route::get('/employee', 'employeeController@index');

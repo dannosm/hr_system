@@ -1,3 +1,4 @@
+var errors = new error_massage;
  $.fn.input_validasi = function (options) {
   
     var error = true;
@@ -22,7 +23,7 @@
 
 
   })
-
+      errors.failed_validasi_input();
    return error  ; 
  
  };

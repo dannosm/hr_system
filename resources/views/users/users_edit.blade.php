@@ -20,10 +20,10 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">EDIT USERS</h4>
+                                        <h4 class="card-header-title language big-text">EDIT USERS</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="#" class="btn btn-primary btn-sm" id="saveAdd"><i class="fa fa-save"></i> Save</a>
-                                            <a href="{{url('/users')}}" class="btn btn-dark btn-sm "><i class="fas fa-sign-out-alt"></i> Back</a>
+                                            <a href="#" class="btn btn-primary btn-sm" id="saveAdd"><i class="fa fa-save"></i><span class="language" >Save</span></a>
+                                            <a href="{{url('/users')}}" class="btn btn-dark btn-sm "><i class="fas fa-sign-out-alt"></i> <span class="language" >Back</span></a>
                                         </div> 
                                     </div>
                             <div class="card-body">
@@ -34,19 +34,19 @@
                             <!--end massage card-->
                              
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Name</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Name</label>
                                             <div class="col-9 col-lg-10">
                                                 <input id="inputEmail2" type="text" required="" data-parsley-type="email" placeholder="Nama" class="form-control enter_tab input_validasi " data-nextTab='1' name="name" value="{{$user->name}}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">username</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">username</label>
                                             <div class="col-9 col-lg-10">
                                                 <input id="inputEmail2" type="text" required="" placeholder="User Name" class="form-control enter_tab input_validasi" data-nextTab='2' name="username" value="{{$user->username}}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Email</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Email</label>
                                             <div class="col-9 col-lg-10">
                                                 <input id="email" type="email" required="" data-parsley-type="email" placeholder="Email" class="form-control enter_tab input_validasi" data-nextTab='3' name="email" value="{{$user->email}}" >
                                             </div>

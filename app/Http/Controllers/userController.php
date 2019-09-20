@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\userModel;
 use Illuminate\Support\Facades\Hash;
+use Auth;
 
 
 
@@ -96,4 +97,31 @@ class userController extends Controller
             return json_encode(array('msg'=>'gagal', 'content'=>$e->getMessage(), 'success'=>FALSE, 'token_status'=>'invalid'));          
         }  
     }
+
+
+    function user_language(Request $request){
+        $id = Auth::user()->id;
+        $user = userModel::user_get_by_id($id);
+        if (!empty($user)) {
+            return json_encode(array('bhs' =>$user[0]->user_language));
+        }
+            return json_encode(array('bhs' =>'id'));
+    }
+
+
+    function save_language(Request $request){
+        try{
+             $id = Auth::user()->id;
+             $add = userModel::where('id', $id)->firstOrFail();
+             $add->user_language = $request->get('id');
+             $result = $add->save();
+            
+            return json_encode(array('bhs' =>$request->get('id')));    
+
+        } catch (Exception $e) {
+            return json_encode(array('msg'=>'gagal', 'content'=>$e->getMessage(), 'success'=>FALSE, 'token_status'=>'invalid'));          
+        }  
+    }
+
+
 }

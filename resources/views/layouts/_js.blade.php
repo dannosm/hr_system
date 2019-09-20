@@ -21,6 +21,20 @@
                          <script src="{{URL::to('/')}}/assets/modul/enter_tab/enter_tab.js"></script>
                          <script src="{{URL::to('/')}}/assets/modul/select_delete/select_delete.js"></script>
                          <script src="{{URL::to('/')}}/assets/modul/select2/select2.min.js"></script>
+                         <script src="{{URL::to('/')}}/assets/modul/language/language.js"></script>
                          <script src="{{URL::to('/')}}/assets/modul/select2_modified/select2_modified.js"></script>
                          <script src="{{URL::to('/')}}/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
                          <script src="{{URL::to('/')}}/assets/vendor/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+@csrf
+
+        <script type="text/javascript">
+                var language = new language();
+                //language.change({id:'id'});
+                language.check_language({url:"{{url('/users/check_language')}}",url_asset:"{{URL::to('/')}}/assets/modul/language/data.json",token:$("input[name='_token']").val()});
+
+                function change_language(id) {
+                     language.save_language({id:id,url:"{{url('/users/save_language')}}",url_asset:"{{URL::to('/')}}/assets/modul/language/data.json",token:$("input[name='_token']").val()});
+                }
+
+            </script>

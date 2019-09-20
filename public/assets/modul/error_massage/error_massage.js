@@ -16,6 +16,14 @@ error_massage.prototype.failed = function (options) {
 	setTimeout(function(){ $(options.id).fadeOut() }, 3000); 	
   
 };
+error_massage.prototype.failed_validasi_input = function (options) {  
+
+  $("#massage_errors").html("");
+  $("#massage_errors").append(this.html('danger','Field Required or Format Input Wrong'));
+  $("massage_errors").fadeIn();
+  setTimeout(function(){ $("#massage_errors").fadeOut() }, 3000); 
+  
+};
 error_massage.prototype.html =function(alerts,msg){
 return '<div class="alert alert-'+alerts+' alert-dismissible fade show" role="alert">'
 		+msg+
