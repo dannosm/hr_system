@@ -29,7 +29,6 @@
 	     	load_data();
 	     	errors.loading({id:"#loading_alerts",type:'hide'});
 	          if(response.success == true){
-	               $("input.form-control").val("");
 	               errors.success({id:"#massage_errors",msg:response.msg});
 	          }else{
 	                errors.failed({id:"#massage_errors",msg:response.msg});

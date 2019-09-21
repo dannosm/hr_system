@@ -22,8 +22,11 @@ var errors = new error_massage;
     }
 
 
-  })
-      errors.failed_validasi_input();
+  })  
+
+      if(error == false){
+        errors.failed_validasi_input();
+      }
    return error  ; 
  
  };

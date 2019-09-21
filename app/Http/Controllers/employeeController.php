@@ -209,11 +209,11 @@ class employeeController extends Controller
 
     function employee_delete(Request $request){
         try{
-            $delete = employeeModel::employee_delete($request);
+            $delete1 = employeeModel::employee_delete($request);
             $delete = employeeDetailModel::employee_detail_delete($request);
             $delete = employeeSalaryModel::employee_salary_delete($request);
 
-            return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete, 'success'=>TRUE));    
+            return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete1, 'success'=>TRUE));    
         }catch (Exception $e) {
             return json_encode(array('msg'=>'gagal', 'content'=>$e->getMessage(), 'success'=>FALSE, 'token_status'=>'invalid'));          
         }  

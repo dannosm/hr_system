@@ -27,6 +27,8 @@
                                         </div>
                                     </div>
                             <div class="card-body">
+                                 <div id="massage_errors"></div>
+                                 <div id="loading_alerts" class="col-md-12" align="center"></div>
                                 <div class="table-responsive ov-hd">
                                 <table class="table table-striped table-bordered" id="attendace_list">
                     <thead>

@@ -52,7 +52,7 @@
                                          <div class="form-group row">
                                             <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Late Limit</label>
                                             <div class="col-9 col-lg-10">
-                                                <input id="lastButton" type="text" required="" data-parsley-type="email" placeholder="Exp 15 Minute" class="form-control enter_tab input_validasi"  name="late_limit" value="{{$data->late_limit}}">
+                                                <input id="lastButton" type="number" required="" data-parsley-type="email" placeholder="Exp 15 Minute" class="form-control enter_tab input_validasi_number"  name="late_limit" value="{{$data->late_limit}}">
                                             </div>
                                         </div>
                                        
@@ -91,8 +91,10 @@ $("#lastButton").keyup(function(e){
 $("#saveAdd").click(function(){
   errors.loading({id:"#loading_alerts",type:'show'});
   var validasi1 = $(".input_validasi").input_validasi({type:'required'});
+  var validasi2 = $(".input_validasi_number").input_validasi({type:'required,number'});
 
- if(validasi1 == false){
+
+ if(validasi1 == false || validasi2 == false){
     errors.loading({id:"#loading_alerts",type:'hide'});
     return;
  }else{
