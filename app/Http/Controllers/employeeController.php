@@ -117,7 +117,7 @@ class employeeController extends Controller
     function employee_edit($id){
 
          $data = employeeModel::employee_get_by_id($id);
- 
+
          return view('employee.employee_edit')->with('data',$data[0]);
     }
 
@@ -169,9 +169,21 @@ class employeeController extends Controller
             if(!empty($request->get('salary'))){
 
                foreach ($request->get('salary') as $key => $value) {
-                    $add = salaryAttributeDataModel::where('employee_id', $request->get('id'))->where('salary_attribute_id', $key)->firstOrFail(); 
+                $check = salaryAttributeDataModel::check_employee_salary_attribute($request->get('id'),$key);
+
+                if(count($check) ==0){
+                    $add = new salaryAttributeDataModel;
+                    $add->employee_id = $request->get('id');
+                    $add->creator = $user->id;
+                    $add->salary_attribute_id = $key;
                     $add->value = $value;
                     $add->save();
+
+                    }else{
+                   $add = salaryAttributeDataModel::where('employee_id', $request->get('id'))->where('salary_attribute_id', $key)->firstOrFail(); 
+                    $add->value = $value;
+                    $add->save();
+                 }
                 } 
                
             }
