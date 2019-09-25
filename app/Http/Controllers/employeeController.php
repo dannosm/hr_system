@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\employeeModel;
 use App\employeeDetailModel;
-use App\employeeSalaryModel;
+use App\salaryAttributeDataModel;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use Illuminate\Support\Str;
@@ -92,20 +92,19 @@ class employeeController extends Controller
             //employee detail end
 
             //employee salary
-            $add = new employeeSalaryModel;
-            $add->user_id = $lastId;
-            $add->basic_salary = $request->get('basic_salary');
-            $add->meal_allowance = $request->get('meal_allowance');
-            $add->bonus = $request->get('bonus');
-            //$add->communication = $request->get('communication');
-            $add->bpjs_ketenaga_kerjaan_salary = $request->get('bpjs_ketenaga_kerjaan_salary');
-            $add->pph = $request->get('pph');
-            $add->positional_allowance = $request->get('posotional_allowance');
-            $add->transport_allowances = $request->get('transport_allowance');
-            $add->commission = $request->get('commission');
-            $add->bpjs_kesehatan_salary = $request->get('bpjs_kesehatan_salary');
-            $add->allowances_outside_the_city = $request->get('allowance_outside_the_city');
-            $add->save();
+            if(!empty($request->get('salary'))){
+
+               foreach ($request->get('salary') as $key => $value) {
+                
+                $add = new salaryAttributeDataModel;
+                    $add->employee_id = $lastId;
+                    $add->creator = $user->id;
+                    $add->salary_attribute_id = $key;
+                    $add->value = $value;
+                    $add->save();
+                } 
+               
+            }
             //employee salary end
 
             return json_encode(array('msg'=>'Sava Data Success', 'content'=>$result, 'success'=>TRUE));    
@@ -118,7 +117,7 @@ class employeeController extends Controller
     function employee_edit($id){
 
          $data = employeeModel::employee_get_by_id($id);
-
+ 
          return view('employee.employee_edit')->with('data',$data[0]);
     }
 
@@ -167,19 +166,16 @@ class employeeController extends Controller
             //employee detail end
 
             //employee salary
-            $add = employeeSalaryModel::where('user_id', $request->get('id'))->firstOrFail(); 
-            $add->basic_salary = $request->get('basic_salary');
-            $add->meal_allowance = $request->get('meal_allowance');
-            $add->bonus = $request->get('bonus');
-            //$add->communication = $request->get('communication');
-            $add->bpjs_ketenaga_kerjaan_salary = $request->get('bpjs_ketenaga_kerjaan_salary');
-            $add->pph = $request->get('pph');
-            $add->positional_allowance = $request->get('posotional_allowance');
-            $add->transport_allowances = $request->get('transport_allowance');
-            $add->commission = $request->get('commission');
-            $add->bpjs_kesehatan_salary = $request->get('bpjs_kesehatan_salary');
-            $add->allowances_outside_the_city = $request->get('allowance_outside_the_city');
-            $add->save();
+            if(!empty($request->get('salary'))){
+
+               foreach ($request->get('salary') as $key => $value) {
+                    $add = salaryAttributeDataModel::where('employee_id', $request->get('id'))->where('salary_attribute_id', $key)->firstOrFail(); 
+                    $add->value = $value;
+                    $add->save();
+                } 
+               
+            }
+           
             //employee salary end
             
              return json_encode(array('msg'=>'Sava Data Success', 'content'=>$result, 'success'=>TRUE));    

@@ -1,13 +1,11 @@
 @extends('layouts.app')
-@push('header')
-<link rel="stylesheet" href="{{URL::to('/')}}/assets/vendor/select2/css/select2.css">
-@endpush
+
 @section('content')
 <!--header content -->
-                <!--  <div class="row">
+               <!--  <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                            <h2 class="pageheader-title breadcrumb">Data Tables </h2>
+                             <h2 class="pageheader-title breadcrumb">Data Tables </h2>
                             <hr style="margin-top:-1%;">
                         </div>
                     </div>
@@ -22,41 +20,52 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">EDIT LOAN</h4>
+                                        <h4 class="card-header-title language big-text">EDIT ATTRIBUTE PAYROLL</h4>
+
                                         <div class="toolbar ml-auto">
                                             <a href="javascript:void(0)" class="btn btn-primary btn-sm" id="saveAdd"><i class="fa fa-save"></i> Save</a>
-                                            <a href="{{url('/loan')}}" class="btn btn-dark btn-sm "><i class="fas fa-sign-out-alt"></i> Back</a>
+                                            <a href="{{url('/payroll/salary-attribute')}}" class="btn btn-dark btn-sm "><i class="fas fa-sign-out-alt"></i> Back</a>
                                         </div>
                                     </div>
                             <div class="card-body">
+                            <!--card-body-->
                             <div id="massage_errors"></div>
                             <div id="loading_alerts" class="col-md-12" align="center"></div>
-                            <!--card-body-->
-                                          <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Employee Name*</label>
-                                            <div class="col-9 col-lg-10">
-                                               <select class="form-control enter_tab input_validasi select_data" data-nextTab='1' name="employee">
-                                                   <option>Choose</option>
-                                               </select>
-                                            </div>
-                                        </div>
+                                <form action="#" id="form2" class="form-horizontal" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$data->id}}">
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Amount*</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Name</label>
                                             <div class="col-9 col-lg-10">
-                                                <input id="amountrup" type="text" placeholder="Amount" class="form-control enter_tab input_validasi" name="amount"  oninput="errors.rupiah(this)">
+                                                <input type="text" class="form-control enter_tab input_validasi " data-nextTab='1'  placeholder="Lable Or Name Attribute Salary" name="name" value="{{$data->name}}">
                                             </div>
                                         </div>
+
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Description*</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Type</label>
                                             <div class="col-9 col-lg-10">
-                                              <textarea class="form-control enter_tab input_validasi" name="description">{{$data->description}}</textarea>
+                                              <select class="form-control enter_tab input_validasi" name="type" id="type_select" >
+                                                <option value="" class="language">Choose Type</option>
+                                                <option value="1" class="language">Addition</option>
+                                                <option value="2" class="language">Deduction</option>
+                                              </select>
                                             </div>
                                         </div>
+
+                                        <div class="form-group row">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Type</label>
+                                            <div class="col-9 col-lg-10">
+                                              <select class="form-control enter_tab input_validasi" name="status" id="status_select" >
+                                                <option value="" class="language">Choose Status</option>
+                                                <option value="active" class="language">Active</option>
+                                                <option value="nonactive" class="language">Nonactive</option>
+                                              </select>
+                                            </div>
+                                        </div>
+
+                                      </form>
                                        
                             <!--end card body-->
-                            <input type="hidden" name="type" value="full">
-                            <input type="hidden" name="id" value="{{$data->id}}">
-
                             </div>
                         </div>
                     </div>
@@ -65,19 +74,30 @@
                     <!-- ============================================================== -->
                 </div>
                 <!--end row-->
-@csrf
+
 
 @endsection
 
 @push('footer')
+ <script src="{{URL::to('/')}}/assets/modul/input_validasi/input_validasi.js"></script>
+ <script src="{{URL::to('/')}}/assets/modul/enter_tab/enter_tab.js"></script>
+ <script src="{{URL::to('/')}}/assets/modul/error_massage/error_massage.js"></script>
+
+
 <script type="text/javascript">
     var errors = new error_massage();
-    $("#amountrup").val(errors.rupiahR("{{$data->amount}}"))
     $(".enter_tab").enter_tab();
-    $(document).ready(function(){
-    
-    $(".select_data").select2_modified({url:"{{url('/employee/get-raw')}}",label:'Choose Employee',token:$("input[name='_token']").val(),field:"select2_employee",value:{id:"{{$data->user_id}}",text:"{{$data->name}}"}});
-     });
+    $("#type_select").val("{{$data->type}}");
+    $("#status_select").val("{{$data->status}}");
+
+
+
+
+$("#lastButton").keyup(function(e){
+     if (e.keyCode == 13) {
+        $("#saveAdd").trigger('click');
+     }
+})   
 
 $("#saveAdd").click(function(){
   errors.loading({id:"#loading_alerts",type:'show'});
@@ -87,26 +107,27 @@ $("#saveAdd").click(function(){
     errors.loading({id:"#loading_alerts",type:'hide'});
     return;
  }else{
-    var employee = $("select[name='employee']").val();
-    var amount = $("input[name='amount']").val().replace(/\./g,'');
-    var description = $("textarea[name='description']").val();
-    var type = $("input[name='type']").val();
-    var id = $("input[name='id']").val();
+   
+    var formData = new FormData($("#form2")[0]);
+        console.log(formData);
 
-
-    var token = $("input[name='_token']").val();
-
-    dataPost = {'_token':token,employee:employee,amount:amount,description:description,type:type,id:id};
+   var formDataSerialized = $("#form2").serialize();
+       console.log(formDataSerialized);     
 
      $.ajax({
-                url:"{{url('/loan/update')}}",
-                data:dataPost,
+                url:"{{url('/payroll-setting/update')}}",
                 dataType: 'JSON',
                 method: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
                 success: function(response) {
         
                   errors.loading({id:"#loading_alerts",type:'hide'});
                   if(response.success == true){
+                       $("input.form-control").val("");
+                       $("textarea.form-control").val("");
 
                        errors.success({id:"#massage_errors",msg:response.msg});
                   }else{
@@ -122,6 +143,8 @@ $("#saveAdd").click(function(){
            });
     }
 });
+
+
 
 </script>
 @endpush

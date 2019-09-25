@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@push('header')
+<link rel="stylesheet" href="{{URL::to('/')}}/assets/vendor/select2/css/select2.css">
+@endpush
 @section('content')
 <!--header content -->
                <!--  <div class="row">
@@ -114,7 +116,7 @@
                                          <div class="form-group row col-lg-5">
                                             <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Shift</label>
                                             <div class="col-lg-9">
-                                                <select class="form-control form-control-sm enter_tab" data-nextTab='7' placeholder="Shift Group" name="shift" id="shift" />
+                                                <select class="form-control form-control-sm enter_tab select_shift" data-nextTab='7' placeholder="Shift Group" name="shift" id="shift" />
                                                     <option value="" class="language">Choose</option>
                                                 </select>
                                             </div>
@@ -268,7 +270,7 @@
                                          <div class="form-group row col-lg-5">
                                             <label for="inputEmail2" class="col-lg-4 col-form-label text-right language">Division</label>
                                             <div class="col-lg-8">
-                                                 <select class="form-control form-control-sm enter_tab" data-nextTab='21' name="division"/>
+                                                 <select class="form-control form-control-sm enter_tab select_division" data-nextTab='21' name="division"/>
                                                     <option value="" class="language">Choose</option>
                                                 </select>
                                             </div>
@@ -279,7 +281,7 @@
                                           <div class="form-group row col-lg-5">
                                             <label for="inputEmail2" class="col-lg-4 col-form-label text-right language">Position</label>
                                             <div class="col-lg-8">
-                                                 <select class="form-control form-control-sm enter_tab" data-nextTab='22' name="position"/>
+                                                 <select class="form-control form-control-sm enter_tab select_position" data-nextTab='22' name="position"/>
                                                     <option value="" class="language">Choose</option>
                                                 </select>
                                           </div>
@@ -349,98 +351,9 @@
                                            <!-- end tab company -->
 
                                         </div>
-                                        <div class="tab-pane fade" id="salary-simple" role="tabpanel" aria-labelledby="salary-tab-simple">
+                                        <div class="tab-pane fade salary_attribute_list" id="salary-simple" role="tabpanel" aria-labelledby="salary-tab-simple">
                                             <!-- tab salary -->
 
-                                        <div class="form-row">
-                                         <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-5 col-form-label text-right language">Basic Salary</label>
-                                            <div class="col-lg-7">
-                                                  <input type="text" value="" class="form-control form-control-sm tab enter_tab rupiah" data-nextTab='39'  name="basic_salary">
-                                            </div>
-                                          </div>
-                                          <div class="form-group row col-lg-2">
-                                            &nbsp;
-                                          </div>
-                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-5 col-form-label text-right language">Position Allowance</label>
-                                            <div class="col-lg-7">
-                                                 <input type="text" value="" class="form-control form-control-sm tab enter_tab rupiah" data-nextTab='40'  name="posotional_allowance">
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                       <div class="form-row">
-                                         <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-5 col-form-label text-right language">Meal Allowance</label>
-                                            <div class="col-lg-7">
-                                                  <input type="text" value="" class="form-control form-control-sm tab enter_tab rupiah" data-nextTab='41'  name="meal_allowance">
-                                            </div>
-                                          </div>
-                                          <div class="form-group row col-lg-2">
-                                            &nbsp;
-                                          </div>
-                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-5 col-form-label text-right language">Transport Allowance</label>
-                                            <div class="col-lg-7">
-                                                 <input type="text" value="" class="form-control form-control-sm tab enter_tab rupiah" data-nextTab='42'  name="transport_allowance">
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                       <div class="form-row">
-                                         <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-5 col-form-label text-right language">Bonus</label>
-                                            <div class="col-lg-7">
-                                                  <input type="text" value="" class="form-control form-control-sm tab enter_tab rupiah" data-nextTab='43'  name="bonus">
-                                            </div>
-                                          </div>
-                                          <div class="form-group row col-lg-2">
-                                            &nbsp;
-                                          </div>
-                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-5 col-form-label text-right language">Commission</label>
-                                            <div class="col-lg-7">
-                                                 <input type="text" value="" class="form-control form-control-sm tab enter_tab rupiah" data-nextTab='44'  name="commission">
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                       <div class="form-row">
-                                         <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-5 col-form-label text-right language">PPH</label>
-                                            <div class="col-lg-7">
-                                                  <input type="text" value="" class="form-control form-control-sm tab enter_tab rupiah" data-nextTab='45'  name="pph">
-                                            </div>
-                                          </div>
-                                          <div class="form-group row col-lg-2">
-                                            &nbsp;
-                                          </div>
-                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-5 col-form-label text-right language">Out Of Town Allowance</label>
-                                            <div class="col-lg-7">
-                                                 <input type="text" value="" class="form-control form-control-sm tab enter_tab rupiah" data-nextTab='46'  name="allowance_outside_the_city">
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                       <div class="form-row">
-                                         <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-5 col-form-label text-right language">Bpjs Tenaker</label>
-                                            <div class="col-lg-7">
-                                                  <input type="text" value="" class="form-control form-control-sm tab enter_tab rupiah" data-nextTab='47'  name="bpjs_ketenaga_kerjaan_salary">
-                                            </div>
-                                          </div>
-                                          <div class="form-group row col-lg-2">
-                                            &nbsp;
-                                          </div>
-                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-5 col-form-label text-right language">Bpjs Kesehatan</label>
-                                            <div class="col-lg-7">
-                                                 <input id="lastButton" type="text" value="" class="form-control form-control-sm tab enter_tab rupiah" data-nextTab='48'  name="bpjs_kesehatan_salary">
-                                          </div>
-                                        </div>
-                                      </div>
 
                                             <!-- tab salary end -->
                                         </div>
@@ -468,17 +381,25 @@
  <script src="{{URL::to('/')}}/assets/modul/input_validasi/input_validasi.js"></script>
  <script src="{{URL::to('/')}}/assets/modul/enter_tab/enter_tab.js"></script>
  <script src="{{URL::to('/')}}/assets/modul/error_massage/error_massage.js"></script>
+ <script src="{{URL::to('/')}}/assets/modul/attribute_salary/attribute_salary.js"></script>
 
 
 <script type="text/javascript">
     var errors = new error_massage();
-    $(".enter_tab").enter_tab();
+    var attribute_salary = new attribute_salary({url:"{{url('payroll/salary-attribute-get')}}",token:$("input[name='_token']").val(),div_id:".salary_attribute_list"});
+   
 
 $("#lastButton").keyup(function(e){
      if (e.keyCode == 13) {
         $("#saveAdd").trigger('click');
      }
 })   
+
+$(document).ready(function(){
+  $(".select_shift").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Shift',token:$("input[name='_token']").val(),field:"select2_shift"});
+  $(".select_position").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Shift',token:$("input[name='_token']").val(),field:"select2_position"});
+  $(".select_division").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Shift',token:$("input[name='_token']").val(),field:"select2_division"});
+})
 
 $("#saveAdd").click(function(){
   errors.loading({id:"#loading_alerts",type:'show'});
@@ -531,12 +452,7 @@ $( function() {
     })
 });
 
-$(".rupiah").on('keyup',function(){
-    var id = $(this).val().replace(/\./g,'');
-    var val = errors.rupiahR(id);
-    $(this).val(val);
-    console.log(val);
-})
+
 
 
 

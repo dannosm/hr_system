@@ -10,7 +10,9 @@
 
             return {
                 q: params.term,
-                _token: options.token // search term
+                _token: options.token,
+                field: options.field // search term
+                 // search term
             };
         },
         processResults: function (data) {

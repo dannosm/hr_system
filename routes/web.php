@@ -116,10 +116,31 @@ Route::post('/multiple-documents/update', 'multipleDocumentController@multiple_d
 Route::post('/multiple-documents/delete', 'multipleDocumentController@multiple_document_delete');
 
 
+//payroll setting attribute
+Route::get('/payroll/salary-attribute', 'payrollController@payroll_salary_attribute');
+Route::get('/payroll-setting/edit/{id?}', 'payrollController@payroll_setting_edit');
+Route::get('/payroll-setting/add', 'payrollController@payroll_setting_add');
+Route::post('/payroll-setting/save', 'payrollController@payroll_setting_save');
+Route::post('/payroll-setting/update', 'payrollController@payroll_setting_update');
+Route::post('/payroll-setting/delete', 'payrollController@payroll_setting_delete');
+Route::post('/payroll-setting/get', 'payrollController@payroll_setting_get');
+Route::post('/payroll/salary-attribute-get', 'payrollController@payroll_salary_attribute_get');
 
 
 
 
+
+
+
+Route::get('/payroll/print', 'payrollController@index');
+
+
+
+
+
+
+//modul
+Route::post('/select2/get-raw', 'modul2Controller@select2_get_raw');
 
 
 

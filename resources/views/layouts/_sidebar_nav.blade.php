@@ -80,10 +80,10 @@
                                 <div id="submenu-6" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/blank-page.html">Blank Page</a>
+                                            <a class="nav-link language" href="{{url('/payroll/print')}}">Payroll Print</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/blank-page-header.html">Blank Page Header</a>
+                                            <a class="nav-link language" href="{{url('/payroll/salary-attribute')}}">Salary Attribute</a>
                                         </li>
                                     </ul>
                                 </div>

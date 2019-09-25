@@ -30,7 +30,14 @@
 ,{"id":"Absent","value":"Tidak Masuk"},{"id":"Permit","value":"Izin"},{"id":"Late Chart","value":"Grafik Keterlambatan"},{"id":"Permission Chart","value":"Grafik Izin"}
 ,{"id":"Category","value":"Kategori"},{"id":"Date Start","value":"Dari Tanggal"},{"id":"Date End","value":"Sampai Tanggal"},{"id":"Days","value":"Hari"}
 ,{"id":"Add Permission","value":"Tambah Izin"},{"id":"Edit Permission","value":"Ubah Izin"}
+,{"id":"Payroll Setting","value":"Pengaturan Gaji"},{"id":"Payroll Print","value":"Cetak Gaji"}
+,{"id":"Addition","value":"Penambah"},{"id":"Deduction","value":"Pengurang"}
+,{"id":"Salary Attribute","value":"Atribut Gaji"}
+
+
 ],
+
+
 
 "us":[{"id":"Beranda","value":"Dashboard"},{"id":"Mesin Absen","value":"Finger Print"},{"id":"Absensi","value":"Attendance"}
 ,{"id":"Modul Mesin Absensi","value":"Module Finger Print"},{"id":"Daftar Absensi Terlambat","value":"Late Attendance List"},
@@ -61,6 +68,9 @@
 ,{"id":"Gaji Pokok","value":"Basic Salary"},{"id":"Tunjangan Jabatan","value":"Position Allowance"},{"id":"Tunjangan Makan","value":"Meal Allowance"}
 ,{"id":"Tunjangan Transportasi","value":"Transport Allowance"},{"id":"Komisi","value":"Commision"},{"id":"Tunjangan Luar Kota","value":"Out Of Town Allowance"}
 ,{"id":"Lihat","value":"View"},{"id":"Tambah User","value":"Add Users"},{"id":"Ubah User","value":"Edit Users"},{"id":"Keluar","value":"Logout"}
+,{"id":"Pengaturan Gaji","value":"Payroll Setting"},{"id":"Cetak Gaji","value":"Payroll Print"}
+,{"id":"Penambah","value":"Addition"},{"id":"Pengurang","value":"Deduction"},
+{"id":"Atribut Gaji","value":"Salary Attribute"}
 
 ]
 }

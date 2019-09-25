@@ -53,7 +53,10 @@ class employeeModel extends Model
     	$data = DB::table('employee')
                 ->leftjoin('employee_detail','employee.id','=','employee_detail.user_id')
                 ->leftjoin('employee_salary','employee.id','=','employee_salary.user_id')
-                ->select('*','employee.id as employee_id')
+                ->leftjoin('position','position_id','=','position.id')
+                ->leftjoin('division','division_id','=','division.id')
+                ->leftjoin('shift','shift_id','=','shift.id')
+                ->select('employee.*','employee_detail.*','employee.id as employee_id','shift.name as shift','division.name as division','position.name as position')
                 ->where('employee.id',$id)
                 ->get();
     	return $data;

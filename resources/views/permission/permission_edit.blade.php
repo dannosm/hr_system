@@ -98,7 +98,7 @@
     $(document).ready(function(){
     $("#category").val("{{$data->category}}");
     
-    $(".select_data").select2_modified({url:"{{url('/employee/get-raw')}}",label:'Choose Employee',token:$("input[name='_token']").val(),value:{id:"{{$data->user_id}}",text:"{{$data->name}}"}});
+    $(".select_data").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Employee',token:$("input[name='_token']").val(),field:"select2_employee",value:{id:"{{$data->user_id}}",text:"{{$data->name}}"}});
      
   
 } );

@@ -73,7 +73,7 @@
     var errors = new error_massage();
     $(".enter_tab").enter_tab();
     $(document).ready(function(){
-        $(".select_data").select2_modified({url:"{{url('/employee/get-raw')}}",label:'Choose Employee',token:$("input[name='_token']").val()});
+        $(".select_data").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Employee',token:$("input[name='_token']").val(),field:"select2_employee"});
     });
 
 $("#saveAdd").click(function(){
