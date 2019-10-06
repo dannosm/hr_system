@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\salaryAttributeModel;
+use App\salaryModuleDetailModel;
 use Auth;
 
 
@@ -54,6 +55,15 @@ class payrollController extends Controller
             $add->type = $request->get('type');
             $add->creator = $user->id;
             $result = $add->save();
+
+            if(!empty($request->get('modul'))){
+
+                $modul = new salaryModuleDetailModel();
+                $modul->salary_module_id = $request->get('modul');
+                $modul->salary_attribute_id = $add->id;
+                $modul->save();
+
+            }
             
             return json_encode(array('msg'=>'Sava Data Success', 'content'=>$result, 'success'=>TRUE));    
 
@@ -79,6 +89,16 @@ class payrollController extends Controller
              $add->status = $request->get('status');
              $add->creator = $user->id;
              $result = $add->save();
+
+              if(!empty($request->get('modul'))){
+
+                $delete = salaryModuleDetailModel::salary_module_detail_delete($request->get('id'));
+                $modul = new salaryModuleDetailModel();
+                $modul->salary_module_id = $request->get('modul');
+                $modul->salary_attribute_id = $request->get('id');
+                $modul->save();
+
+            }
             
              return json_encode(array('msg'=>'Sava Data Success', 'content'=>$result, 'success'=>TRUE));    
 

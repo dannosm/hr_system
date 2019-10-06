@@ -126,6 +126,8 @@ Route::post('/payroll-setting/delete', 'payrollController@payroll_setting_delete
 Route::post('/payroll-setting/get', 'payrollController@payroll_setting_get');
 Route::post('/payroll/salary-attribute-get', 'payrollController@payroll_salary_attribute_get');
 
+//payroll add modul
+//Route::post('/payroll-setting/save', 'payrollController@payroll_setting_save');
 
 
 
@@ -133,9 +135,6 @@ Route::post('/payroll/salary-attribute-get', 'payrollController@payroll_salary_a
 
 
 Route::get('/payroll/print', 'payrollController@index');
-
-
-
 
 
 

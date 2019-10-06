@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@push('header')
+<link rel="stylesheet" href="{{URL::to('/')}}/assets/vendor/select2/css/select2.css">
+@endpush
 @section('content')
 <!--header content -->
                <!--  <div class="row">
@@ -35,14 +37,14 @@
                                 @csrf
                                 <input type="hidden" name="id" value="{{$data->id}}">
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Name</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Name</label>
                                             <div class="col-9 col-lg-10">
                                                 <input type="text" class="form-control enter_tab input_validasi " data-nextTab='1'  placeholder="Lable Or Name Attribute Salary" name="name" value="{{$data->name}}">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Type</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Type</label>
                                             <div class="col-9 col-lg-10">
                                               <select class="form-control enter_tab input_validasi" name="type" id="type_select" >
                                                 <option value="" class="language">Choose Type</option>
@@ -52,8 +54,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Type</label>
+                                         <div class="form-group row">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Status</label>
                                             <div class="col-9 col-lg-10">
                                               <select class="form-control enter_tab input_validasi" name="status" id="status_select" >
                                                 <option value="" class="language">Choose Status</option>
@@ -62,6 +64,15 @@
                                               </select>
                                             </div>
                                         </div>
+
+                                        <div class="form-group row">
+                                          <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Module</label>
+                                          <div class="col-9 col-lg-10">
+                                            <select class="form-control enter_tab select_salary_module" name="modul" >
+                                              <option value="">Pilih Modul</option>
+                                            </select>
+                                          </div>
+                                      </div>
 
                                       </form>
                                        
@@ -93,56 +104,58 @@
 
 
 
-$("#lastButton").keyup(function(e){
-     if (e.keyCode == 13) {
-        $("#saveAdd").trigger('click');
-     }
-})   
+    $("#lastButton").keyup(function(e){
+         if (e.keyCode == 13) {
+            $("#saveAdd").trigger('click');
+         }
+    })   
+     
+     $(document).ready(function(){
+          $(".select_salary_module").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Module',token:$("input[name='_token']").val(),field:"select_salary_module",value:{id:"<?php echo $data->module_id ;?>",text:"<?php echo $data->module_name;?>"}});
+      })
 
-$("#saveAdd").click(function(){
-  errors.loading({id:"#loading_alerts",type:'show'});
-  var validasi1 = $(".input_validasi").input_validasi({type:'required'});
+    $("#saveAdd").click(function(){
+      errors.loading({id:"#loading_alerts",type:'show'});
+      var validasi1 = $(".input_validasi").input_validasi({type:'required'});
 
- if(validasi1 == false){
-    errors.loading({id:"#loading_alerts",type:'hide'});
-    return;
- }else{
-   
-    var formData = new FormData($("#form2")[0]);
-        console.log(formData);
+     if(validasi1 == false){
+        errors.loading({id:"#loading_alerts",type:'hide'});
+        return;
+     }else{
+       
+        var formData = new FormData($("#form2")[0]);
+            console.log(formData);
 
-   var formDataSerialized = $("#form2").serialize();
-       console.log(formDataSerialized);     
+       var formDataSerialized = $("#form2").serialize();
+           console.log(formDataSerialized);     
 
-     $.ajax({
-                url:"{{url('/payroll-setting/update')}}",
-                dataType: 'JSON',
-                method: 'POST',
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-        
-                  errors.loading({id:"#loading_alerts",type:'hide'});
-                  if(response.success == true){
-                       $("input.form-control").val("");
-                       $("textarea.form-control").val("");
+         $.ajax({
+                    url:"{{url('/payroll-setting/update')}}",
+                    dataType: 'JSON',
+                    method: 'POST',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+            
+                      errors.loading({id:"#loading_alerts",type:'hide'});
+                      if(response.success == true){
 
-                       errors.success({id:"#massage_errors",msg:response.msg});
-                  }else{
-                        errors.failed({id:"#massage_errors",msg:response.msg});
-                  }
-                   
-                },error: function (error) {
-                    msg = JSON.stringify(error.responseJSON.errors);
-                    //msg = error.responseJSON.errors.email;
-                    errors.loading({id:"#loading_alerts",type:'hide'});
-                    errors.failed({id:"#massage_errors",msg:"Save Data Failed"+msg});
-                }
-           });
-    }
-});
+                           errors.success({id:"#massage_errors",msg:response.msg});
+                      }else{
+                            errors.failed({id:"#massage_errors",msg:response.msg});
+                      }
+                       
+                    },error: function (error) {
+                        msg = JSON.stringify(error.responseJSON.errors);
+                        //msg = error.responseJSON.errors.email;
+                        errors.loading({id:"#loading_alerts",type:'hide'});
+                        errors.failed({id:"#massage_errors",msg:"Save Data Failed"+msg});
+                    }
+               });
+        }
+    });
 
 
 

@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@push('header')
+<link rel="stylesheet" href="{{URL::to('/')}}/assets/vendor/select2/css/select2.css">
+@endpush
 @section('content')
 <!--header content -->
                <!--  <div class="row">
@@ -34,14 +36,14 @@
                                 <form action="#" id="form2" class="form-horizontal" enctype="multipart/form-data">
                                 @csrf
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Name</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Name</label>
                                             <div class="col-9 col-lg-10">
                                                 <input type="text" class="form-control enter_tab input_validasi " data-nextTab='1'  placeholder="Lable Or Name Attribute Salary" name="name">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Type</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Type</label>
                                             <div class="col-9 col-lg-10">
                                               <select class="form-control enter_tab input_validasi" name="type" >
                                                 <option value="">Pilih Type</option>
@@ -50,6 +52,15 @@
                                               </select>
                                             </div>
                                         </div>
+
+                                       <div class="form-group row">
+                                          <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Module</label>
+                                          <div class="col-9 col-lg-10">
+                                            <select class="form-control enter_tab select_salary_module" name="modul" >
+                                              <option value="">Pilih Modul</option>
+                                            </select>
+                                          </div>
+                                      </div>
                                     </form>
                                        
                             <!--end card body-->
@@ -75,56 +86,60 @@
     var errors = new error_massage();
     $(".enter_tab").enter_tab();
 
-$("#lastButton").keyup(function(e){
-     if (e.keyCode == 13) {
-        $("#saveAdd").trigger('click');
-     }
-})   
+    $("#lastButton").keyup(function(e){
+         if (e.keyCode == 13) {
+            $("#saveAdd").trigger('click');
+         }
+    })   
 
-$("#saveAdd").click(function(){
-  errors.loading({id:"#loading_alerts",type:'show'});
-  var validasi1 = $(".input_validasi").input_validasi({type:'required'});
+    $(document).ready(function(){
+      $(".select_salary_module").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Module',token:$("input[name='_token']").val(),field:"select_salary_module"});
+    });
 
- if(validasi1 == false){
-    errors.loading({id:"#loading_alerts",type:'hide'});
-    return;
- }else{
-   
-    var formData = new FormData($("#form2")[0]);
-        console.log(formData);
+    $("#saveAdd").click(function(){
+      errors.loading({id:"#loading_alerts",type:'show'});
+      var validasi1 = $(".input_validasi").input_validasi({type:'required'});
 
-   var formDataSerialized = $("#form2").serialize();
-       console.log(formDataSerialized);     
+     if(validasi1 == false){
+        errors.loading({id:"#loading_alerts",type:'hide'});
+        return;
+     }else{
+       
+        var formData = new FormData($("#form2")[0]);
+            console.log(formData);
 
-     $.ajax({
-                url:"{{url('/payroll-setting/save')}}",
-                dataType: 'JSON',
-                method: 'POST',
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-        
-                  errors.loading({id:"#loading_alerts",type:'hide'});
-                  if(response.success == true){
-                       $("input.form-control").val("");
-                       $("textarea.form-control").val("");
+       var formDataSerialized = $("#form2").serialize();
+           console.log(formDataSerialized);     
 
-                       errors.success({id:"#massage_errors",msg:response.msg});
-                  }else{
-                        errors.failed({id:"#massage_errors",msg:response.msg});
-                  }
-                   
-                },error: function (error) {
-                    msg = JSON.stringify(error.responseJSON.errors);
-                    //msg = error.responseJSON.errors.email;
-                    errors.loading({id:"#loading_alerts",type:'hide'});
-                    errors.failed({id:"#massage_errors",msg:"Save Data Failed"+msg});
-                }
-           });
-    }
-});
+         $.ajax({
+                    url:"{{url('/payroll-setting/save')}}",
+                    dataType: 'JSON',
+                    method: 'POST',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+            
+                      errors.loading({id:"#loading_alerts",type:'hide'});
+                      if(response.success == true){
+                           $("input.form-control").val("");
+                           $("textarea.form-control").val("");
+
+                           errors.success({id:"#massage_errors",msg:response.msg});
+                      }else{
+                            errors.failed({id:"#massage_errors",msg:response.msg});
+                      }
+                       
+                    },error: function (error) {
+                        msg = JSON.stringify(error.responseJSON.errors);
+                        //msg = error.responseJSON.errors.email;
+                        errors.loading({id:"#loading_alerts",type:'hide'});
+                        errors.failed({id:"#massage_errors",msg:"Save Data Failed"+msg});
+                    }
+               });
+        }
+    });
 
 
 
