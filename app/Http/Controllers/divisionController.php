@@ -20,7 +20,7 @@ class divisionController extends Controller
         $draw=$request['draw'];
 
 			$data = divisionModel::division_get($request);
-			$total = $data->count();
+			$total = divisionModel::division_get_count($request)->count();
 
 		    $output['draw']=$draw;
             if($total){

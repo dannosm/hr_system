@@ -18,7 +18,7 @@ class loanController extends Controller
 		try {
 
 			$data = loanModel::loan_get($request);
-			$total = $data->count();
+			$total = loanModel::loan_get_count($request)->count();
 
 
 		    $output['draw']=$draw;

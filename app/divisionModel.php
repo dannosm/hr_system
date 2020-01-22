@@ -37,6 +37,25 @@ class divisionModel extends Model
     	return $data;
     }
 
+
+    static function division_get_count($request){
+
+        $search=$request['search']["value"];
+
+        if(empty($search)){
+           $data = DB::table('division')
+                ->get();
+        }else{
+
+             $data = DB::table('division')
+                ->where('name', 'LIKE', '%'.$search.'%')
+                ->orwhere('description', 'LIKE', '%'.$search.'%')             
+                ->get();
+        }
+
+        return $data;
+    }
+
     static function division_get_by_id($id){
     	
     	$users = divisionModel::where('id',$id)->get();

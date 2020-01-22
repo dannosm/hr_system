@@ -33,6 +33,15 @@
 ,{"id":"Payroll Setting","value":"Pengaturan Gaji"},{"id":"Payroll Print","value":"Cetak Gaji"}
 ,{"id":"Addition","value":"Penambah"},{"id":"Deduction","value":"Pengurang"}
 ,{"id":"Salary Attribute","value":"Atribut Gaji"}
+,{"id":"Update By Date","value":"Perbarui Dgn Tanggal"}
+,{"id":"Break","value":"Istirahat"}
+,{"id":"Image","value":"Gambar"}
+,{"id":"Height","value":"Tinggi"}
+,{"id":"Widht","value":"Lebar"}
+
+
+
+
 
 
 ],
@@ -71,6 +80,15 @@
 ,{"id":"Pengaturan Gaji","value":"Payroll Setting"},{"id":"Cetak Gaji","value":"Payroll Print"}
 ,{"id":"Penambah","value":"Addition"},{"id":"Pengurang","value":"Deduction"},
 {"id":"Atribut Gaji","value":"Salary Attribute"}
+,{"id":"Perbarui Dgn Tanggal","value":"Update By Date"}
+,{"id":"Istirahat","value":"Break"}
+,{"id":"Gambar","value":"Image"}
+,{"id":"Tinggi","value":"Height"}
+,{"id":"Lebar","value":"Widht"}
+
+
+
+
 
 ]
 }

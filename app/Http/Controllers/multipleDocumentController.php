@@ -18,7 +18,7 @@ class multipleDocumentController extends Controller
         $draw=$request['draw'];
 
 			$user = multipleDocumentModel::multiple_document_get($request);
-			$total = $user->count();
+			$total = multipleDocumentModel::multiple_document_get_count($request)->count();
 
 		    $output['draw']=$draw;
             if($total){

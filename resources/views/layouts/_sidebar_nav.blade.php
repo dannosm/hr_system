@@ -23,7 +23,7 @@
                                             <a class="nav-link" href="{{url('/permission')}}"><span class="language">Permission</span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/general.html"><span class="language">Module Finger Print</span></a>
+                                            <a class="nav-link" href="{{url('/finger-print')}}"><span class="language">Module Finger Print</span></a>
                                         </li>
                                         
                                     </ul>
@@ -99,7 +99,7 @@
                                             <a class="nav-link" href="pages/email-details.html"><span class="language">Role</span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/email-compose.html"><span class="language">Config</span></a>
+                                            <a class="nav-link" href="{{url('/setting')}}"><span class="language">Config</span></a>
                                         </li>
                                     </ul>
                                 </div>

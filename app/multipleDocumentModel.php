@@ -39,6 +39,25 @@ class multipleDocumentModel extends Model
     	return $data;
     }
 
+
+     static function multiple_document_get_count($request){
+
+        $search=$request['search']["value"];
+
+        if(empty($search)){
+           $data = DB::table('multiple_document')
+                ->get();
+        }else{
+
+             $data = DB::table('multiple_document')
+                ->where('title', 'LIKE', '%'.$search.'%')
+                ->orwhere('description', 'LIKE', '%'.$search.'%')
+                ->get();
+        }
+
+        return $data;
+    }
+
     static function multiple_document_get_by_id($id){
     	
     	$data = multipleDocumentModel::where('id',$id)->get();

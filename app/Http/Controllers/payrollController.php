@@ -23,7 +23,7 @@ class payrollController extends Controller
         $draw=$request['draw'];
 
 			$data = salaryAttributeModel::salary_attribute_get($request);
-			$total = $data->count();
+			$total = salaryAttributeModel::salary_attribute_get_count($request)->count();
 
 		    $output['draw']=$draw;
             if($total){

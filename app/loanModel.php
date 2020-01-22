@@ -42,6 +42,28 @@ class loanModel extends Model
     	
     }
 
+      static function loan_get_count($request){
+
+        $search=$request['search']["value"];
+        
+        if(empty($search)){
+           $data = DB::table('loans')
+                ->join('employee', 'user_id', '=', 'employee.id')
+                ->select("loans.*",'employee.name')
+                ->get();
+        }else{
+
+             $data = DB::table('loans')
+                ->join('employee', 'user_id', '=', 'employee.id')
+                ->select("loans.*",'employee.name')
+                ->where('employee.name', 'LIKE', '%'.$search.'%')
+                ->get();
+        }
+
+        return $data;
+        
+    }
+
     static function loan_get_by_id($id){
     	
     	$sql = DB::table('loans')

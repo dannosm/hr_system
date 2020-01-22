@@ -6,30 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 
-class positionModel extends Model
+class settingModel extends Model
 {
-    protected $table = 'position';
+    protected $table = 'settings';
     protected $primaryKey='id';
     protected $fillable = [
-        'name', 'description', 'creator',
+        'name', 'setting_json', 'image','type',
     ];
 
-    static function position_get($request){
+    static function setting_get($request){
 
         $length=$request['length'];
         $start=$request['start'];
         $search=$request['search']["value"];
 
     	if(empty($search)){
-           $data = DB::table('position')
+           $data = DB::table('settings')
                 ->offset($start)
                 ->limit($length)
                 ->get();
         }else{
 
-             $data = DB::table('position')
+             $data = DB::table('settings')
                 ->where('name', 'LIKE', '%'.$search.'%')
-                ->orwhere('description', 'LIKE', '%'.$search.'%')             
                 ->offset($start)
                 ->limit($length)
                 ->get();
@@ -38,34 +37,32 @@ class positionModel extends Model
     	return $data;
     }
 
-
-     static function position_get_count($request){
+    static function setting_get_count($request){
 
         $search=$request['search']["value"];
 
         if(empty($search)){
-           $data = DB::table('position')
+           $data = DB::table('settings')
                 ->get();
         }else{
 
-             $data = DB::table('position')
+             $data = DB::table('settings')
                 ->where('name', 'LIKE', '%'.$search.'%')
-                ->orwhere('description', 'LIKE', '%'.$search.'%')             
                 ->get();
         }
 
         return $data;
     }
 
-    static function position_get_by_id($id){
+    static function setting_get_by_id($id){
     	
-    	$users = positionModel::where('id',$id)->get();
+    	$users = settingModel::where('id',$id)->get();
     	return $users;
     }
     
-    static function position_delete($request){
+    static function setting_delete($request){
         $id = implode(',', $request['list_id']);
-        $users = DB::DELETE("DELETE FROM position WHERE id in($id)");
+        $users = DB::DELETE("DELETE FROM setting WHERE id in($id)");
         return $users;
-    }    
+    } 
 }

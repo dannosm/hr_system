@@ -19,7 +19,7 @@ class positionController extends Controller
         $draw=$request['draw'];
 
 			$data = positionModel::position_get($request);
-			$total = $data->count();
+			$total = positionModel::position_get_count($request)->count();
 
 		    $output['draw']=$draw;
             if($total){

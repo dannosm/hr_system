@@ -39,6 +39,28 @@ class userModel extends Model
     	return $users;
     }
 
+
+ static function user_get_count($request){
+
+        $length=$request['length'];
+        $start=$request['start'];
+        $search=$request['search']["value"];
+
+        if(empty($search)){
+           $users = DB::table('users')
+                ->get();
+        }else{
+
+             $users = DB::table('users')
+                ->where('name', 'LIKE', '%'.$search.'%')
+                ->orwhere('username', 'LIKE', '%'.$search.'%')
+                ->orwhere('email', 'LIKE', '%'.$search.'%')
+                ->get();
+        }
+
+        return $users;
+    }
+
     static function user_get_by_id($id){
     	
     	$users = userModel::where('id',$id)->get();

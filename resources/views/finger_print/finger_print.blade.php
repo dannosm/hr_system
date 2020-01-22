@@ -20,10 +20,10 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title language big-text">MULTIPLE DOCUMENTS</h4>
+                                        <h4 class="card-header-title language">Finger Print</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm" id="deleteBtn"><span class="language">Delete</span></a>
-                                            <a href="{{url('/multiple-documents/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i> <span class="language" >Add</span></a>
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm" id="deleteBtn">Delete</a>
+                                            <a href="{{url('/finger-print/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i> Add</a>
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -34,10 +34,12 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="select_all" name="select_all" title="checked all" ></th>
-                            <th class="language">Title</th>
-                            <th class="language">Description</th>
-                            <th class="language">Type</th>
-                            <th class="language">Option</th>
+                            <th>Name</th>
+                            <th>Ip</th>
+                            <th>Port</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Option</th>
                         </tr>
                     </thead>
                     <tbody id="list-ready">
@@ -63,7 +65,7 @@
  <script src="{{URL::to('/')}}/assets/modul/error_massage/error_massage.js"></script>
 <script type="text/javascript">
 var errors = new error_massage();
-$("#select_all").select_delete({buttons:'#deleteBtn',select_child:'.child',urls:"{{url('application-letter/delete')}}",token:$("input[name='_token']").val()});
+$("#select_all").select_delete({buttons:'#deleteBtn',select_child:'.child',urls:"{{url('finger-print/delete')}}",token:$("input[name='_token']").val()});
 
 $(document).ready(function () {
 load_data();
@@ -75,7 +77,7 @@ function load_data(){
     "processing": true,
     "serverSide": true,
     "ajax":{
-        url :"{{url('/multiple-documents/get')}}",
+        url :"{{url('/finger-print/get')}}",
             type: "POST",
             data:{'_token': $("input[name='_token']").val()},            
         "dataSrc": function ( json ) {
@@ -91,14 +93,15 @@ function load_data(){
              let id = data['id'];
               return '<input class="child" type="checkbox" name="user_target_id[]"  onclick="unCheck()" value="'+id+'">';
             } },
-    {data:"title"},  
-    {data:"description"},
+    {data:"name"}, 
+    {data:"ip"},  
+    {data:"port"},
     {data:"type"},
+    {data:"status"},  
     { data: null, render: function ( data, type, row ) {
             // Combine the first and last names into a single table field
-            let id = "{{URL::to('/')}}/multiple-documents/edit/"+data['id'];
-            let image= "{{URL::to('/')}}/multiple_document/"+data['file_name'];
-            return '<a href="javascript:void(0)" class="btn btn-rounded btn-info language" onclick="errors.file_download(\''+image+'\')">Download</a>&nbsp;<a href="'+id+'" class="btn btn-rounded btn-primary language">Edit</a>';
+            let id = "{{URL::to('/')}}/finger-print/edit/"+data['id'];
+            return '<a href="'+id+'" class="btn btn-rounded btn-primary">Edit</a>';
         } },
     ],
     "columnDefs": [ {

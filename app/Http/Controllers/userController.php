@@ -21,7 +21,7 @@ class userController extends Controller
         $draw=$request['draw'];
 
 			$user = userModel::user_get($request);
-			$total = $user->count();
+			$total = userModel::user_get_count($request)->count();
 
 		    $output['draw']=$draw;
             if($total){
@@ -122,6 +122,9 @@ class userController extends Controller
             return json_encode(array('msg'=>'gagal', 'content'=>$e->getMessage(), 'success'=>FALSE, 'token_status'=>'invalid'));          
         }  
     }
+
+
+    
 
 
 }

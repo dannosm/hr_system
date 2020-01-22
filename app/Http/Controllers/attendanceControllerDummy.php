@@ -29,7 +29,7 @@ class attendanceController extends Controller
     	 return view('attendance.attendance');
     }
 
-      function attendance_get(Request $request){
+      function attendance_get(){
 
      	$draw=$_REQUEST['draw'];
         $length=$_REQUEST['length'];
@@ -37,8 +37,8 @@ class attendanceController extends Controller
         $search=$_REQUEST['search']["value"];
 		try {
 
-			$user = attendanceModel::attendance_get($request);
-			$total = attendanceModel::attendance_get_count($request)->count();
+			$user = attendanceModel::attendance_get();
+			$total = $user->count();
 
 
 		    $output['draw']=$draw;
@@ -93,7 +93,8 @@ class attendanceController extends Controller
             }
                 
 
-           $Connect = fsockopen($ip, $port, $errno, $errstr, 1);
+
+    /*        $Connect = fsockopen($ip, $port, $errno, $errstr, 1);
             if($Connect){
                                    
                        $soap_request="<GetAttLog><ArgComKey xsi:type='xsd:integer\'>".$key."</ArgComKey> <Arg> <Date xsi:type='xsd:string'>".$start."</Date></Arg></GetAttLog>" ;
@@ -111,8 +112,6 @@ class attendanceController extends Controller
                     $log_response=Parse_Data($buffer,"<GetAttLogResponse>","</GetAttLogResponse>");
                     $log_response=str_replace("\r\n","\n",$log_response);
                     $a_log_response=explode("\n",$log_response);
-                    $i=1;
-                    $xcount = count($a_log_response);
                     for($a=0;$a<count($a_log_response);$a++)
                     {
                         $baris=Parse_Data($a_log_response[$a],"<Row>","</Row>");
@@ -122,21 +121,20 @@ class attendanceController extends Controller
                         $Verified=Parse_Data($baris,"<Verified>","</Verified>");
                         $Status=Parse_Data($baris,"<Status>","</Status>");
 
-                        if($xcount == $i){
-                           $string .= "('".$PIN."','".$DateTime."','".$DateTime."','$tipe');";
-                        }else{
-                           $string .= "('".$PIN."','".$DateTime."','".$DateTime."','$tipe'),";
-                        }
-                        $i++;
+                            if (date('Y-m-d',strtotime($DateTime)) >= $start AND  date('Y-m-d',strtotime($DateTime)) <= $end) {
+                                DB::insert("INSERT INTO `attendance_tmphours`(`a_nik`, `a_datetime`) VALUES ('".$PIN."','".$DateTime."')");
+                            }
                     }//endfor
                       
              }else{
                  $notconnect[] = array("name"=>$value->name,"ip"=>$value->ip);
-             }
+             }*/
 
          }//endforeach
 
          $attendance_save = attendanceModel::attendance_save($string);
+         echo $attendance_save;
+         exit();
          echo json_encode(array('msg'=>'Update Data success', 'content'=>$e->getMessage(), 'success'=>TRUE, 'token_status'=>'valid'));          
 
          } catch (Exception $e) {

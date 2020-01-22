@@ -19,7 +19,7 @@ class shiftController extends Controller
 		try {
 
 			$data = shiftModel::shift_get($request);
-			$total = $data->count();
+			$total = shiftModel::shift_get_count($request)->count();
 
 
 		    $output['draw']=$draw;

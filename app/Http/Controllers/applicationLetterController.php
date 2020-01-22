@@ -18,7 +18,7 @@ class applicationLetterController extends Controller
         $draw=$request['draw'];
 
 			$user = applicationLetterModel::application_letter_get($request);
-			$total = $user->count();
+			$total = applicationLetterModel::application_letter_get_count($request)->count();
 
 		    $output['draw']=$draw;
             if($total){

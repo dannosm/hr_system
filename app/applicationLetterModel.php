@@ -38,6 +38,25 @@ class applicationLetterModel extends Model
     	return $data;
     }
 
+
+     static function application_letter_get_count($request){
+
+        $search=$request['search']["value"];
+
+        if(empty($search)){
+           $data = DB::table('application_letter')
+                ->get();
+        }else{
+
+             $data = DB::table('application_letter')
+                ->where('title', 'LIKE', '%'.$search.'%')
+                ->orwhere('description', 'LIKE', '%'.$search.'%')
+                ->get();
+        }
+
+        return $data;
+    }
+
     static function application_letter_get_by_id($id){
     	
     	$data = applicationLetterModel::where('id',$id)->get();

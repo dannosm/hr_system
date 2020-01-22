@@ -22,7 +22,7 @@ class employeeController extends Controller
 		try {
 
 			$user = employeeModel::employee_get($request);
-			$total =  employeeModel::employee_get_count($request)->count();
+			$total = $user->count();
 
 
 		    $output['draw']=$draw;

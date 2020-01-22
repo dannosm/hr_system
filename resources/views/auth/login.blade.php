@@ -35,7 +35,7 @@
     <div class="splash-container">
         <div class="card ">
             <div class="card-header text-center"><!-- <a href="../index.html"><img class="logo-img" src="../assets/images/logo.png" alt="logo" -->
-                <h1>Hr System</h1>
+                <h1><img  alt="HR System" width="" height="" id="set_image_1"/></h1>
             </a><!-- <span class="splash-description">Login</span> --></div>
             <div class="card-body">
                  <form method="POST" action="{{ route('login') }}">
@@ -70,9 +70,15 @@
     <!-- Optional JavaScript -->
     <script src="../assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+     <script src="{{URL::to('/')}}/assets/modul/page_setting/page_setting.js"></script>
+
      <script type="text/javascript">
+         var page_setting = new page_setting();
         (function($) {
             $(document).ready(function() {
+                 
+                  page_setting.set_page({url:"{{url('/setting/set-page')}}",token:$("input[name='_token']").val()});
+
                 $("#form-login").hide();
                 $("#username").focus();
 
@@ -97,6 +103,7 @@
             $("#username").focus();
             $("#form-login").hide();
         })
+
     </script>
 </body>
  

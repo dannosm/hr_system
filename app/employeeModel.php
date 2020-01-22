@@ -48,6 +48,34 @@ class employeeModel extends Model
         return $data;
     }
 
+     static function employee_get_count($request){
+
+        $search=$request['search']["value"];
+
+        if(empty($search)){
+           $data = DB::table('employee')
+                ->leftjoin('division','employee.division_id','=','division.id')
+                ->leftjoin('shift','employee.shift_id','=','shift.id')
+                ->select('employee.*','shift.name as shift','division.name as division')
+                ->get();
+        }else{
+
+             $data = DB::table('employee')
+              ->leftjoin('division','employee.division_id','=','division.id')
+                ->leftjoin('shift','employee.shift_id','=','shift.id')
+                ->select('employee.*','shift.name as shift','division.name as division')
+                ->where('employee.name', 'LIKE', '%'.$search.'%')
+                ->orwhere('employee.status', 'LIKE', '%'.$search.'%')
+                ->orwhere('employee.telphone', 'LIKE', '%'.$search.'%')
+                ->orwhere('division.name', 'LIKE', '%'.$search.'%')
+                ->orwhere('shift.name', 'LIKE', '%'.$search.'%')
+                ->orwhere('employee.email', 'LIKE', '%'.$search.'%')
+                ->get();
+        }
+
+        return $data;
+    }
+
     static function employee_get_by_id($id){
     	
     	$data = DB::table('employee')
@@ -92,6 +120,37 @@ class employeeModel extends Model
         $data = DB::table('employee')
                 ->select('id','division_id','name','position_id','status','email')
                 ->where('employee.id',$id)
+                ->get();
+        return $data;
+    }
+
+    static function employee_get_api(){
+        
+        $data = DB::table('employee')
+                ->leftjoin('employee_detail','employee.id','=','employee_detail.user_id')
+                ->leftjoin('employee_salary','employee.id','=','employee_salary.user_id')
+                ->leftjoin('position','position_id','=','position.id')
+                ->leftjoin('division','division_id','=','division.id')
+                ->leftjoin('shift','shift_id','=','shift.id')
+                ->select('employee.id','employee.name','employee.email','employee.telphone','employee.status','employee.id as employee_id','shift.name as shift','division.name as division','position.name as position')
+//->select('employee.*','employee_detail.*','employee.id as employee_id','shift.name as shift','division.name as division','position.name as position')
+                ->get();
+        return $data;
+    }
+
+
+     static function employee_get_by_id_api($id){
+        
+        $data = DB::table('employee')
+                ->leftjoin('employee_detail','employee.id','=','employee_detail.user_id')
+                ->leftjoin('employee_salary','employee.id','=','employee_salary.user_id')
+                ->leftjoin('position','position_id','=','position.id')
+                ->leftjoin('division','division_id','=','division.id')
+                ->leftjoin('shift','shift_id','=','shift.id')
+                ->select('employee.id','employee.name','employee.email','employee.telphone','employee.status','employee.id as employee_id','shift.name as shift','division.name as division','position.name as position')
+                ->where('employee.id',$id)
+
+//->select('employee.*','employee_detail.*','employee.id as employee_id','shift.name as shift','division.name as division','position.name as position')
                 ->get();
         return $data;
     }

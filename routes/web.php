@@ -15,11 +15,16 @@ Route::get('/', function () {
  return view('auth.login');
 });
 
+Route::post('/setting/set-page', 'settingController@setting_set_page');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/attendance', 'attendanceController@index');
 Route::post('/attendance/get', 'attendanceController@attendance_get');
+Route::post('/attendance/update-data', 'attendanceController@attendance_update_data');
+
 
 //usermaster
 Route::get('/users', 'userController@index');
@@ -43,6 +48,21 @@ Route::post('/employee/get-raw', 'employeeController@employee_get_raw');
 Route::post('/employee/save', 'employeeController@employee_save');
 Route::post('/employee/update', 'employeeController@employee_update');
 Route::post('/employee/delete', 'employeeController@employee_delete');
+
+//fingerptiny
+Route::get('/finger-print/upload-user', 'fingerPrintController@finger_print_upload_user');
+Route::get('/finger-print/export-absen', 'fingerPrintController@finger_print_export_absen');
+Route::post('/master-fingerprint/get-list', 'fingerPrintController@finger_print_get_all_mesin');
+Route::get('/finger-print', 'fingerPrintController@index');
+Route::get('/finger-print/add', 'fingerPrintController@finger_print_add');
+Route::get('/finger-print/edit/{id?}', 'fingerPrintController@finger_print_edit');
+Route::post('/finger-print/get', 'fingerPrintController@finger_print_get');
+Route::post('/finger-print/get-raw', 'fingerPrintController@finger_print_get_raw');
+Route::post('/finger-print/save', 'fingerPrintController@finger_print_save');
+Route::post('/finger-print/update', 'fingerPrintController@finger_print_update');
+Route::post('/finger-print/delete', 'fingerPrintController@finger_print_delete');
+
+
 
 
 //division
@@ -129,9 +149,16 @@ Route::post('/payroll/salary-attribute-get', 'payrollController@payroll_salary_a
 //payroll add modul
 //Route::post('/payroll-setting/save', 'payrollController@payroll_setting_save');
 
-
-
-
+//pengaturan
+Route::get('/setting', 'settingController@index');
+Route::get('/setting/add', 'settingController@setting_add');
+Route::get('/setting/edit/{id?}', 'settingController@setting_edit');
+Route::post('/setting/get', 'settingController@setting_get');
+Route::post('/setting/get-raw', 'settingController@setting_get_raw');
+Route::post('/setting/save', 'settingController@setting_save');
+Route::post('/setting/update', 'settingController@setting_update');
+Route::post('/setting/delete', 'settingController@setting_delete');
+Route::post('/setting/modul-save', 'settingController@setting_modul_save');
 
 
 Route::get('/payroll/print', 'payrollController@index');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\modul2Model;
 
+
 class modul2Controller extends Controller
 {
     function select2_get_raw(Request $request){
@@ -23,4 +24,5 @@ class modul2Controller extends Controller
         }
 
     }
+
 }

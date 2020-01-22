@@ -18,7 +18,7 @@ class permissionController extends Controller
 		try {
 
 			$data = permissionModel::permission_get($request);
-			$total = $data->count();
+			$total = permissionModel::permission_get_count($request)->count();
 
 
 		    $output['draw']=$draw;

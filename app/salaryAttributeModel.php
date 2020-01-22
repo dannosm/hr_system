@@ -46,6 +46,33 @@ class salaryAttributeModel extends Model
     	return $data;
     }
 
+     static function salary_attribute_get_count($request){
+
+        $search=$request['search']["value"];
+
+        if(empty($search)){
+           $data = DB::table('salary_attribute')
+                ->leftjoin('salary_module_detail','salary_attribute.id','=','salary_attribute_id')
+                ->select('salary_attribute.id as id','type','salary_attribute.name as name','salary_module_id as module_id'
+                ,DB::raw('(select name from salary_module where id=salary_module_id) as module_name'),'status')
+                ->offset($start)
+                ->limit($length)
+                ->get();
+        }else{
+
+             $data = DB::table('salary_attribute')
+                ->leftjoin('salary_module_detail','salary_attribute.id','=','salary_attribute_id')
+                ->where('name', 'LIKE', '%'.$search.'%')
+                ->orwhere('type', 'LIKE', '%'.$search.'%')  
+                ->orwhere('status', 'LIKE', '%'.$search.'%')
+                 ->select('salary_attribute.id as id','type as tipe','salary_attribute.name as name','salary_module_id as module_id'
+                ,DB::raw('(select name from salary_module where id=salary_module_id) as module_name'),'status')           
+                ->get();
+        }
+
+        return $data;
+    }
+
     static function salary_attribute_get_by_id($id){
     	
         $data = DB::table('salary_attribute')

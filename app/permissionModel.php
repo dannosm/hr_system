@@ -42,6 +42,28 @@ class permissionModel extends Model
         return $data;
     }
 
+     static function permission_get_count($request){
+        
+        $search=$request['search']["value"];
+        
+        if(empty($search)){
+           $data = DB::table('permission')
+                ->join('employee', 'permission.user_id', '=', 'employee.id')
+                ->select('permission.*', 'employee.name')
+                ->get();
+        }else{
+
+             $data = DB::table('permission')
+                ->join('employee', 'permission.user_id', '=', 'employee.id')
+                ->select('permission.*', 'employee.name')
+                ->where('employee.name', 'LIKE', '%'.$search.'%')
+                ->orwhere('category', 'LIKE', '%'.$search.'%')
+                ->get();
+        }
+
+        return $data;
+    }
+
     static function permission_get_by_id($id){
     	
     	 $data = DB::table('permission')

@@ -38,6 +38,27 @@ class shiftModel extends Model
         return $data;
     }
 
+
+      static function shift_get_count($request){
+
+        $search=$request['search']["value"];
+        
+        if(empty($search)){
+           $data = DB::table('shift')
+                ->get();
+        }else{
+
+             $data = DB::table('shift')
+                ->where('name', 'LIKE', '%'.$search.'%')
+                ->orwhere('late_limit', 'LIKE', '%'.$search.'%')
+                ->get();
+        }
+
+        return $data;
+    }
+
+
+
     static function shift_get_by_id($id){
     	
     	$data = shiftModel::where('id',$id)->get();
