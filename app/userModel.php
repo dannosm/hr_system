@@ -22,12 +22,14 @@ class userModel extends Model
 
     	if(empty($search)){
            $users = DB::table('users')
+                ->leftjoin('group_role','users.role_group','=','group_role.group_role_id')
                 ->offset($start)
                 ->limit($length)
                 ->get();
         }else{
 
              $users = DB::table('users')
+                ->leftjoin('group_role','users.role_group','=','group_role.group_role_id')
                 ->where('name', 'LIKE', '%'.$search.'%')
                 ->orwhere('username', 'LIKE', '%'.$search.'%')
                 ->orwhere('email', 'LIKE', '%'.$search.'%')
@@ -63,7 +65,9 @@ class userModel extends Model
 
     static function user_get_by_id($id){
     	
-    	$users = userModel::where('id',$id)->get();
+    	$users = userModel::where('id',$id)
+         ->leftjoin('group_role','users.role_group','=','group_role.group_role_id')
+        ->get();
     	return $users;
     }
     

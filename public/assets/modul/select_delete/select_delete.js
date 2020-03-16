@@ -27,6 +27,7 @@
 	    success: function(response)
 	     {
 	     	load_data();
+	     	$(options.buttons).hide();
 	     	errors.loading({id:"#loading_alerts",type:'hide'});
 	          if(response.success == true){
 	               errors.success({id:"#massage_errors",msg:response.msg});

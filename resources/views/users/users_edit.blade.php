@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@push('header')
+<link rel="stylesheet" href="{{URL::to('/')}}/assets/vendor/select2/css/select2.css">
+@endpush
 @section('content')
 <!--header content -->
                <!--  <div class="row">
@@ -51,19 +53,35 @@
                                                 <input id="email" type="email" required="" data-parsley-type="email" placeholder="Email" class="form-control enter_tab input_validasi" data-nextTab='3' name="email" value="{{$user->email}}" >
                                             </div>
                                         </div>
-                                       
-                                       <!--  <div class="form-group row">
-                                            <label for="inputPassword2" class="col-3 col-lg-2 col-form-label text-right">Password</label>
+
+                                          <div class="form-group row">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Role</label>
                                             <div class="col-9 col-lg-10">
-                                                <input id="inputPassword2" type="password" required="" placeholder="Password" class="form-control">
+                                               <select class="form-control enter_tab input_validasi select_data" data-nextTab='1' name="role">
+                                                   <option class="language" value="">Choose</option>
+                                               </select>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
+
+                                         <div class="form-group row">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Change Password</label>
+                                            <div class="col-9 col-lg-10">
+                                                <input type="checkbox" name="change_pass" value="yes" id="change_pass" style="margin-top:10px;">
+                                            </div>
+                                        </div>
+                                       
+                                         <div class="form-group row pass" style="display:none;">
+                                            <label for="inputPassword2" class="col-3 col-lg-2 col-form-label text-right">Password</label>
+                                            <div class="col-9 col-lg-10">
+                                                <input id="inputPassword2" type="password" required="" placeholder="Password" class="form-control enter_tab re-password" data-repassword='1' data-min='8' data-nextTab='4' name="password">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row pass" style="display:none;">
                                             <label for="inputWebSite" class="col-3 col-lg-2 col-form-label text-right">Re Password</label>
                                             <div class="col-9 col-lg-10">
-                                                <input id="inputWebSite" type="url" required="" data-parsley-type="url" placeholder="Re Password" class="form-control">
+                                                <input id="repassword" type="password" data-min='8'  data-repassword='2' placeholder="Re Password" class="form-control enter_tab re-password" data-nextTab='5' name="repassword">
                                             </div>
-                                        </div> -->
+                                        </div> 
                                 
                             <!--end card body-->
                             </div>
@@ -84,6 +102,8 @@
  <script src="{{URL::to('/')}}/assets/modul/error_massage/error_massage.js"></script>
 
 
+
+
 <script type="text/javascript">
 var errors = new error_massage();
 $(".enter_tab").enter_tab();
@@ -93,10 +113,27 @@ $("#email").keyup(function(e){
      }
 })   
 
+ $(document).ready(function(){
+    
+    $(".select_data").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Employee',token:$("input[name='_token']").val(),field:"select2_role",value:{id:"{{$user->role_group}}",text:"{{$user->group_name}}"}});
+     
+  
+} );
+
 $("#saveAdd").click(function(){
   errors.loading({id:"#loading_alerts",type:'show'});
   var validasi1 = $(".input_validasi").input_validasi({type:'required'});
 
+    if($("#change_pass").is(":checked") == true ){
+  var validasi2 = $(".re-password").input_validasi({type:'required,password,min'});
+
+        if(validasi2 == false){
+
+            errors.loading({id:"#loading_alerts",type:'hide'});
+            return;
+
+        }
+    }
  if(validasi1 == false){
     errors.loading({id:"#loading_alerts",type:'hide'});
     return;
@@ -105,9 +142,16 @@ $("#saveAdd").click(function(){
     var username = $("input[name='username']").val();
     var email = $("input[name='email']").val();
     var token = $("input[name='_token']").val();
+    var password = $("input[name='password']").val();
+    var repassword = $("input[name='repassword']").val();
+    var change_pass = $("#change_pass:checked").val();
+    var role = $("select[name='role']").val();
+    
+
+
     var id = $("input[name='id']").val();
 
-    dataPost = {'_token':token,name:name,username:username,email:email,id:id};
+    dataPost = {'_token':token,name:name,username:username,email:email,id:id,password:password,repassword:repassword,change_pass:change_pass,role:role};
      $.ajax({
                 url:"{{url('/users/update')}}",
                 data:dataPost,
@@ -133,5 +177,13 @@ $("#saveAdd").click(function(){
 
 
 });
+
+$("#change_pass").on('click',function(){
+    if($(this).is(':checked')){
+        $(".pass").removeAttr('style');
+    }else{
+        $(".pass").css({'display':'none'})
+    }
+})
 </script>
 @endpush

@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <!--header content -->
                <!--  <div class="row">
@@ -20,10 +19,14 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title language big-text">EMPLOYEE</h4>
+                                        <h4 class="card-header-title language">Salary Module</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a>
-                                            <a href="{{url('/employee/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i> <span class="language" >Add</span></a>
+                                            @if(session()->get('roles')[9]->role_delete == 1)
+                                            <!-- <a href="javascript:void(0)" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a> -->
+                                            @endif
+                                            @if(session()->get('roles')[9]->role_write == 1)
+                                           <!--  <a href="{{url('/salary-module/add')}}" class="btn btn-primary btn-sm language"><i class="fa fa-plus"></i> Add</a> -->
+                                            @endif
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -35,10 +38,6 @@
                         <tr>
                             <th><input type="checkbox" id="select_all" name="select_all" title="checked all" ></th>
                             <th class="language">Name</th>
-                            <th class="language">Email</th>
-                            <th class="language">Telephone</th>
-                            <th class="language">Division</th>
-                            <th class="language">Shift</th>
                             <th class="language">Status</th>
                             <th class="language">Option</th>
                         </tr>
@@ -60,12 +59,13 @@
 @csrf
 
 @endsection
+
 @push('footer')
 <script src="{{URL::to('/')}}/assets/modul/select_delete/select_delete.js"></script>
  <script src="{{URL::to('/')}}/assets/modul/error_massage/error_massage.js"></script>
 <script type="text/javascript">
 var errors = new error_massage();
-$("#select_all").select_delete({buttons:'#deleteBtn',select_child:'.child',urls:"{{url('employee/delete')}}",token:$("input[name='_token']").val()});
+$("#select_all").select_delete({buttons:'#deleteBtn',select_child:'.child',urls:"{{url('salary-module/delete')}}",token:$("input[name='_token']").val()});
 
 $(document).ready(function () {
 load_data();
@@ -77,7 +77,7 @@ function load_data(){
     "processing": true,
     "serverSide": true,
     "ajax":{
-        url :"{{url('/employee/get')}}",
+        url :"{{url('/salary-module/get')}}",
             type: "POST",
             data:{'_token': $("input[name='_token']").val()},            
         "dataSrc": function ( json ) {
@@ -93,16 +93,12 @@ function load_data(){
              let id = data['id'];
               return '<input class="child" type="checkbox" name="user_target_id[]"  onclick="unCheck()" value="'+id+'">';
             } },
-    {data:"name"}, 
-    {data:"email"},  
-    {data:"telphone"},  
-    {data:"division"},  
-    {data:"shift"},  
-    {data:"status"},  
+    {data:"name"},  
+    {data:"status"},
     { data: null, render: function ( data, type, row ) {
             // Combine the first and last names into a single table field
-            let id = "{{URL::to('/')}}/employee/edit/"+data['id'];
-            return '<a href="'+id+'" class="btn btn-rounded btn-primary">Edit</a>';
+            let id = "{{URL::to('/')}}/salary-module/"+data['view']+"/"+data['id'];
+            return '@if(session()->get('roles')[5]->role_write == 1)<a href="'+id+'" class="btn btn-rounded btn-primary">Edit</a> @endif';
         } },
     ],
     "columnDefs": [ {

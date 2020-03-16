@@ -22,22 +22,32 @@ class salaryAttributeModel extends Model
         $search=$request['search']["value"];
 
     	if(empty($search)){
-           $data = DB::table('salary_attribute')
+          /* $data = DB::table('salary_attribute')
                 ->leftjoin('salary_module_detail','salary_attribute.id','=','salary_attribute_id')
                 ->select('salary_attribute.id as id','type','salary_attribute.name as name','salary_module_id as module_id'
                 ,DB::raw('(select name from salary_module where id=salary_module_id) as module_name'),'status')
+                ->offset($start)
+                ->limit($length)
+                ->get();*/
+             $data = DB::table('salary_attribute')
+                  ->leftjoin('salary_module','salary_attribute.module_id','=','salary_module.id')
+                //->leftjoin('salary_module','salary_module_id','=','salary_module.id')
+                ->select('salary_attribute.id as id','type','salary_attribute.name as name','module_id'
+                ,'salary_module.name as module_name','salary_attribute.status')
                 ->offset($start)
                 ->limit($length)
                 ->get();
         }else{
 
              $data = DB::table('salary_attribute')
-                ->leftjoin('salary_module_detail','salary_attribute.id','=','salary_attribute_id')
-                ->where('name', 'LIKE', '%'.$search.'%')
+               ->leftjoin('salary_module','salary_attribute.module_id','=','salary_module.id')
+                //->leftjoin('salary_module','salary_module_id','=','salary_module.id')
+                ->select('salary_attribute.id as id','type','salary_attribute.name as name','module_id'
+                ,'salary_module.name as module_name','salary_attribute.status')
+               
+                ->where('salary_attribute.name', 'LIKE', '%'.$search.'%')
                 ->orwhere('type', 'LIKE', '%'.$search.'%')  
-                ->orwhere('status', 'LIKE', '%'.$search.'%')
-                 ->select('salary_attribute.id as id','type as tipe','salary_attribute.name as name','salary_module_id as module_id'
-                ,DB::raw('(select name from salary_module where id=salary_module_id) as module_name'),'status')           
+                ->orwhere('salary_attribute.status', 'LIKE', '%'.$search.'%')
                 ->offset($start)
                 ->limit($length)
                 ->get();
@@ -52,21 +62,22 @@ class salaryAttributeModel extends Model
 
         if(empty($search)){
            $data = DB::table('salary_attribute')
-                ->leftjoin('salary_module_detail','salary_attribute.id','=','salary_attribute_id')
-                ->select('salary_attribute.id as id','type','salary_attribute.name as name','salary_module_id as module_id'
-                ,DB::raw('(select name from salary_module where id=salary_module_id) as module_name'),'status')
-                ->offset($start)
-                ->limit($length)
+                 ->leftjoin('salary_module','salary_attribute.module_id','=','salary_module.id')
+                //->leftjoin('salary_module','salary_module_id','=','salary_module.id')
+                ->select('salary_attribute.id as id','type','salary_attribute.name as name','module_id'
+                ,'salary_module.name as module_name','salary_attribute.status')
                 ->get();
         }else{
 
              $data = DB::table('salary_attribute')
-                ->leftjoin('salary_module_detail','salary_attribute.id','=','salary_attribute_id')
-                ->where('name', 'LIKE', '%'.$search.'%')
+                 ->leftjoin('salary_module','salary_attribute.module_id','=','salary_module.id')
+                //->leftjoin('salary_module','salary_module_id','=','salary_module.id')
+                ->select('salary_attribute.id as id','type','salary_attribute.name as name','module_id'
+                ,'salary_module.name as module_name','salary_attribute.status')
+                ->where('salary_attribute.name', 'LIKE', '%'.$search.'%')
                 ->orwhere('type', 'LIKE', '%'.$search.'%')  
-                ->orwhere('status', 'LIKE', '%'.$search.'%')
-                 ->select('salary_attribute.id as id','type as tipe','salary_attribute.name as name','salary_module_id as module_id'
-                ,DB::raw('(select name from salary_module where id=salary_module_id) as module_name'),'status')           
+                ->orwhere('salary_attribute.status', 'LIKE', '%'.$search.'%')
+                         
                 ->get();
         }
 
@@ -76,11 +87,11 @@ class salaryAttributeModel extends Model
     static function salary_attribute_get_by_id($id){
     	
         $data = DB::table('salary_attribute')
-                ->leftjoin('salary_module_detail','salary_attribute.id','=','salary_attribute_id')
+               ->leftjoin('salary_module','salary_attribute.module_id','=','salary_module.id')
                 //->leftjoin('salary_module','salary_module_id','=','salary_module.id')
+                ->select('salary_attribute.id as id','type','salary_attribute.name as name','module_id'
+                ,'salary_module.name as module_name','salary_attribute.status')
                 ->where('salary_attribute.id', '=',$id)
-                ->select('salary_attribute.id as id','type','salary_attribute.name as name','salary_module_id as module_id'
-                ,DB::raw('(select name from salary_module where id=salary_module_id) as module_name'),'status')
                 ->get();
 
            
@@ -96,7 +107,45 @@ class salaryAttributeModel extends Model
 
     static function salary_attribute_get_status_active($request){
 
-         $data = DB::SELECT("SELECT sa.id,sa.`name`,if(sd.`value` is null,'',sd.`value`)value FROM salary_attribute sa LEFT JOIN salary_attribute_data sd ON sa.`id`=sd.`salary_attribute_id` AND sd.`employee_id`='".$request->get('id')."' WHERE `status`='active'");
+         $data = DB::SELECT("SELECT sa.id,sa.`name`,if(sd.`value` is null,'',sd.`value`)value,module_id FROM salary_attribute sa LEFT JOIN salary_attribute_data sd ON sa.`id`=sd.`salary_attribute_id` AND sd.`employee_id`='".$request->get('id')."' WHERE `status`='active' AND module_id ='0'");
+
+        return $data;
+
+    } 
+
+     static function salary_attribute_get_status_active_module_id($request){
+
+         $data = DB::SELECT("SELECT sa.id,sa.`name`,if(sd.`value` is null,'',sd.`value`)value,module_id FROM salary_attribute sa LEFT JOIN salary_attribute_data sd ON sa.`id`=sd.`salary_attribute_id` AND sd.`employee_id`='".$request->get('id')."' WHERE `status`='active' AND module_id !='0'");
+
+        return $data;
+
+    } 
+
+
+    static function salary_attribute_get_by_employee(){
+
+         $data = DB::SELECT("
+
+                SELECT 
+                ee.id employee_id, 
+                   sa.`type`, 
+                   `salary_attribute_id`, 
+                   sa.`name`, 
+                   sa.`module_id`, 
+                   sad.`value`, 
+                smd.`extensions`,
+                smd.`value` extensions_value
+                
+            FROM   employee ee 
+                   INNER JOIN salary_attribute_data sad 
+                           ON ee.`id` = sad.`employee_id` 
+                   INNER JOIN salary_attribute sa 
+                           ON sad.`salary_attribute_id` = sa.id 
+                   LEFT JOIN salary_module_detail smd 
+                    ON sa.`module_id`=smd.`salary_module_id`
+            WHERE  ee.status = 'active' 
+
+            ");
 
         return $data;
 

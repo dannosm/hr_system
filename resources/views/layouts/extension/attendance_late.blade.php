@@ -20,11 +20,11 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title language">ADD DIVISION</h4>
+                                        <h4 class="card-header-title language">Attendance Late Module</h4>
 
                                         <div class="toolbar ml-auto">
                                             <a href="javascript:void(0)" class="btn btn-primary btn-sm language" id="saveAdd"><i class="fa fa-save"></i> Save</a>
-                                            <a href="{{url('/division')}}" class="btn btn-dark btn-sm language"><i class="fas fa-sign-out-alt"></i> Back</a>
+                                            <a href="{{url('/')}}" class="btn btn-dark btn-sm language"><i class="fas fa-sign-out-alt"></i> Back</a>
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -33,16 +33,47 @@
                             <div id="loading_alerts" class="col-md-12" align="center"></div>
                                 <form action="#" id="form2" class="form-horizontal" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="id" value="{{$id}}">
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Division</label>
-                                            <div class="col-9 col-lg-10">
-                                                <input type="text" class="form-control enter_tab input_validasi " data-nextTab='1'  placeholder="Division Name" name="name">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Event</label>
+                                            <div class="col-9 col-lg-10" >
+
+                                                <input type=checkbox name="all_in_one" id="all_in_one" value="yes" style="margin: 12px;"><span class="language">All in One &nbsp;
+
+                                                  <input type=checkbox name="late_deduction" id="late_deduction" value="yes" style="margin: 12px;"><span class="language">Late Reduction &nbsp;
+
+                                                    <input type=checkbox name="late_breack" id="late_breack" value="yes" style="margin: 12px;"><span class="language">Late Break Reduction &nbsp;
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Description</label>
+
+                                        <div class="form-group row all_in_one" style="display: none;">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Amount</label>
                                             <div class="col-9 col-lg-10">
-                                                <textarea name="description" class="form-control enter_tab" data-nextTab='2'></textarea>
+                                                <input type="text" name="all_in_one_value" class="form-control rupiah" id="all_in_one_value" oninput="errors.rupiah(this)">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row late_deduction" style="display: none;">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Amount Attendance Late</label>
+                                            <div class="col-9 col-lg-10">
+                                                <input type="text" name="late_deduction_value" class="form-control rupiah" id="late_deduction_value" oninput="errors.rupiah(this)">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row late_breack" style="display: none;" >
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Amount Late Break</label>
+                                            <div class="col-9 col-lg-10">
+                                              <input type="text" name="late_breack_value" class="form-control rupiah" id="late_break_value" oninput="errors.rupiah(this)">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Status</label>
+                                            <div class="col-9 col-lg-10">
+                                                <select name="status" class="form-control">
+                                                  <option value="active">Active</option>
+                                                  <option value="active">Non Active</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </form>
@@ -74,6 +105,15 @@ $("#lastButton").keyup(function(e){
      if (e.keyCode == 13) {
         $("#saveAdd").trigger('click');
      }
+});
+
+$(document).ready(function(){
+  $("#status").val("{{$data[0]->status}}");
+   <?php foreach ($data as $key => $value) { ?>
+    $(".{{$value->title}}").removeAttr('style');
+    $("#{{$value->title}}").prop("checked",true);
+    $("#{{$value->title}}_value").val("{{$value->value}}");
+ <?php }?>
 })   
 
 $("#saveAdd").click(function(){
@@ -92,7 +132,7 @@ $("#saveAdd").click(function(){
        console.log(formDataSerialized);     
 
      $.ajax({
-                url:"{{url('/division/save')}}",
+                url:"{{url('/extension/attendance-late/save')}}",
                 dataType: 'JSON',
                 method: 'POST',
                 data: formData,
@@ -121,6 +161,48 @@ $("#saveAdd").click(function(){
     }
 });
 
+
+$("#late_deduction").change(function(){
+  if($(this).is(":checked")){
+    $(".late_deduction").removeAttr('style');
+    $(".all_in_one").css('display','none');
+    $("#all_in_one").prop("checked",false);
+
+  }else{
+    $(".late_deduction").css('display','none');
+
+  }
+})
+
+$("#late_breack").change(function(){
+  if($(this).is(":checked")){
+    $(".late_breack").removeAttr('style')
+    $(".all_in_one").css('display','none');
+    $("#all_in_one").prop("checked",false);
+
+  }else{
+    $(".late_breack").css('display','none');
+  }
+})
+
+$("#all_in_one").change(function(){
+  if($(this).is(":checked")){
+    $(".late_deduction").css('display','none')
+    $(".late_breack").css('display','none')
+    $("#late_deduction").prop("checked",false);
+    $("#late_breack").prop("checked",false);
+    $(".all_in_one").removeAttr('style');
+
+  }else{
+    $(".all_in_one").css('display','none');
+
+  }
+})
+
+
+$(".rupiah").on('keyup',function(){
+  $(this).val().replace
+})
 
 
 </script>

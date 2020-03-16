@@ -1,4 +1,5 @@
-<div class="menu-list">
+<div style="overflow: auto;">
+<div class="menu-list" style="max-height:750px;">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,11 +80,17 @@
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="far fa-money-bill-alt"></i><span class="language">Payroll</span></a>
                                 <div id="submenu-6" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
+                                         <li class="nav-item">
+                                            <a class="nav-link language" href="{{url('/payroll')}}">Payroll</a>
+                                        </li>
                                         <li class="nav-item">
                                             <a class="nav-link language" href="{{url('/payroll/print')}}">Payroll Print</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link language" href="{{url('/payroll/salary-attribute')}}">Salary Attribute</a>
+                                        </li>
+                                         <li class="nav-item">
+                                            <a class="nav-link language" href="{{url('/salary-module')}}">Salary Module</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -96,7 +103,7 @@
                                             <a class="nav-link" href="{{url('/users')}}"><span class="language">Users Master</span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/email-details.html"><span class="language">Role</span></a>
+                                            <a class="nav-link" href="{{url('/group-role')}}"><span class="language">Role</span></a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{url('/setting')}}"><span class="language">Config</span></a>
@@ -108,3 +115,4 @@
                     </div>
                 </nav>
             </div>
+</div>

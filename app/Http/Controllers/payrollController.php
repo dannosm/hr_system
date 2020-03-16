@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\salaryAttributeModel;
 use App\salaryModuleDetailModel;
+use App\payrollModel;
+
 use Auth;
 
 
@@ -15,6 +17,18 @@ class payrollController extends Controller
 
      public function payroll_salary_attribute(){
     	 return view('payroll.payroll_setting');
+     }
+
+     public function payroll(){
+        if($this->authSession(6,'r') == 1){return redirect('home');}
+         return view('payroll.payroll');
+     }
+
+
+      public function index(){
+        
+        if($this->authSession(6,'r') == 1){return redirect('home');}
+         return view('payroll.payroll_print');
      }
 
      function payroll_setting_get(Request $request){
@@ -88,17 +102,12 @@ class payrollController extends Controller
              $add->type = $request->get('type');
              $add->status = $request->get('status');
              $add->creator = $user->id;
-             $result = $add->save();
 
               if(!empty($request->get('modul'))){
-
-                $delete = salaryModuleDetailModel::salary_module_detail_delete($request->get('id'));
-                $modul = new salaryModuleDetailModel();
-                $modul->salary_module_id = $request->get('modul');
-                $modul->salary_attribute_id = $request->get('id');
-                $modul->save();
-
+                $add->module_id = $request->get('modul');
             }
+             $result = $add->save();
+            
             
              return json_encode(array('msg'=>'Sava Data Success', 'content'=>$result, 'success'=>TRUE));    
 
@@ -121,7 +130,9 @@ class payrollController extends Controller
     function payroll_salary_attribute_get(Request $request){
 
         $data = salaryAttributeModel::salary_attribute_get_status_active($request);
-        return $data;
+        $data2 = salaryAttributeModel::salary_attribute_get_status_active_module_id($request);
+
+        return array("data"=>$data,"data2"=>$data2);
 
     }
 
@@ -130,6 +141,122 @@ class payrollController extends Controller
 
     public function payrol_print(){
     	 return view('employee.employee');
+    }
+
+
+    public function payroll_get_data(Request $request){
+         try{
+            
+           
+
+           if($this->authSession(6,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
+
+            $get_data_payroll =  payrollModel::payroll_get_data_by_id($request);
+
+            if(!empty($get_data_payroll)){
+             return json_encode(array('msg'=>'Sava Data Success', 'content'=>$get_data_payroll, 'success'=>TRUE));    
+            }else{
+             return json_encode(array('msg'=>'Data Tidak Ditemukan', 'content'=>"Data Tidak Ditemukan", 'success'=>FALSE));    
+            }
+              
+        }catch (Exception $e) {
+            return json_encode(array('msg'=>'gagal', 'content'=>$e->getMessage(), 'success'=>FALSE, 'token_status'=>'invalid'));          
+        } 
+    }
+
+
+    public function get_list_payroll(Request $request){
+         try{
+            
+           
+
+           if($this->authSession(6,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
+
+            $get_data_payroll =  payrollModel::get_payroll_list($request);
+
+            if(!empty($get_data_payroll)){
+             return json_encode(array('msg'=>'Sava Data Success', 'content'=>$get_data_payroll, 'success'=>TRUE));    
+            }else{
+             return json_encode(array('msg'=>'Data Tidak Ditemukan', 'content'=>"Data Tidak Ditemukan", 'success'=>FALSE));    
+            }
+              
+        }catch (Exception $e) {
+            return json_encode(array('msg'=>'gagal', 'content'=>$e->getMessage(), 'success'=>FALSE, 'token_status'=>'invalid'));          
+        } 
+    }
+
+
+    public function payroll_sync(Request $request){
+        try{
+            
+           if($this->authSession(6,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
+        //get attribute salary by company
+           $payroll = array();
+           $pending = array();
+           $data = salaryAttributeModel::salary_attribute_get_by_employee();
+
+           foreach ($data as $key => $value) {
+                $nilai =0;
+                if($value->value !== '' || !empty($value->value)){
+                    $nilai =$value->value;
+                }
+
+                if($value->module_id !=0){
+                     
+                     $pending[$value->employee_id][] = array('type'=>$value->type,'extensions_value'=>$value->extensions_value,'id'=>$value->salary_attribute_id,'extensions'=>$value->extensions,'title'=>$value->name);
+                }
+
+                if($value->type == 1){
+                    if($value->module_id ==0){
+                        $payroll[$value->employee_id]['addition'][]  = array('id' => $value->salary_attribute_id,'title'=>$value->name,'value' => $nilai); 
+                   }
+                }else{
+
+                    if($value->module_id ==0){
+                        $payroll[$value->employee_id]['reduce'][]  =  array('id' => $value->salary_attribute_id,'title'=>$value->name,'value' => $nilai);
+                    }  
+                }   
+           }
+
+           //echo json_encode($payroll[1]);
+
+           //detele buulan yang sama 
+
+           $delete = payrollModel::payroll_sync_delete_month(date('Y'),date('m'));
+           foreach ($payroll as $key => $value) {
+        
+                foreach ($pending[$key] as $keys => $values) {
+                    $model_name = 'App\Http\Controllers\ '.$values['extensions'];
+                    $model_name = str_replace(' ', '', $model_name);
+                    $nilai = $model_name::getResultExtensions($values,$value);
+
+                    
+                    if($values['type'] == 1){
+                       $value['addition'][]  = array('id' => $values['id'],'title'=>$values['title'],'value' => $nilai);
+                    }else{
+                        $value['reduce'][]  =  array('id' => $values['id'],'title'=>$values['title'],'value' => $nilai);
+                    }
+
+                }
+
+              
+                $add = New payrollModel;
+                $add->employee_id = $key;
+                $add->sync_date = date("Y-m-d");
+                $add->json_data = json_encode($value);
+                $add->save();
+
+           }
+         
+         return json_encode(array('msg'=>'Sava Data Success', 'content'=>count($payroll), 'success'=>TRUE));    
+            
+              
+        }catch (Exception $e) {
+            return json_encode(array('msg'=>'gagal', 'content'=>$e->getMessage(), 'success'=>FALSE, 'token_status'=>'invalid'));          
+        } 
     }
 
 }

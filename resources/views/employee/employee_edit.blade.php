@@ -400,6 +400,10 @@ $(document).ready(function(){
 
   $(".select_shift").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Shift',token:$("input[name='_token']").val(),field:"select2_shift",value:{id:"{{$data->shift_id}}",text:"{{$data->shift}}"}});
 
+  $("select[name='status']").val("{{$data->status}}");
+  $("select[name='gender']").val("{{$data->gender}}");
+
+
   $(".select_position").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Position',token:$("input[name='_token']").val(),field:"select2_position",value:{id:"{{$data->position_id}}",text:"{{$data->position}}"}});
 
   $(".select_division").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Division',token:$("input[name='_token']").val(),field:"select2_division",value:{id:"{{$data->division_id}}",text:"{{$data->division}}"}});

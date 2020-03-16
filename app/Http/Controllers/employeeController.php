@@ -100,7 +100,7 @@ class employeeController extends Controller
                     $add->employee_id = $lastId;
                     $add->creator = $user->id;
                     $add->salary_attribute_id = $key;
-                    $add->value = $value;
+                    $add->value = str_replace('.', '', $value);
                     $add->save();
                 } 
                
@@ -176,12 +176,12 @@ class employeeController extends Controller
                     $add->employee_id = $request->get('id');
                     $add->creator = $user->id;
                     $add->salary_attribute_id = $key;
-                    $add->value = $value;
+                    $add->value = str_replace('.', '', $value);
                     $add->save();
 
                     }else{
                    $add = salaryAttributeDataModel::where('employee_id', $request->get('id'))->where('salary_attribute_id', $key)->firstOrFail(); 
-                    $add->value = $value;
+                    $add->value = str_replace('.', '', $value);
                     $add->save();
                  }
                 } 

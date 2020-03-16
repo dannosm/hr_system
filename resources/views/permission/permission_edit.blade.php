@@ -177,7 +177,7 @@ $( function() {
                 errors.failed({id:"#massage_errors",msg:"minimum days 1"});
             }
             
-             $("#days").val(x);
+             $("#days").val(x + 1);
             
          }
         })

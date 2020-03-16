@@ -19,4 +19,9 @@ class salaryModuleDetailModel extends Model
         $data = DB::DELETE("DELETE FROM salary_module_detail WHERE salary_attribute_id = $id");
         return $data;
     }
+
+    static function extension_delete_insert($id){
+    	$data = DB::DELETE("DELETE FROM salary_module_detail where salary_module_id='".$id."'");
+    	return $data;
+    }
 }

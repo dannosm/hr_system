@@ -37,6 +37,7 @@
                             <th class="language">Name</th>
                             <th class="language">Username</th>
                             <th class="language">Email</th>
+                            <th class="language">Role</th>
                             <th class="language">Option</th>
                         </tr>
                     </thead>
@@ -93,11 +94,13 @@ function load_data(){
             } },
     {data:"name"},  
     {data:"username"},  
-    {data:"email"},  
+    {data:"email"}, 
+    {data:"group_name"},  
+
     { data: null, render: function ( data, type, row ) {
             // Combine the first and last names into a single table field
             let id = "{{URL::to('/')}}/users/edit/"+data['id'];
-            return '<a href="#" class="btn btn-rounded btn-info language">View</a>&nbsp;<a href="'+id+'" class="btn btn-rounded btn-primary language">Edit</a>';
+            return '&nbsp;<a href="'+id+'" class="btn btn-rounded btn-primary language">Edit</a>';
         } },
     ],
     "columnDefs": [ {

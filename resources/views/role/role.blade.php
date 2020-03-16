@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
 <!--header content -->
                <!--  <div class="row">
@@ -19,14 +20,12 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title language">DIVISION</h4>
+                                        <h4 class="card-header-title language">ROLE</h4>
                                         <div class="toolbar ml-auto">
-                                            @if(session()->get('roles')[5]->role_delete == 1)
                                             <a href="javascript:void(0)" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a>
-                                            @endif
-                                            @if(session()->get('roles')[5]->role_write == 1)
-                                            <a href="{{url('/division/add')}}" class="btn btn-primary btn-sm language"><i class="fa fa-plus"></i> Add</a>
-                                            @endif
+                                            <a href="{{url('/role/add')}}" class="btn btn-primary btn-sm language"><i class="fa fa-plus"></i> Add</a>
+                                            <a href="{{url('/group-role')}}" class="btn btn-dark btn-sm language"><i class="fas fa-sign-out-alt"></i> Back</a>
+
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -38,7 +37,6 @@
                         <tr>
                             <th><input type="checkbox" id="select_all" name="select_all" title="checked all" ></th>
                             <th class="language">Name</th>
-                            <th class="language">Description</th>
                             <th class="language">Option</th>
                         </tr>
                     </thead>
@@ -65,7 +63,7 @@
  <script src="{{URL::to('/')}}/assets/modul/error_massage/error_massage.js"></script>
 <script type="text/javascript">
 var errors = new error_massage();
-$("#select_all").select_delete({buttons:'#deleteBtn',select_child:'.child',urls:"{{url('division/delete')}}",token:$("input[name='_token']").val()});
+$("#select_all").select_delete({buttons:'#deleteBtn',select_child:'.child',urls:"{{url('role/delete')}}",token:$("input[name='_token']").val()});
 
 $(document).ready(function () {
 load_data();
@@ -77,7 +75,7 @@ function load_data(){
     "processing": true,
     "serverSide": true,
     "ajax":{
-        url :"{{url('/division/get')}}",
+        url :"{{url('/role/get')}}",
             type: "POST",
             data:{'_token': $("input[name='_token']").val()},            
         "dataSrc": function ( json ) {
@@ -90,15 +88,14 @@ function load_data(){
       },
     "columns":[
     { data: null, render: function ( data, type, row ) {
-             let id = data['id'];
+             let id = data['role_id'];
               return '<input class="child" type="checkbox" name="user_target_id[]"  onclick="unCheck()" value="'+id+'">';
             } },
-    {data:"name"},  
-    {data:"description"},
+    {data:"role_name"},  
     { data: null, render: function ( data, type, row ) {
             // Combine the first and last names into a single table field
-            let id = "{{URL::to('/')}}/division/edit/"+data['id'];
-            return '@if(session()->get('roles')[5]->role_write == 1)<a href="'+id+'" class="btn btn-rounded btn-primary">Edit</a> @endif';
+            let id = "{{URL::to('/')}}/role/edit/"+data['role_id'];
+            return '<a href="'+id+'" class="btn btn-rounded btn-primary">Edit</a>';
         } },
     ],
     "columnDefs": [ {

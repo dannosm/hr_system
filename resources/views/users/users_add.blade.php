@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@push('header')
+<link rel="stylesheet" href="{{URL::to('/')}}/assets/vendor/select2/css/select2.css">
+@endpush
 @section('content')
 <!--header content -->
                <!--  <div class="row">
@@ -52,6 +54,15 @@
                                         </div>
                                        
                                         <div class="form-group row">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Role</label>
+                                            <div class="col-9 col-lg-10">
+                                               <select class="form-control enter_tab input_validasi select_data" data-nextTab='1' name="role">
+                                                   <option class="language" value="">Choose</option>
+                                               </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
                                             <label for="inputPassword2" class="col-3 col-lg-2 col-form-label text-right">Password</label>
                                             <div class="col-9 col-lg-10">
                                                 <input id="inputPassword2" type="password" required="" placeholder="Password" class="form-control enter_tab re-password" data-repassword='1' data-min='8' data-nextTab='4' name="password">
@@ -86,6 +97,10 @@
 <script type="text/javascript">
     var errors = new error_massage();
     $(".enter_tab").enter_tab();
+$(document).ready(function(){
+    $(".select_data").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Role',token:$("input[name='_token']").val(),field:"select2_role"});
+
+})
 
 $("#repassword").keyup(function(e){
      if (e.keyCode == 13) {
@@ -108,8 +123,10 @@ $("#saveAdd").click(function(){
     var password = $("input[name='password']").val();
     var repassword = $("input[name='repassword']").val();
     var token = $("input[name='_token']").val();
+    var role = $("select[name='role']").val();
 
-    dataPost = {'_token':token,name:name,username:username,email:email,password:password,repassword:repassword};
+
+    dataPost = {'_token':token,name:name,username:username,email:email,password:password,repassword:repassword,role:role};
 
      $.ajax({
                 url:"{{url('/users/save')}}",

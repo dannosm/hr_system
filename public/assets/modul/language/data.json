@@ -1,7 +1,7 @@
 ﻿{"id":[{"id":"Dashboard","value":"Beranda"},{"id":"Finger Print","value":"Mesin Absen"},{"id":"Attendance","value":"Absensi"}
 ,{"id":"Module Finger Print","value":"Modul Mesin Absensi"},{"id":"Late Attendance List","value":"Daftar Absensi Terlambat"},
 {"id":"Recruitmen","value":"Perekrutan"},{"id":"Print Id Card","value":"Cetak Kartu Id"},{"id":"Doc Archive","value":"Dokumen"}
-,{"id":"Multiple Documents","value":"Multi Dokumen"},{"id":"Payroll","value":"Gaji"},{"id":"Print Salary","value":"Cetak Slip Gaji"},
+,{"id":"Multiple Documents","value":"Multi Dokumen"},{"id":"Print Salary","value":"Cetak Slip Gaji"},
 {"id":"Add Finger Print Employee","value":"Tambah Sidik Jari Karyawan"},{"id":"Application Letter","value":"Surat Lamaran"},
 {"id":"Employee","value":"Karyawan"},{"id":"Permission","value":"Izin"},{"id":"Employee","value":"Karyawan"},{"id":"Division","value":"Divisi"},
 {"id":"Position","value":"Jabatan"},{"id":"Loan","value":"Pinjaman"},{"id":"Shift","value":"Shift"},{"id":"General Setting","value":"Pengaturan Umum"},
@@ -38,6 +38,31 @@
 ,{"id":"Image","value":"Gambar"}
 ,{"id":"Height","value":"Tinggi"}
 ,{"id":"Widht","value":"Lebar"}
+,{"id":"Role Group","value":"Grup Hak Akses"}
+,{"id":"Group Name","value":"Nama Grup"}
+,{"id":"Add Role","value":"Tambah Akses"}
+,{"id":"Edit Role","value":"Ubah Akses"}
+,{"id":"Payslip","value":"Slip Gaji"}
+,{"id":"Payroll","value":"Daftar Gaji"}
+,{"id":"Payroll Module","value":"Modul Gaji"}
+,{"id":"Payroll Sync","value":"Sinkron Gaji"}
+,{"id":"Salary Module","value":"Modul Gaji"}
+,{"id":"Late Reduction","value":"Potongan Telat"}
+,{"id":"Late Break Reduction","value":"Potongan Telat Istirahat"}
+,{"id":"ALl In One","value":"Semua Jadi Satu"}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -51,7 +76,7 @@
 "us":[{"id":"Beranda","value":"Dashboard"},{"id":"Mesin Absen","value":"Finger Print"},{"id":"Absensi","value":"Attendance"}
 ,{"id":"Modul Mesin Absensi","value":"Module Finger Print"},{"id":"Daftar Absensi Terlambat","value":"Late Attendance List"},
 {"id":"Perekrutan","value":"Recruitmen"},{"id":"Cetak Kartu Id","value":"Print Id Card"},{"id":"Dokumen","value":"Doc Archive"},
-{"id":"Multi Dokumen","value":"Multiple Documents"},{"id":"Gaji","value":"Payroll"},{"id":"Cetak Slip Gaji","value":"Print Salary"},
+{"id":"Multi Dokumen","value":"Multiple Documents"},{"id":"Cetak Slip Gaji","value":"Print Salary"},
 {"id":"Tambah Sidik Jari Karyawan","value":"Add Finger Print Employee"},{"id":"Surat Lamaran","value":"Application Letter"},
 {"id":"Karyawan","value":"Employee"},{"id":"Izin","value":"Permission"},{"id":"Divisi","value":"Division"},
 {"id":"Jabatan","value":"Position"},{"id":"Pinjaman","value":"Loan"},{"id":"Shift","value":"Shift"},
@@ -85,6 +110,22 @@
 ,{"id":"Gambar","value":"Image"}
 ,{"id":"Tinggi","value":"Height"}
 ,{"id":"Lebar","value":"Widht"}
+,{"id":"Grup Hak Akses","value":"Role Group"}
+,{"id":"Nama Grup","value":"Group Name"}
+,{"id":"Ubah Akses","value":"Edit Role"}
+,{"id":"Slip Gaji","value":"Payslip"}
+,{"id":"Daftar Gaji","value":"Payroll"}
+,{"id":"Modul Gaji","value":"Payroll Module"}
+,{"id":"Sinkron Gaji","value":"Payroll Sync"}
+,{"id":"Modul Gaji","value":"Salary Module"}
+,{"id":"Potongan Telat","value":"Late Reduction"}
+,{"id":"Potongan Telat Istirahat","value":"Late Break Deduction"}
+,{"id":"Semua Jadi Satu","value":"All In One"}
+
+
+
+
+
 
 
 

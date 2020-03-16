@@ -57,6 +57,8 @@ class userController extends Controller
             $add->username = $request->get('username');
             $add->email = $request->get('email');
             $add->password =  Hash::make($request->get('password'));
+            $add->role_group = $request->get('role');
+
             $result = $add->save();
             
             return json_encode(array('msg'=>'Sava Data Success', 'content'=>$result, 'success'=>TRUE));    
@@ -80,6 +82,13 @@ class userController extends Controller
              $add->name = $request->get('name');
              $add->username = $request->get('username');
              $add->email = $request->get('email');
+            $add->role_group = $request->get('role');
+             
+
+             if(!empty($request->get('change_pass'))){
+               $add->password =  Hash::make($request->get('password'));
+             }
+             
              $result = $add->save();
             
              return json_encode(array('msg'=>'Sava Data Success', 'content'=>$result, 'success'=>TRUE));    

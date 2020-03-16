@@ -69,6 +69,7 @@ class loanModel extends Model
     	$sql = DB::table('loans')
             ->join('employee', 'user_id', '=', 'employee.id')
                 ->select("loans.*",'employee.name')
+                ->where('loans.id',$id)
             ->get();
 
             return $sql;

@@ -161,7 +161,59 @@ Route::post('/setting/delete', 'settingController@setting_delete');
 Route::post('/setting/modul-save', 'settingController@setting_modul_save');
 
 
+
+//role
+Route::get('/role', 'roleController@index');
+Route::get('/role/add', 'roleController@role_add');
+Route::get('/role/edit/{id?}', 'roleController@role_edit');
+Route::post('/role/get', 'roleController@role_get');
+Route::get('/role/get-raw', 'roleController@role_get_raw');
+Route::post('/role/save', 'roleController@role_save');
+Route::post('/role/update', 'roleController@role_update');
+Route::post('/role/delete', 'roleController@role_delete');
+
+//group role
+Route::get('/group-role', 'groupRoleController@index');
+Route::get('/group-role/add', 'groupRoleController@group_role_add');
+Route::get('/group-role/edit/{id?}', 'groupRoleController@group_role_edit');
+Route::post('/group-role/get', 'groupRoleController@group_role_get');
+Route::post('/group-role/get-raw', 'groupRoleController@group_role_get_raw');
+Route::post('/group-role/save', 'groupRoleController@group_role_save');
+Route::post('/group-role/update', 'groupRoleController@group_role_update');
+Route::post('/group-role/delete', 'groupRoleController@group_role_delete');
+Route::post('/group-role-detail/get-id', 'groupRoleController@group_role_detail_get_by_id');
+
+
+
+
 Route::get('/payroll/print', 'payrollController@index');
+Route::post('/payroll/get-data', 'payrollController@payroll_get_data');
+Route::get('/payroll', 'payrollController@payroll');
+Route::post('/payroll/get-payroll-list', 'payrollController@get_list_payroll');
+Route::get('/payroll/sync', 'payrollController@payroll_sync');
+
+
+//Route::get('/payroll/module', 'payrollController@payroll');
+
+//salary module
+Route::get('/salary-module', 'salaryModuleController@index');
+Route::post('/salary-module/get', 'salaryModuleController@salary_module_get');
+Route::get('/salary-module/{view?}/{id?}', 'salaryModuleController@salary_module_edit');
+
+
+///extension
+Route::post('/extension/attendance-late/save','extensionAttendanceController@extension_attendance_save');
+Route::post('/extension/bpjs-ketenaga-kerjaan/save','extensionBPJSKetenagaKerjaanController@extension_bpjs_ketenaga_kerjaan_save');
+Route::post('/extension/bpjs-kesehatan/save','extensionBPJSKesehatanController@extension_bpjs_kesehatan_save');
+
+
+
+
+
+
+
+
+
 
 
 

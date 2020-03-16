@@ -20,11 +20,11 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">EDIT DIVISION</h4>
+                                        <h4 class="card-header-title language">EDIT DIVISION</h4>
 
                                         <div class="toolbar ml-auto">
-                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm" id="saveAdd"><i class="fa fa-save"></i> Save</a>
-                                            <a href="{{url('/division')}}" class="btn btn-dark btn-sm "><i class="fas fa-sign-out-alt"></i> Back</a>
+                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm language" id="saveAdd"><i class="fa fa-save"></i> Save</a>
+                                            <a href="{{url('/division')}}" class="btn btn-dark btn-sm language"><i class="fas fa-sign-out-alt"></i> Back</a>
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -36,15 +36,15 @@
 
                                         @csrf      
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Division</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Division</label>
                                             <div class="col-9 col-lg-10">
                                                 <input type="text" class="form-control enter_tab input_validasi " data-nextTab='1' name="name" value="{{$data->name}}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Description</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Description</label>
                                             <div class="col-9 col-lg-10">
-                                                <textarea name="description" class="form-control enter_tab " data-nextTab='2'>{{$data->description}}</textarea>
+                                                <textarea name="description" class="form-control enter_tab" data-nextTab='2'>{{$data->description}}</textarea>
                                             </div>
                                         </div>
                                         

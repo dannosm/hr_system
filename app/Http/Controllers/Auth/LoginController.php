@@ -39,7 +39,6 @@ class LoginController extends Controller
 
     public function username()
     {   
-
       
             if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 return 'email';

@@ -25,6 +25,21 @@ attribute_salary.prototype.append_html = function (id,data) {
 
 };
 
+attribute_salary.prototype.append_html_hidden = function (id,data) {
+	var div_app = [];
+	$(data).each(function(idx,val){
+		
+			div_app.push('<input type="hidden" value="'+errors.rupiahR(val.value)+'" class="form-control form-control-sm tab enter_tab rupiah"  name="salary['+val.id+']">');
+		
+		
+	});
+
+		$(id).append(div_app.join(''));
+		attribute_salary.rupiah();
+		$(".enter_tab").enter_tab();
+
+};
+
 attribute_salary.prototype.attribute_salary_get = function (options) {
 
 	$.ajax({
@@ -34,8 +49,10 @@ attribute_salary.prototype.attribute_salary_get = function (options) {
       cache: false,
      dataType: 'json',
       success: function(data){
-  
-      	attribute_salary.append_html(options.div_id,data)
+
+      	attribute_salary.append_html(options.div_id,data.data)
+      	attribute_salary.append_html_hidden(options.div_id,data.data2)
+
       }
 
    });
@@ -48,7 +65,7 @@ attribute_salary.prototype.html = function (id,name,num,val) {
 return   '<div class="form-group row col-lg-5">'
 +'<label for="inputEmail2" class="col-lg-5 col-form-label text-right language">'+name+'</label>'
 +'<div class="col-lg-7">'
- +     '<input type="text" value="'+val+'" class="form-control form-control-sm tab enter_tab rupiah" data-nextTab='+num+'  name="salary['+id+']">'
+ +     '<input type="text" value="'+errors.rupiahR(val)+'" class="form-control form-control-sm tab enter_tab rupiah" data-nextTab='+num+'  name="salary['+id+']">'
 +'</div>'
 +'</div>';
                              	
