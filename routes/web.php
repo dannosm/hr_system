@@ -137,6 +137,15 @@ Route::post('/application-letter/save', 'applicationLetterController@application
 Route::post('/application-letter/update', 'applicationLetterController@application_letter_update');
 Route::post('/application-letter/delete', 'applicationLetterController@application_letter_delete');
 
+//rekruitmen
+Route::get('/rekruitmens', 'rekruitmenController@index');
+Route::get('/rekruitmen/add', 'rekruitmenController@rekruitmen_add');
+Route::get('/rekruitmen/edit/{id?}', 'rekruitmenController@rekruitmen_edit');
+Route::post('/rekruitmen/get', 'rekruitmenController@rekruitmen_get');
+Route::post('/rekruitmen/save', 'rekruitmenController@rekruitmen_save');
+Route::post('/rekruitmen/update', 'rekruitmenController@rekruitmen_update');
+Route::post('/rekruitmen/delete', 'rekruitmenController@rekruitmen_delete');
+
 
 //multiple Documents
 Route::get('/multiple-documents', 'multipleDocumentController@index');

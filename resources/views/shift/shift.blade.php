@@ -244,6 +244,8 @@ $("#printBtn").click(function(){
             if(response.success == true){   
 
                 var html_td = [];    
+                var html_head ="";
+                $("#list_shift").html(" ");     
                 $(response.content).each(function(idx,val){
                     html_td.push("<tr><td>"+val.id+"</td><td>"+val.name+"</td><td>"+val.shift_name+"</td></tr>");
                 })

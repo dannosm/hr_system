@@ -139,7 +139,7 @@ $("#saveAdd").click(function(){
     var status = $("select[name='status']").val();
     var tipe = $("select[name='tipe']").val();
     var token = $("input[name='_token']").val();
-    var auto_sync = $("#auto_sync").val();
+    var auto_sync = $("#auto_sync:checked").val();
     var schedule = $("input[name='schedule']").val();
 
      var shift = [];

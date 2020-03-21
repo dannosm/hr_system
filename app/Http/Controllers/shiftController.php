@@ -219,8 +219,8 @@ class shiftController extends Controller
             }else{
 
                 if($request->get('tipe') == 'print'){
-                        
-                    return json_encode(array('msg'=>'Print Data Success', 'content'=>'', 'success'=>TRUE));    
+                    $detail_shift = employeeModel::employee_shift_get();
+                    return json_encode(array('msg'=>'Print Data Success', 'content'=>$detail_shift, 'success'=>TRUE));    
 
                 }
 
