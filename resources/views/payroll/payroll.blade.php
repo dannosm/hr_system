@@ -223,7 +223,42 @@ function load_data(){
 
 function export_excel(){
 
-    alert("Export Excel Berhasil");
+   var validasi1 = $(".input_validasi").input_validasi({type:'required'});
+
+      if(validasi1 == false){
+         errors.loading({id:"#loading_alerts",type:'hide'});
+         return;
+      }else{
+
+           var employee_id = $("#employee_id").val();
+           var periode = $("#periode").val();
+           var years = $("#years").val();
+
+    $.ajax({
+                    url:"{{url('/payroll/export-excel')}}",
+                    dataType: 'JSON',
+                    method: 'POST',
+                    data: {employee_id:employee_id,years:years,periode:periode,'_token': $("input[name='_token']").val()},
+                    cache: false,
+                    success: function(response) {
+                    
+                      if(response.success == true){
+                      let image= "{{URL::to('/')}}/payroll.xlsx";
+                      errors.file_download(image);
+                      }else{
+                        alert("Export Excel Gagal");
+                      }
+                       
+                    },error: function (error) {
+                        msg = JSON.stringify(error.responseJSON.message);
+                        //msg = error.responseJSON.errors.email;
+                        errors.loading({id:"#loading_alertsmodal",type:'hide'});
+                        errors.failed({id:"#massage_errors",msg:msg});
+                        $("#modal_finger_print").modal('hide');
+                    }
+         });
+
+  }
 
 }
 

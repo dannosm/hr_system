@@ -31,7 +31,7 @@
                                 </div>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link active" href="{{url('/rekruitmen')}}"><i class="fas fa-fw fa-chart-pie"></i><span class="language">Recruitmen</span></a>
+                                <a class="nav-link active" href="{{url('/rekruitmens')}}"><i class="fas fa-fw fa-chart-pie"></i><span class="language">Recruitmen</span></a>
                             </li>
                             
                             <li class="nav-item ">

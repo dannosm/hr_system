@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\salaryAttributeModel;
 use App\salaryModuleDetailModel;
 use App\payrollModel;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 use Auth;
 
@@ -257,6 +259,50 @@ class payrollController extends Controller
         }catch (Exception $e) {
             return json_encode(array('msg'=>'gagal', 'content'=>$e->getMessage(), 'success'=>FALSE, 'token_status'=>'invalid'));          
         } 
+    }
+
+
+
+    public function payroll_export_to_excel(Request $request){
+
+        $get_data_payroll =  payrollModel::get_payroll_list($request);
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'NIK');
+        $sheet->setCellValue('B1', 'NAME');
+        $sheet->setCellValue('C1', 'TOTAL');
+        $i = 1;
+
+        foreach ($get_data_payroll as $key => $value) {
+            $data = json_decode($value->json_data,true);
+            $sub1 = 0;
+            $sub2 = 0;
+            $total = 0;
+            if(!empty($data)){    
+                foreach ($data['addition'] as $k => $val) {
+                    $sub1 +=$val['value'];
+                }
+                foreach ($data['reduce'] as $ks => $vals) {
+                    $sub2 +=$vals['value'];
+                }
+                $total = $sub1-$sub2;
+            }
+                $i++;
+                $sheet->setCellValue('A'.$i,$value->nik);
+                $sheet->setCellValue('B'.$i, $value->name);
+                $sheet->setCellValue('C'.$i, number_format($total,0,'.',','));
+
+
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('payroll.xlsx');
+
+     
+        return json_encode(array('msg'=>'Sava Data Success', 'content'=>"", 'success'=>TRUE));    
+
+
+    
     }
 
 }

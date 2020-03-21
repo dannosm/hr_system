@@ -212,6 +212,8 @@ Route::post('/payroll/get-data', 'payrollController@payroll_get_data');
 Route::get('/payroll', 'payrollController@payroll');
 Route::post('/payroll/get-payroll-list', 'payrollController@get_list_payroll');
 Route::get('/payroll/sync', 'payrollController@payroll_sync');
+Route::POST('/payroll/export-excel', 'payrollController@payroll_export_to_excel');
+
 
 
 //Route::get('/payroll/module', 'payrollController@payroll');
