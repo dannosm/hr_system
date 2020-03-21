@@ -22,8 +22,22 @@
                            <div class="card-header d-flex">
                                         <h4 class="card-header-title">SHIFT MASTER</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="#" class="btn btn-danger btn-sm " id="deleteBtn">Delete</a>
-                                            <a href="{{url('/shift/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i> Add</a>
+                                            
+                                            
+                                            @if(session()->get('roles')[10]->role_delete == 1)
+                                            <a href="#" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a>
+                                            @endif
+                                            @if(session()->get('roles')[10]->role_read == 1)
+                                            <a href="javascript:void(0)" class="btn btn-info btn-sm language" id="printBtn">Print</a>
+                                            @endif
+                                            @if(session()->get('roles')[10]->role_write == 1)
+                                            @if($sync == 0)
+                                            <a href="javascript:void(0)" class="btn btn-dark btn-sm language" onclick="sync_()">Shifting</a>
+                                            @endif
+                                            <a href="{{url('/shift-setting')}}" class="btn btn-success btn-sm language">Setting</a>
+                                            <a href="{{url('/shift/add')}}" class="btn btn-primary btn-sm language"><i class="fa fa-plus"></i> Add</a>
+                                            @endif
+
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -55,6 +69,96 @@
                     <!-- ============================================================== -->
                 </div>
                 <!--end row-->
+
+
+<!-- module print -->
+
+<div id="coba">
+    <style>
+#customerss {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customerss td, #customerss th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+
+#customerss tr:nth-child(even){background-color: #f2f2f2;}
+
+#customerss tr:hover {background-color: #ddd;}
+
+#customerss th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    padding: 8px;
+}
+
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.bo{
+    border: none;
+}
+
+
+
+</style>
+</div>
+<div id="printarea" style="display: none;">
+<!--     <table id="customers">
+
+  <tr>
+    <td align="left" valign="top">
+     <img src="/images/btktype.png" alt="BTKMART">
+    </td>
+    <td align="left" valign="bottom" style="font-size:30px;font-weight: bold;float: left; margin-top:30px;margin-left: -50%" class="language">JADWAL SHIFT KARYAWAN</td>
+  </tr>
+</table>  
+
+<br> -->
+<br>
+
+
+ <table class="table table-striped table-bordered" id="customerss">
+    <thead>
+                     <tr style="border: none;">
+                        <td colspan="3" align="center" style="border: none;"><h4>JADWAL SHIFT KARYAWAN<BR>Bulan : {{date("F Y")}}</h4></td>
+                    </tr>
+    </thead>
+    <tbody id="list_shift">
+
+    </tbody>
+                            
+</table>
+</div>
+
+<!-- end module print-->
 @csrf
 
 @endsection
@@ -125,6 +229,73 @@ function unCheck(){
   });
 }
 
+
+$("#printBtn").click(function(){
+
+    $.ajax({
+        url:"{{('/shift/print')}}",
+        type:"POST",
+        data:{_token:$("input[name='_token']").val(),tipe:'print'},
+        dataType:"JSON",
+        cache:false,
+        success:function(response){
+
+            
+            if(response.success == true){   
+
+                var html_td = [];    
+                $(response.content).each(function(idx,val){
+                    html_td.push("<tr><td>"+val.id+"</td><td>"+val.name+"</td><td>"+val.shift_name+"</td></tr>");
+                })
+                html_head = "<tr><td width='1'>NIK</td><td>NAME</td><td>SHIFT</td></tr>";
+                $("#list_shift").append(html_head+html_td.join(""));
+
+                 $("#printarea").removeAttr('style');
+                  newWin= window.open();
+                  newWin.document.write(document.getElementById('coba').innerHTML);
+                  newWin.document.write(document.getElementById('printarea').innerHTML);
+                  newWin.document.close();
+                  newWin.focus();
+                  //newWin.print();
+                  //newWin.document.close();
+                   setTimeout(function(){ 
+                  newWin.print();
+
+                    newWin.document.close();
+                $("#printarea").css('display','none');
+
+                   }, 1000);
+
+            }
+        },
+        errors:function(error){
+
+        }
+    });
+});
+
+
+function sync_(){
+     $.ajax({
+        url:"{{('/shift/print')}}",
+        type:"POST",
+        data:{_token:$("input[name='_token']").val(),tipe:'sycn'},
+        dataType:"JSON",
+        cache:false,
+        success:function(response){
+            if(response.success == true){
+
+                 alert("Update Shift Berhasil");
+
+            }else{
+                 alert(response.msg);
+            }
+        },
+        errors:function(error){
+
+        }
+    });
+}
 </script>
 @endpush
 

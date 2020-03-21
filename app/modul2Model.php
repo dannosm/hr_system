@@ -9,6 +9,7 @@ class modul2Model extends Model
 {
     static function select2_get_raw($post){
         
+        
         if(empty($post['q'])){
 
             $data = DB::table($post['field'])
@@ -21,5 +22,17 @@ class modul2Model extends Model
                 ->get();
         }
         return $data;
+    }
+
+    static function select2_group_get_like($query){
+
+
+         $data = DB::table("shift")
+                ->where('name', 'LIKE', '%'.$query.'%')
+                ->limit(10)
+                ->get();
+        
+        return $data;
+
     }
 }

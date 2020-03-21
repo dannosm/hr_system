@@ -154,4 +154,10 @@ class employeeModel extends Model
                 ->get();
         return $data;
     }
+
+
+    static function employee_shift_get(){
+        $data = DB::SELECT("SELECT id,shift_id,name,(SELECT name FROM shift where id=employee.shift_id)shift_name FROM employee WHERE `status` ='active' order by shift_id asc");
+        return $data;
+    }
 }

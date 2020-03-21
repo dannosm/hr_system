@@ -25,4 +25,18 @@ class modul2Controller extends Controller
 
     }
 
+
+    function select2_get_like(){
+
+      try {
+
+            $output = modul2Model::select2_group_get_like($_GET['query']);
+
+            echo json_encode($output);
+        } catch (Exception $e) {
+            echo json_encode(array('msg'=>'gagal', 'content'=>$e->getMessage(), 'success'=>FALSE, 'token_status'=>'invalid'));          
+        }
+
+    }
+
 }

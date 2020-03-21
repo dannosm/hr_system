@@ -6,30 +6,33 @@ function removeRow(vals){
 }
 
  $.fn.select_group = function (options) {
+
      
     var idx = this;
      var field_name = options.value_name;
     $(this).after(function(){
       return '<div id="'+field_name+'" class="scrollbox" style="margin-top:5px;height:120px;width:100%;border:1px solid #ccc;overflow:auto;"> </div>';
     })
-    if(options.url_get !== ''){
+
+    
+   if(options.url_get !== ''){
          $.ajax({
             type: "POST",
             url:options.url_get,
-            data: options.url_get_data, 
+            data: {_token:options.token}, 
             cache: false,
 
             success: function(response){
               var result = JSON.parse(response);
-                
-                $(result.content).each(function(idx,item){
 
+                $(JSON.parse(result[0].shift_list)).each(function(idx,item){
+                  
               var wrapper = $("#"+field_name); 
-              var list_product=item.nama_group+' <input type="hidden" class="'+field_name+'" name="'+field_name+'[]" id="val_'+item.attribute_group_id+'" value="'+item.attribute_group_id+'"></td>';
-              var list_action_delete='<a class="btn btn-info btn-flat" onclick ="removeRow(\''+rowNum+'\')"><i class="fa fa-minus fa-fw"></i> Hapus</a>';
+              var list_product=item.name+' <input type="hidden" class="'+field_name+'" name="'+field_name+'[]" data-no-name="'+item.name+'" id="val_'+item.id+'" value="'+item.id+'"></td>';
+              var list_action_delete='<a class="btn btn-danger btn-sm language" style="color:#ffffff" onclick ="removeRow(\''+rowNum+'\')"><i class="fa fa-minus fa-fw"></i>Remove</a>';
               $(wrapper).append('<p id="rowNum'+rowNum+'">'+list_product+list_action_delete+'</p>');
               $(idx).val('');
-              rowNum++;
+                 rowNum++;
 
                 })
                
@@ -62,8 +65,8 @@ function removeRow(vals){
                 }
               }
               var wrapper = $("#"+field_name); 
-              var list_product=item.name+' <input type="hidden" class="'+field_name+'" name="'+field_name+'[]" id="val_'+item.id+'" value="'+item.id+'"></td>';
-              var list_action_delete='<a class="btn btn-info btn-flat" onclick ="removeRow(\''+rowNum+'\')"><i class="fa fa-minus fa-fw"></i> Hapus</a>';
+              var list_product=item.name+' <input type="hidden" class="'+field_name+'" name="'+field_name+'[]" id="val_'+item.id+'" data-no-name="'+item.name+'" value="'+item.id+'"></td>';
+              var list_action_delete='<a class="btn btn-danger btn-sm language" style="color:#ffffff" onclick ="removeRow(\''+rowNum+'\')"><i class="fa fa-minus fa-fw"></i>Remove</a>';
               $(wrapper).append('<p id="rowNum'+rowNum+'">'+list_product+list_action_delete+'</p>');
               $(idx).val('');
               rowNum++;

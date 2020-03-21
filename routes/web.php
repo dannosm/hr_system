@@ -95,6 +95,18 @@ Route::post('/shift/get', 'shiftController@shift_get');
 Route::post('/shift/save', 'shiftController@shift_save');
 Route::post('/shift/update', 'shiftController@shift_update');
 Route::post('/shift/delete', 'shiftController@shift_delete');
+Route::post('/shift/print', 'shiftController@shift_print');
+
+//shift module
+Route::get('/shift-setting', 'shiftSettingController@index');
+Route::post('/shift-setting/get', 'shiftSettingController@shift_setting_get');
+Route::post('/shift-setting/update', 'shiftSettingController@shift_setting_update');
+Route::post('/shift-setting/get-by-id', 'shiftSettingController@shift_setting_get_by_id');
+Route::post('/shift-setting/get-by-id', 'shiftSettingController@shift_setting_get_by_id');
+
+
+
+
 
 
 //loan
@@ -219,6 +231,8 @@ Route::post('/extension/bpjs-kesehatan/save','extensionBPJSKesehatanController@e
 
 //modul
 Route::post('/select2/get-raw', 'modul2Controller@select2_get_raw');
+Route::get('/select2-group/get-like/{query?}', 'modul2Controller@select2_get_like');
+
 
 
 
