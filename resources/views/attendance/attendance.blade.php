@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@push('header')
+<link rel="stylesheet" href="{{URL::to('/')}}/assets/vendor/select2/css/select2.css">
+@endpush
 @section('content')
 <!--header content -->
                <!--  <div class="row">
@@ -43,8 +45,8 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="location" class="language">Status</label>
-                                <select id="location" name="location" class="form-control">
+                                <label for="shift" class="language">Shift</label>
+                                <select id="shift" name="shift" class="form-control select_shift filter_field">
                                     <option value="" class="language">Pilih</option>
                                     
                                 </select>
@@ -53,15 +55,18 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="tanggal" class="language">Date</label>
-                                <input type="text" id="tanggal" name="tanggal" class="form-control">
+                                <input type="text" id="tanggal" name="tanggal" class="form-control datepicker filter_field">
                             </div>
                             <input type="hidden" id="start">
                             <input type="hidden" id="end">
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="location" class="language">Division</label>
-                                <input type="text" class="form-control" id="no_order">
+                                  <label for="division" class="language">Division</label>
+                                <select id="division" name="division" class="form-control select_division filter_field">
+                                    <option value="" class="language">Pilih</option>
+                                    
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -88,6 +93,7 @@
                             <th class="language">Name</th>
                             <th class="language">Check In</th>
                             <th class="language">Check Out</th>
+                            <th class="language">Breack</th>
                             <th class="language">Description</th>
                         </tr>
                     </thead>
@@ -184,6 +190,11 @@ $( function() {
     })
 });
 
+$(document).ready(function(){
+  $(".select_shift").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Shift',token:$("input[name='_token']").val(),field:"select2_shift"});
+  $(".select_division").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Shift',token:$("input[name='_token']").val(),field:"select2_division"});
+})
+
 $(document).ready(function () {
 var errors = new error_massage();
 finger_print_get_list();
@@ -191,6 +202,26 @@ finger_print_get_list();
 $("#list_finger_print").hide();
 _nav();
 
+filter();
+
+
+
+});
+
+function clearFilter(){
+    $(".filter_field").val("");
+     $(".select_shift").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Shift',token:$("input[name='_token']").val(),field:"select2_shift"});
+  $(".select_division").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Shift',token:$("input[name='_token']").val(),field:"select2_division"});
+}
+
+function filter(){
+ 
+ var shift =  $("#shift").val();
+ var division = $("#division").val();
+ var date = $("#tanggal").val();
+
+
+ $('#attendace_list').DataTable().destroy();
  $('#attendace_list').DataTable({
     ordering: false,
     "processing": true,
@@ -198,7 +229,7 @@ _nav();
     "ajax":{
         url :"{{url('/attendance/get')}}",
             type: "POST",
-            data:{'_token': $("input[name='_token']").val()},            
+            data:{'_token': $("input[name='_token']").val(),param:{shift:shift,division:division,date:date}},            
         "dataSrc": function ( json ) {
             //Make your callback here.
             if(json.token_status=='valid'){
@@ -212,6 +243,7 @@ _nav();
         {data:"name"},  
     {data:"check_in"},  
     {data:"check_out"},
+    {data:"breacks"},
     {data:"description"},  
     ],
     "columnDefs": [ {
@@ -220,9 +252,9 @@ _nav();
     } ],
 
     
-} );
+ });
 
-});
+}
 
 //rpute js
 function _nav(){

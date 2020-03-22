@@ -38,12 +38,12 @@ class attendanceController extends Controller
 		try {
 
 			$user = attendanceModel::attendance_get($request);
-			$total = attendanceModel::attendance_get_count($request)->count();
 
+			$total = attendanceModel::attendance_get_count($request);
 
 		    $output['draw']=$draw;
             if($total){
-                $output['recordsTotal']=$output['recordsFiltered']=$total;
+                $output['recordsTotal']=$output['recordsFiltered']=$total[0]->jum;
             }else{
                 $output['recordsTotal']=$output['recordsFiltered']=$draw;   
             }

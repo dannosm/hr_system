@@ -14,41 +14,83 @@ class attendanceModel extends Model
         $length=$request['length'];
         $start=$request['start'];
         $search=$request['search']["value"];
-        
-        if(empty($search)){
-           $data = DB::table('attendance')
-               ->join('employee', 'user_id', '=', 'employee.id')->select("*")
-                 ->offset($start)
-                ->limit($length)
-                ->get();
-        }else{
+        $param = $request['param'];
 
-             $data = DB::table('attendance')
-               ->join('employee', 'user_id', '=', 'employee.id')->select("*")
-                ->where('employee.name', 'LIKE', '%'.$search.'%')
-                ->where('attendance.description', 'LIKE', '%'.$search.'%')
-                  ->offset($start)
-                ->limit($length)
-                ->get();
+        $query = array();
+        
+        if(!empty($param['shift'])){
+
+            $query[]= "ee.shift_id = '".$param['shift']."'";
         }
+
+        if(!empty($param['division'])){
+            $query[]= "ee.division_id = '".$param['division']."'";
+        }
+
+        if(!empty($param['date'])){
+            $query[]= "date(check_in) = '".$param['date']."'";
+        }
+
+        if(!empty($query)){
+            $query = " AND ".implode("AND ", $query);
+        }else{
+            $query = "";
+        }
+        
+                if(empty($search)){
+
+                   $data = DB::SELECT("SELECT aa.*,ee.name,
+        (SELECT CONCAT(TIME(check_in),IF(check_in = check_out,'',' s/d '),IF(check_out = check_in,'',TIME(check_out))) FROM attendance WHERE user_id=aa.user_id AND tipe='break' AND DATE(check_in)=DATE(check_in) )breacks 
+        FROM attendance aa inner join employee ee on aa.user_id=ee.id WHERE tipe = 'attendance' $query limit $start,$length");
+                      
+                }else{
+
+                      $data = DB::SELECT("SELECT aa.*,ee.name,
+        (SELECT CONCAT(TIME(check_in),IF(check_in = check_out,'',' s/d '),IF(check_out = check_in,'',TIME(check_out))) FROM attendance WHERE user_id=aa.user_id AND tipe='break' AND DATE(check_in)=DATE(check_in) )breacks 
+        FROM attendance aa inner join employee ee on aa.user_id=ee.id WHERE tipe = 'attendance' $query AND (ee.name LIKE '%".$search."%' or aa.description LIKE '%".$search."%') limit $start,$length");
+                }
+
 
         return $data;
     }
 
      static function attendance_get_count($request){
+
+
         
         $search=$request['search']["value"];
+
+         $param = $request['param'];
+        
+        $query = array();
+        
+        if(!empty($param['shift'])){
+
+            $query[]= "ee.shift_id = '".$param['shift']."'";
+        }
+
+        if(!empty($param['division'])){
+            $query[]= "ee.division_id = '".$param['division']."'";
+        }
+
+        if(!empty($param['date'])){
+            $query[]= "date(check_in) = '".$param['date']."'";
+        }
+
+        if(!empty($query)){
+            $query = " AND ".implode("AND ", $query);
+        }else{
+            $query = "";
+       }
+       
         if(empty($search)){
-           $data = DB::table('attendance')
-               ->join('employee', 'user_id', '=', 'employee.id')->select("*")
-                ->get();
+           $data = DB::SELECT("SELECT COUNT(*)jum  
+FROM attendance aa inner join employee ee on aa.user_id=ee.id WHERE tipe = 'attendance' $query ");
+              
         }else{
 
-             $data = DB::table('attendance')
-               ->join('employee', 'user_id', '=', 'employee.id')->select("*")
-                ->where('employee.name', 'LIKE', '%'.$search.'%')
-                ->where('attendance.description', 'LIKE', '%'.$search.'%')
-                ->get();
+              $data = DB::SELECT("SELECT count(*)jum 
+FROM attendance aa inner join employee ee on aa.user_id=ee.id WHERE tipe = 'attendance' $query AND (ee.name LIKE '%".$search."%' or aa.description LIKE '%".$search."%') ");
         }
 
         return $data;

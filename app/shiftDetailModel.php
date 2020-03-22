@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\DB;
 class shiftDetailModel extends Model
 {
 
+    protected $table = 'shift_detail';
+    protected $primaryKey='id';
+    protected $fillable = [
+        'shift_id', 'employee_id',
+    ];
+
 
     static function shift_detail_delete(){
     	DB::DELETE("DELETE FROM shift_detail WHERE 1");

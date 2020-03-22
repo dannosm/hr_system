@@ -7,6 +7,7 @@ use App\employeeModel;
 use App\employeeDetailModel;
 use App\salaryAttributeDataModel;
 use Illuminate\Support\Facades\Hash;
+use App\shiftDetailModel;
 use Auth;
 use Illuminate\Support\Str;
 
@@ -91,6 +92,12 @@ class employeeController extends Controller
             $add->save();
             //employee detail end
 
+            //shift detail
+            $add = New shiftDetailModel;
+            $add->shift_id = $request->get('shift');
+            $add->employee_id = $lastId;
+            $add->save();
+
             //employee salary
             if(!empty($request->get('salary'))){
 
@@ -164,6 +171,9 @@ class employeeController extends Controller
             $add->bpjs_kesehatan = $request->get('bpjs_kesehatan');
             $add->save();
             //employee detail end
+            $add = shiftDetailModel::where('employee_id',$request->get('id'))->firstOrFail();
+            $add->shift_id = $request->get('shift');
+            $add->save();
 
             //employee salary
             if(!empty($request->get('salary'))){

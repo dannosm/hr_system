@@ -104,6 +104,7 @@ class shiftController extends Controller
            if($this->authSession(10,'d') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
             $delete = shiftModel::shift_delete($request);
+            $deleteshiftsetting = shiftSettingModel::shift_setting_delete_json_data($request);
             return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete, 'success'=>TRUE));    
         }catch (Exception $e) {
             return json_encode(array('msg'=>'gagal', 'content'=>$e->getMessage(), 'success'=>FALSE, 'token_status'=>'invalid'));          
