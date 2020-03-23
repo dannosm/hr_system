@@ -54,6 +54,47 @@
                                                 <input id="lastButton" type="text"  placeholder="Exp 15"  class="form-control enter_tab input_validasi_number"  name="late_limit">
                                             </div>
                                         </div>
+
+
+                                         <div class="form-group row">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">&nbsp;</label>
+                                            <div class="col-9 col-lg-10" style="color: red;">
+                                                Note : Jika Memilih durasi maka, keteralambatan jam istirahat dihitung berdasarkan durasi , contoh 60 menit , maka waktu istirahat adalah 60 , dan jika lebih dari 60 menit, maka dianggap telat 
+                                            </div>
+                                        </div>
+
+
+                                         <div class="form-group row">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Duration</label>
+                                            <div class="col-9 col-lg-10">
+                                                <input type="checkbox"  id="duration" placeholder="Exp 60"   name="duration" value="duration"> &nbsp; Yes 
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row yes-duration" style="display: none;">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Duration breack</label>
+                                             <div class="input-group col-9 col-lg-10">
+                                                <div class="input-group-prepend"><span class="input-group-text language">Minute</span></div>
+                                                <input type="number" placeholder="0" class="form-control" name="duration_breack" value="">
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group row no-duration" style="display: none;">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Breack In</label>
+                                            <div class="col-9 col-lg-10">
+                                                <input type="time"  class="form-control "  name="breack_in" value="">
+                                            <span>Format : H:i  exp 08:00</span>
+                                            </div>
+                                        </div>
+
+
+                                         <div class="form-group row no-duration" style="display: none;">
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Breack Out</label>
+                                            <div class="col-9 col-lg-10">
+                                                <input type="time" class="form-control "  name="breack_out" value="">
+                                              <span>Format : H:i  exp 08:00</span>
+                                            </div>
+                                        </div>
                                        
                             <!--end card body-->
                             </div>
@@ -82,6 +123,16 @@ $("#lastButton").keyup(function(e){
         $("#saveAdd").trigger('click');
      }
 })  
+$("#duration").change(function(){
+  
+  if($(this).is(":checked")){
+    $(".yes-duration").removeAttr('style');
+    $(".no-duration").css('display','none');
+  }else{
+     $(".no-duration").removeAttr('style');
+    $(".yes-duration").css('display','none');
+  }
+})
 
 
 $("#saveAdd").click(function(){
@@ -99,8 +150,13 @@ $("#saveAdd").click(function(){
     var check_out = $("input[name='check_out']").val();
     var late_limit = $("input[name='late_limit']").val();
     var token = $("input[name='_token']").val();
+        var duration = $("#duration:checked").val();
+    var duration_breack = $("input[name='duration_breack']").val();
+    var breack_in = $("input[name='breack_in']").val();
+    var breack_out = $("input[name='breack_out']").val();
 
-    dataPost = {'_token':token,group_name:group_name,check_in:check_in,check_out:check_out,late_limit:late_limit};
+
+    dataPost = {'_token':token,group_name:group_name,check_in:check_in,check_out:check_out,late_limit:late_limit,duration:duration,duration_breack:duration_breack,breack_in:breack_in,breack_out:breack_out};
 
      $.ajax({
                 url:"{{url('/shift/save')}}",

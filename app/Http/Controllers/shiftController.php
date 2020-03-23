@@ -7,7 +7,7 @@ use App\shiftModel;
 use App\shiftSettingModel;
 use App\employeeModel;
 use App\shiftDetailModel;
-
+USE Auth;
 
 class shiftController extends Controller
 {
@@ -57,11 +57,18 @@ class shiftController extends Controller
            
            if($this->authSession(10,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
+            $user = Auth::user();
             $add = new shiftModel;
             $add->name = $request->get('group_name');
             $add->time_in = $request->get('check_in');
             $add->time_out = $request->get('check_out');
             $add->late_limit =  $request->get('late_limit');
+             $add->breack_tipe = $request->get('duration') == 'duration' ? $request->get('duration'):'schedule';
+             $add->breack_in = $request->get('breack_in');
+             $add->breack_out = $request->get('breack_out');
+             $add->breack_duration = $request->get('duration_breack');
+            $add->creator = $user->username;
+
             $result = $add->save();
             
             return json_encode(array('msg'=>'Sava Data Success', 'content'=>$result, 'success'=>TRUE));    
@@ -84,11 +91,19 @@ class shiftController extends Controller
 
            if($this->authSession(10,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
              
+            
+             $user = Auth::user();
              $add = shiftModel::where('id', $request->get('id'))->firstOrFail();
              $add->name = $request->get('group_name');
              $add->time_in = $request->get('check_in');
              $add->time_out = $request->get('check_out');
              $add->late_limit =  $request->get('late_limit');
+             $add->breack_tipe = $request->get('duration') == 'duration' ? $request->get('duration'):'schedule';
+             $add->breack_in = $request->get('breack_in');
+             $add->breack_out = $request->get('breack_out');
+             $add->breack_duration = $request->get('duration_breack');
+             $add->creator = $user->username;
+
              $result = $add->save();
             
              return json_encode(array('msg'=>'Sava Data Success', 'content'=>$result, 'success'=>TRUE));    

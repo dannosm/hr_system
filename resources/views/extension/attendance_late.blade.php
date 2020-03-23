@@ -65,7 +65,7 @@
                                         <div class="form-group row late_breack" style="display: none;" >
                                             <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Amount Late Break</label>
                                             <div class="col-9 col-lg-10">
-                                              <input type="text" name="late_breack_value" class="form-control rupiah" id="late_break_value" oninput="errors.rupiah(this)">
+                                              <input type="text" name="late_breack_value" class="form-control rupiah" id="late_breack_value" oninput="errors.rupiah(this)">
                                             </div>
                                         </div>
 
@@ -89,6 +89,7 @@
                     <!-- ============================================================== -->
                 </div>
                 <!--end row-->
+              @php $arr = json_decode($data[0]->value,true); $tipe = $arr['tipe']; @endphp
 
 
 @endsection
@@ -111,11 +112,21 @@ $("#lastButton").keyup(function(e){
 
 $(document).ready(function(){
   $("#status").val("{{$data[0]->status}}");
-   <?php foreach ($data as $key => $value) { ?>
-    $(".{{$value->title}}").removeAttr('style');
-    $("#{{$value->title}}").prop("checked",true);
-    $("#{{$value->title}}_value").val("{{$value->value}}");
- <?php }?>
+    var tipe = "{{$tipe}}";
+    if(tipe == '1'){
+     $(".all_in_one").removeAttr('style');
+     $("#all_in_one").prop("checked",true);
+     $("#all_in_one_value").val(errors.rupiahR("{{@$arr['value']}}"));
+    }else{
+
+     $(".late_deduction").removeAttr('style');
+     $("#late_deduction").prop("checked",true);
+     $("#late_deduction_value").val(errors.rupiahR("{{@$arr['module']['attendance']}}"));
+
+     $(".late_breack").removeAttr('style');
+     $("#late_breack").prop("checked",true);
+     $("#late_breack_value").val(errors.rupiahR("{{@$arr['module']['breack']}}"));
+    }
 })   
 
 $("#saveAdd").click(function(){

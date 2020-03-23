@@ -31,13 +31,13 @@
                         <div class="card chd">
                            <div class="card-header d-flex">
                                         <h4 class="card-header-title language">Attendance List</h4>
-                                        <div class="toolbar ml-auto">
+                                      <!--   <div class="toolbar ml-auto">
                                             <a href="javascript:void(0)" onclick="absensi_update_data()" class="btn btn-primary btn-sm "><i class="fas fa-sync-alt"></i> <span class="language">Update Data</span></a>
-                                        </div>
+                                        </div> -->
                                     </div>
+
             <div class="card-body" style="margin-top:-50px; ">
 
-                  <!-- Default Box -->
                 <div
                     style="padding: 20px;border: 1px solid #d8d8d8;border-radius: 5px;margin-top: 50px;position: relative;">
                     <div style="position: absolute;top: -10px;font-size: 15px;font-weight: bold;background: white;">
@@ -72,6 +72,7 @@
                         <div class="col-md-12">
                             <button onclick="filter();" class="btn btn-primary btn-sm ">Filter</button>
                             <button onclick="clearFilter();" class="btn btn-default btn-sm ">Reset</button>
+                             <a href="javascript:void(0)" onclick="absensi_update_data()" class="btn btn-success btn-sm "><i class="fas fa-sync-alt"></i> <span class="language">Update Data</span></a>
                         </div>
                     </div>
                 </div>

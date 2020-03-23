@@ -73,7 +73,8 @@ class salaryModuleController extends Controller
 
 
          $data = salaryModuleModel::get_extension_module($id);
-        
+
+   
          return view('extension.'.$view)->with('id',$id)->with('data',$data);
 
 

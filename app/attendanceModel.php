@@ -100,4 +100,17 @@ FROM attendance aa inner join employee ee on aa.user_id=ee.id WHERE tipe = 'atte
     	$sql = DB::insert("INSERT INTO attendance(user_id,check_in,check_out,tipe)VALUES $value");
     	return $sql;
     }
+
+
+    static function attendance_calculate_late($month,$years){
+        $data = DB::SELECT("SELECT user_id,tipe,breack_tipe,shift_id,
+SUM(IF(tipe='attendance',(CASE WHEN CEILING(TIME_TO_SEC(TIMEDIFF(masuk,time_in))/60) > late_limit THEN 1 ELSE 0 END),0 ))telat_masuk,
+SUM(IF(tipe='break', IF(breack_tipe ='duration',(CASE WHEN CEILING(TIME_TO_SEC(TIMEDIFF(pulang,masuk))/60) > breack_duration THEN 1 ELSE 0 END),(CASE WHEN pulang > breack_out THEN 1 ELSE 0 END) ),0
+))telat_isti
+FROM 
+(SELECT aa.*,ee.`shift_id`,TIME(aa.check_in)masuk,TIME(aa.`check_out`)pulang FROM attendance aa INNER JOIN employee ee ON aa.`user_id` = ee.`id` AND MONTH(aa.check_in)='$month' AND YEAR(aa.check_in)='$years')ae 
+INNER JOIN (SELECT * FROM shift )sf ON ae.shift_id=sf.id  GROUP BY user_id
+");
+        return $data;
+    }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\salaryAttributeModel;
 use App\salaryModuleDetailModel;
 use App\payrollModel;
+use App\attendanceModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -199,6 +200,8 @@ class payrollController extends Controller
            $payroll = array();
            $pending = array();
            $data = salaryAttributeModel::salary_attribute_get_by_employee();
+           $att = attendanceModel::attendance_calculate_late(date('m'),date('Y'));
+
 
            foreach ($data as $key => $value) {
                 $nilai =0;
@@ -228,11 +231,15 @@ class payrollController extends Controller
            //detele buulan yang sama 
 
            $delete = payrollModel::payroll_sync_delete_month(date('Y'),date('m'));
+
            foreach ($payroll as $key => $value) {
         
                 foreach ($pending[$key] as $keys => $values) {
                     $model_name = 'App\Http\Controllers\ '.$values['extensions'];
                     $model_name = str_replace(' ', '', $model_name);
+                    $values['employee_id'] = $keys;
+                    $values['att'] = $att;
+
                     $nilai = $model_name::getResultExtensions($values,$value);
 
                     
