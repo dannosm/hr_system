@@ -11,9 +11,8 @@
                         <script src="{{URL::to('/')}}/assets/vendor/charts/morris-bundle/morrisjs.html"></script>
                         <!-- chart js -->
                         <script src="{{URL::to('/')}}/assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>
-                        <script src="{{URL::to('/')}}/assets/vendor/charts/charts-bundle/chartjs.js"></script>
                         <!-- dashboard js -->
-                        <script src="{{URL::to('/')}}/assets/libs/js/dashboard-influencer.js"></script>
+                     <!--    <script src="{{URL::to('/')}}/assets/libs/js/dashboard-influencer.js"></script> -->
                         <script src="{{URL::to('/')}}/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
                         <script src="{{URL::to('/')}}/assets/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
                         <script src="{{URL::to('/')}}/assets/modul/error_massage/error_massage.js"></script>

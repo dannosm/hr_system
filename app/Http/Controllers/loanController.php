@@ -9,6 +9,8 @@ use Auth;
 class loanController extends Controller
 {
      public function index(){
+
+        if($this->authSession(14,'r') == 1){return redirect('home');}
     	 return view('loan.loan');
     }
 
@@ -39,12 +41,17 @@ class loanController extends Controller
     }
 
     function loan_add(){
+
+        if($this->authSession(14,'w') == 1){return redirect('home');}
+
          return view('loan.loan_add');
     }
 
     function loan_save(Request $request){
         try{
             
+           if($this->authSession(14,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $user = Auth::user();
 
             $add = new loanModel;
@@ -66,6 +73,8 @@ class loanController extends Controller
 
     function loan_edit($id){
 
+        if($this->authSession(14,'w') == 1){return redirect('home');}
+
          $data = loanModel::loan_get_by_id($id);
 
          return view('loan.loan_edit')->with('data',$data[0]);
@@ -73,7 +82,11 @@ class loanController extends Controller
 
     function loan_update(Request $request){
         try{
-             
+            
+
+           if($this->authSession(14,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
+
             $user = Auth::user();
             $add = loanModel::where('id', $request->get('id'))->firstOrFail();
             $add->type = $request->get('type');
@@ -93,6 +106,9 @@ class loanController extends Controller
 
     function loan_delete(Request $request){
         try{
+
+           if($this->authSession(14,'d') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $delete = loanModel::loan_delete($request);
             return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete, 'success'=>TRUE));    
         }catch (Exception $e) {

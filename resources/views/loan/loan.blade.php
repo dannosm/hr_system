@@ -20,10 +20,14 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">LOANS</h4>
+                                        <h4 class="card-header-title language">LOANS</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm" id="deleteBtn">Delete</a>
-                                            <a href="{{url('/loan/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i> Add</a>
+                                            @if(session()->get('roles')[14]->role_delete == 1)
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a>
+                                            @endif
+                                            @if(session()->get('roles')[14]->role_write == 1)
+                                            <a href="{{url('/loan/add')}}" class="btn btn-primary btn-sm language"><i class="fa fa-plus"></i> Add</a>
+                                            @endif
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -34,11 +38,12 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="select_all" name="select_all" title="checked all" ></th>
-                            <th>Employee</th>
-                            <th>Date Loan</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Option</th>
+
+                            <th class="language">Employee</th>
+                            <th class="language">Date Loan</th>
+                            <th class="language">Amount</th>
+                            <th class="language">Status</th>
+                            <th class="language">Option</th>
                         </tr>
                     </thead>
                     <tbody id="list-ready">

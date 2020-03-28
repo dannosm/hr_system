@@ -11,6 +11,9 @@ class settingController extends Controller
 {
 
      public function index(){
+
+        if($this->authSession(18,'r') == 1){return redirect('home');}
+
     	 return view('setting.setting');
     }
 
@@ -39,12 +42,17 @@ class settingController extends Controller
     }
 
     function setting_add(){
+
+        if($this->authSession(18,'w') == 1){return redirect('home');}
+
          return view('setting.setting_add');
     }
 
     function setting_save(Request $request){
         try{
-           
+            
+           if($this->authSession(18,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
         	$user = Auth::user();
             $add = new settingModel;
             $add->name = $request->get('name');
@@ -61,6 +69,8 @@ class settingController extends Controller
 
     function setting_edit($id){
 
+        if($this->authSession(18,'w') == 1){return redirect('home');}
+
          $data = settingModel::setting_get_by_id($id);
 
          return view('setting.setting_edit')->with('data',$data[0]);
@@ -68,6 +78,8 @@ class settingController extends Controller
 
     function setting_update(Request $request){
         try{
+
+           if($this->authSession(18,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
              $user = Auth::user();
              $add = settingModel::where('id', $request->get('id'))->firstOrFail();
@@ -85,6 +97,9 @@ class settingController extends Controller
 
     function setting_delete(Request $request){
         try{
+
+           if($this->authSession(18,'d') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $delete = settingModel::setting_delete($request);
             return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete, 'success'=>TRUE));    
         }catch (Exception $e) {
@@ -119,7 +134,9 @@ class settingController extends Controller
 
     public function setting_set_page(Request $request){
          try{
-           
+            
+           if($this->authSession(18,'r') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $page = settingModel::all();
             return json_encode(array('msg'=>'Sava Data Success', 'content'=>$page, 'success'=>TRUE));    
 

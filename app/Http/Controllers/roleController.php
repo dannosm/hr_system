@@ -10,6 +10,9 @@ use Auth;
 class roleController extends Controller
 {
      public function index(){
+
+        if($this->authSession(17,'r') == 1){return redirect('home');}
+
     	 return view('role.role');
     }
 
@@ -47,12 +50,17 @@ class roleController extends Controller
     }
 
     function role_add(){
+
+        if($this->authSession(17,'w') == 1){return redirect('home');}
+
          return view('role.role_add');
     }
 
     function role_save(Request $request){
         try{
            
+           if($this->authSession(17,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
         	$user = Auth::user();
             $add = new roleModel;
             $add->role_name = $request->get('name');
@@ -67,6 +75,9 @@ class roleController extends Controller
 
     function role_edit($id){
 
+        if($this->authSession(17,'w') == 1){return redirect('home');}
+
+
          $data = roleModel::role_get_by_id($id);
 
          return view('role.role_edit')->with('data',$data[0]);
@@ -74,6 +85,8 @@ class roleController extends Controller
 
     function role_update(Request $request){
         try{
+
+           if($this->authSession(17,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
              $user = Auth::user();
              $add = roleModel::where('role_id', $request->get('id'))->firstOrFail();
@@ -89,6 +102,8 @@ class roleController extends Controller
 
     function role_delete(Request $request){
         try{
+           if($this->authSession(17,'d') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $delete = roleModel::role_delete($request);
             return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete, 'success'=>TRUE));    
         }catch (Exception $e) {

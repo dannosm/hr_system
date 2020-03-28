@@ -20,11 +20,11 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">EDIT FINGER PRINT</h4>
+                                        <h4 class="card-header-title language">EDIT FINGER PRINT</h4>
 
                                         <div class="toolbar ml-auto">
-                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm" id="saveAdd"><i class="fa fa-save"></i> Save</a>
-                                            <a href="{{url('/finger-print')}}" class="btn btn-dark btn-sm "><i class="fas fa-sign-out-alt"></i> Back</a>
+                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm language" id="saveAdd"><i class="fa fa-save"></i> Save</a>
+                                            <a href="{{url('/finger-print')}}" class="btn btn-dark btn-sm language"><i class="fas fa-sign-out-alt"></i> Back</a>
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -36,25 +36,25 @@
 
                                         @csrf      
                                          <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Name</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Name</label>
                                             <div class="col-9 col-lg-10">
                                                 <input type="text" class="form-control enter_tab input_validasi " data-nextTab='1'  placeholder="Mesin Name" name="name" value="{{$data->name}}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Ip</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Ip</label>
                                             <div class="col-9 col-lg-10">
                                                 <input type="text" class="form-control enter_tab input_validasi " data-nextTab='2'  placeholder="Ip " name="ip" value="{{$data->ip}}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Port</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Port</label>
                                             <div class="col-9 col-lg-10">
                                                 <input type="text" class="form-control enter_tab input_validasi " data-nextTab='3'  placeholder="Port" name="port" value="{{$data->port}}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Type</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Type</label>
                                             <div class="col-9 col-lg-10">
                                                 <select class="form-control form-control-sm enter_tab" data-nextTab='4' placeholder="status" name="type" id="types" />
                                                     <option value="" class="language">Choose</option>
@@ -64,7 +64,7 @@
                                             </div>
                                         </div>
                                          <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Status</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Status</label>
                                             <div class="col-9 col-lg-10">
                                                 <select class="form-control form-control-sm enter_tab" data-nextTab='4' placeholder="status" name="status" id="status" />
                                                     <option value="" class="language">Choose</option>

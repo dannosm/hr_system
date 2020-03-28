@@ -46,7 +46,7 @@
                                     <div class="card-body">
                                         <div class="d-inline-block">
                                             <h5 class="text-muted ">Total <span class="language" >Employee</span></h5>
-                                            <h2 class="mb-0"> 1000</h2>
+                                            <h2 class="mb-0">{{$data[0]->ee_jum}}</h2>
                                         </div>
                                         <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
                                             <i class="fa fa-eye fa-fw fa-sm text-info"></i>
@@ -65,7 +65,7 @@
                                     <div class="card-body">
                                         <div class="d-inline-block">
                                             <h5 class="text-muted ">Total <span class="language" >Absent</span></h5>
-                                            <h2 class="mb-0"> 22</h2>
+                                            <h2 class="mb-0">{{$data[0]->att_jum}}</h2>
                                         </div>
                                         <div class="float-right icon-circle-medium  icon-box-lg  bg-primary-light mt-1">
                                             <i class="fa fa-user fa-fw fa-sm text-primary"></i>
@@ -84,7 +84,7 @@
                                     <div class="card-body">
                                         <div class="d-inline-block">
                                             <h5 class="text-muted ">Total <span class="language" >Permit</span></h5>
-                                            <h2 class="mb-0">14</h2>
+                                            <h2 class="mb-0">{{$data[0]->per_mit}}</h2>
                                         </div>
                                         <div class="float-right icon-circle-medium  icon-box-lg  bg-secondary-light mt-1">
                                             <i class="fa fa-handshake fa-fw fa-sm text-secondary"></i>
@@ -103,7 +103,7 @@
                                     <div class="card-body">
                                         <div class="d-inline-block">
                                             <h5 class="text-muted ">Total <span class="language" >Leave</span></h5>
-                                            <h2 class="mb-0">10</h2>
+                                            <h2 class="mb-0">{{$data[0]->lev_mit}}</h2>
                                         </div>
                                         <div class="float-right icon-circle-medium  icon-box-lg  bg-brand-light mt-1">
                                             <i class="fa fa-money-bill-alt fa-fw fa-sm text-brand"></i>
@@ -130,11 +130,11 @@
                                     </div>
                                     <div class="card-footer p-0 bg-white d-flex">
                                         <div class="card-footer-item card-footer-item-bordered w-50">
-                                            <h2 class="mb-0"> 10% </h2>
+                                            <h2 class="mb-0"> {{$persen}}% </h2>
                                             <p>Late </p>
                                         </div>
                                         <div class="card-footer-item card-footer-item-bordered">
-                                            <h2 class="mb-0">90% </h2>
+                                            <h2 class="mb-0">{{100 - $persen}}% </h2>
                                             <p>Good</p>
                                         </div>
                                     </div>
@@ -150,7 +150,7 @@
                                 <div class="card">
                                     <h5 class="card-header language">Permission Chart</h5>
                                     <div class="card-body">
-                                        <canvas id="chartjs_bar"></canvas>
+                                        <canvas id="chartjs_bar2"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -168,4 +168,100 @@
                         
 
 
+
+
+
 @endsection
+@push('footer')
+<script type="text/javascript">
+
+    $(document).ready(function() {
+                
+
+                            var ctx = document.getElementById("chartjs_bar2").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul","Agst","Sep","Oct","Nov","Des"],
+                        datasets: [{
+                            label: 'Permit',
+                            data: [<?php 
+                                echo implode(',', $permit);
+                            ?>],
+                           backgroundColor: "rgba(89, 105, 255,0.5)",
+                                    borderColor: "rgba(89, 105, 255,0.7)",
+                            borderWidth: 2
+                        }, {
+                            label: 'Leave',
+                            data: [<?php 
+                                echo implode(',', $leave);
+                            ?>],
+                           backgroundColor: "rgba(255, 64, 123,0.5)",
+                                    borderColor: "rgba(255, 64, 123,0.7)",
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+
+                            }]
+                        },
+                             legend: {
+                        display: true,
+                        position: 'bottom',
+
+                        labels: {
+                            fontColor: '#71748d',
+                            fontFamily: 'Circular Std Book',
+                            fontSize: 14,
+                        }
+                    },
+
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                fontSize: 14,
+                                fontFamily: 'Circular Std Book',
+                                fontColor: '#71748d',
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                fontSize: 14,
+                                fontFamily: 'Circular Std Book',
+                                fontColor: '#71748d',
+                            }
+                        }]
+                    }
+                }
+
+                    
+                });
+
+});
+
+      Morris.Donut({
+        element: 'gender_donut',
+        data: [
+            { value: <?php echo $persen ; ?>, label: 'Late' },
+            { value: <?php echo 100-$persen ; ?>, label: 'Good' }
+
+        ],
+
+        labelColor: '#ff407b',
+        colors: [
+            '#ff407b',
+            '#5969ff',
+
+        ],
+
+
+
+        formatter: function(x) { return x + "%" }
+    });
+
+
+  
+</script>
+@endpush

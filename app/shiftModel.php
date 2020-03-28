@@ -11,7 +11,7 @@ class shiftModel extends Model
     protected $table = 'shift';
     protected $primaryKey='id';
     protected $fillable = [
-        'name', 'time_in', 'time_out','late_limit',
+        'name', 'time_in', 'time_out','late_limit','breack_tipe','breack_duration','breack_in','breack_out',
     ];
 
     static function shift_get($request){

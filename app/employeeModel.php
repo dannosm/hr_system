@@ -160,4 +160,14 @@ class employeeModel extends Model
         $data = DB::SELECT("SELECT id,shift_id,name,(SELECT name FROM shift where id=employee.shift_id)shift_name FROM employee WHERE `status` ='active' order by shift_id asc");
         return $data;
     }
+
+
+    static function employee_all_status_get(){
+        $data = DB::SELECT("   SELECT * FROM  (SELECT COUNT(*)att_jum FROM employee ee INNER JOIN attendance aa ON ee.`id`=aa.`user_id` WHERE `status`='active' AND DATE(check_in)=DATE(NOW()))att,
+                    (SELECT COUNT(*)ee_jum FROM employee WHERE `status`='active') ee,
+                    (SELECT COUNT(*)per_mit FROM permission  WHERE `type`='permission' AND date_start <= DATE(NOW()) AND date_end >=DATE(NOW()))per,
+                     (SELECT COUNT(*)lev_mit FROM permission  WHERE `type` ='leave' AND date_start <= DATE(NOW()) AND date_end >=DATE(NOW()) )lev;
+                    ");
+        return $data;
+    }
 }

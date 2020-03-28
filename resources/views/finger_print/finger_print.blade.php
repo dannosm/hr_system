@@ -22,8 +22,12 @@
                            <div class="card-header d-flex">
                                         <h4 class="card-header-title language">Finger Print</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm" id="deleteBtn">Delete</a>
-                                            <a href="{{url('/finger-print/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i> Add</a>
+                                            @if(session()->get('roles')[3]->role_delete == 1)
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a>
+                                            @endif
+                                            @if(session()->get('roles')[3]->role_write == 1)
+                                            <a href="{{url('/finger-print/add')}}" class="btn btn-primary btn-sm language "><i class="fa fa-plus "></i> Add</a>
+                                            @endif
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -34,12 +38,12 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="select_all" name="select_all" title="checked all" ></th>
-                            <th>Name</th>
-                            <th>Ip</th>
-                            <th>Port</th>
-                            <th>Type</th>
-                            <th>Status</th>
-                            <th>Option</th>
+                            <th class="language">Name</th>
+                            <th class="language">Ip</th>
+                            <th class="language">Port</th>
+                            <th class="language">Type</th>
+                            <th class="language">Status</th>
+                            <th class="language">Option</th>
                         </tr>
                     </thead>
                     <tbody id="list-ready">

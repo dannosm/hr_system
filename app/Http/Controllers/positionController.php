@@ -10,6 +10,9 @@ use Auth;
 class positionController extends Controller
 {
     public function index(){
+
+        if($this->authSession(15,'r') == 1){return redirect('home');}
+
     	 return view('position.position');
     }
 
@@ -39,13 +42,17 @@ class positionController extends Controller
     }
 
     function position_add(){
+
+        if($this->authSession(15,'w') == 1){return redirect('home');}
+
          return view('position.position_add');
     }
 
     function position_save(Request $request){
         try{
            
-         
+           if($this->authSession(15,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+            
         	$user = Auth::user();
             $add = new positionModel;
             $add->name = $request->get('name');
@@ -62,6 +69,8 @@ class positionController extends Controller
 
     function position_edit($id){
 
+        if($this->authSession(15,'w') == 1){return redirect('home');}
+
          $data = positionModel::position_get_by_id($id);
 
          return view('position.position_edit')->with('data',$data[0]);
@@ -69,6 +78,8 @@ class positionController extends Controller
 
     function position_update(Request $request){
         try{
+
+           if($this->authSession(15,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
              $user = Auth::user();
              $add = positionModel::where('id', $request->get('id'))->firstOrFail();
@@ -86,6 +97,9 @@ class positionController extends Controller
 
     function position_delete(Request $request){
         try{
+
+           if($this->authSession(15,'d') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $delete = positionModel::position_delete($request);
             return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete, 'success'=>TRUE));    
         }catch (Exception $e) {

@@ -22,8 +22,14 @@
                            <div class="card-header d-flex">
                                         <h4 class="card-header-title language">ROLE</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a>
+                                            @if(session()->get('roles')[17]->role_delete == 1)
+                                                 <a href="javascript:void(0)" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a>
+                                            @endif
+
+                                            @if(session()->get('roles')[17]->role_write == 1)
                                             <a href="{{url('/role/add')}}" class="btn btn-primary btn-sm language"><i class="fa fa-plus"></i> Add</a>
+                                            @endif
+
                                             <a href="{{url('/group-role')}}" class="btn btn-dark btn-sm language"><i class="fas fa-sign-out-alt"></i> Back</a>
 
                                         </div>

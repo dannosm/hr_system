@@ -14,6 +14,9 @@ use Illuminate\Support\Str;
 class employeeController extends Controller
 {
      public function index(){
+
+        if($this->authSession(13,'r') == 1){return redirect('home');}
+
     	 return view('employee.employee');
     }
 
@@ -44,11 +47,17 @@ class employeeController extends Controller
     }
 
     function employee_add(){
+
+        if($this->authSession(13,'w') == 1){return redirect('home');}
+
          return view('employee.employee_add');
     }
 
     function employee_save(Request $request){
         try{
+
+           if($this->authSession(13,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
 
             $user = Auth::user();
             //group employee
@@ -123,6 +132,8 @@ class employeeController extends Controller
 
     function employee_edit($id){
 
+        if($this->authSession(13,'w') == 1){return redirect('home');}
+
          $data = employeeModel::employee_get_by_id($id);
 
          return view('employee.employee_edit')->with('data',$data[0]);
@@ -130,6 +141,8 @@ class employeeController extends Controller
 
     function employee_update(Request $request){
         try{
+
+           if($this->authSession(13,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
               $user = Auth::user();
 
@@ -227,6 +240,9 @@ class employeeController extends Controller
 
     function employee_delete(Request $request){
         try{
+
+           if($this->authSession(13,'d') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $delete1 = employeeModel::employee_delete($request);
             $delete = employeeDetailModel::employee_detail_delete($request);
             $delete = employeeSalaryModel::employee_salary_delete($request);

@@ -8,11 +8,16 @@ use App\groupRoleDetailModel as grd;
 
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Session;
+use App\Http\Controllers\HomeController as hm;
 
 
 class groupRoleController extends Controller
 {
      public function index(){
+
+        if($this->authSession(17,'r') == 1){return redirect('home');}
+
     	 return view('group_role.group_role');
     }
 
@@ -42,12 +47,16 @@ class groupRoleController extends Controller
     }
 
     function group_role_add(){
+
+        if($this->authSession(17,'w') == 1){return redirect('home');}
+
          return view('group_role.group_role_add');
     }
 
     function group_role_save(Request $request){
         try{
             
+           if($this->authSession(17,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
            if(empty($request->get('group_id'))){ 
             	$user = Auth::user();
@@ -70,6 +79,8 @@ class groupRoleController extends Controller
                         $result = $add->save();
                         
                     }
+                $resession  = hm::resession();
+
 
                 return json_encode(array('msg'=>'Sava Data Success', 'content'=>true, 'success'=>TRUE)); 
 
@@ -83,6 +94,9 @@ class groupRoleController extends Controller
 
     function group_role_edit($id){
 
+        if($this->authSession(17,'w') == 1){return redirect('home');}
+
+
          $data = groupRoleModel::where('group_role_id',$id)->get();
 
 
@@ -94,13 +108,19 @@ class groupRoleController extends Controller
         try{
 
 
+
+
+
+         //  if($this->authSession(17,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
+
                $up = groupRoleModel::where('group_role_id', $request->get('group_id'))->firstOrFail();
                 $up->group_name = $request->get('group_name');
                 $up->status = $request->get('status');
                 $result = $up->save();
                 //delete detail
                 $delete = grd::delete_raw_all($request->get('group_id'));
-              foreach ($request->get("detail_role") as $key => $value) {
+                 foreach ($request->get("detail_role") as $key => $value) {
                         
                         $add = new grd;
                         $add->role_id = $value['role_id'];
@@ -112,6 +132,9 @@ class groupRoleController extends Controller
                         
                     }
 
+
+                $resession  = hm::resession();
+                
                 return json_encode(array('msg'=>'Sava Data Success', 'content'=>true, 'success'=>TRUE)); 
 
 
@@ -122,6 +145,9 @@ class groupRoleController extends Controller
 
     function group_role_delete(Request $request){
         try{
+
+           if($this->authSession(17,'d') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $delete = groupRoleModel::group_role_delete($request);
             return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete, 'success'=>TRUE));    
         }catch (Exception $e) {
@@ -132,6 +158,9 @@ class groupRoleController extends Controller
 
     function group_role_detail_get_by_id(Request $request){
         try{
+
+           if($this->authSession(17,'r') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $data = grd::group_role_detail_get_by_id($request->get('id'));
             return json_encode(array('msg'=>'Delete Data Success', 'content'=>$data, 'success'=>TRUE));    
         }catch (Exception $e) {

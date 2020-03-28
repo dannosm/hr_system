@@ -9,6 +9,9 @@ use Auth;
 class multipleDocumentController extends Controller
 {
      public function index(){
+
+        if($this->authSession(12,'r') == 1){return redirect('home');}
+
     	 return view('multiple_document.multiple_document');
     }
 
@@ -38,12 +41,17 @@ class multipleDocumentController extends Controller
     }
 
     function multiple_document_add(){
+
+        if($this->authSession(12,'w') == 1){return redirect('home');}
+
          return view('multiple_document.multiple_document_add');
     }
 
     function multiple_document_save(Request $request){
         try{
-           
+            
+           if($this->authSession(12,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $user = Auth::user();
             $add = new multipleDocumentModel;
               if($request->file('files') !=''){
@@ -71,6 +79,8 @@ class multipleDocumentController extends Controller
 
     function multiple_document_edit($id){
 
+        if($this->authSession(12,'w') == 1){return redirect('home');}
+
          $data = multipleDocumentModel::multiple_document_get_by_id($id);
 
          return view('multiple_document.multiple_document_edit')->with('data',$data[0]);
@@ -78,6 +88,8 @@ class multipleDocumentController extends Controller
 
     function multiple_document_update(Request $request){
         try{
+
+           if($this->authSession(12,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
               $user = Auth::user();
               $add = multipleDocumentModel::where('id', $request->get('id'))->firstOrFail();
@@ -106,6 +118,9 @@ class multipleDocumentController extends Controller
 
     function multiple_document_delete(Request $request){
         try{
+
+           if($this->authSession(12,'d') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $delete =  multipleDocumentModel::multipleDocument_delete($request);
             return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete, 'success'=>TRUE));    
         }catch (Exception $e) {

@@ -22,8 +22,12 @@
                            <div class="card-header d-flex">
                                         <h4 class="card-header-title language big-text">PERMISSION</h4>
                                         <div class="toolbar ml-auto">
+                                         @if(session()->get('roles')[2]->role_delete == 1)
                                             <a href="javascript:void(0)" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a>
+                                        @endif
+                                        @if(session()->get('roles')[2]->role_write == 1)
                                             <a href="{{url('/permission/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i><span class="language" > Add</span></a>
+                                        @endif
                                         </div>
                                     </div>
                             <div class="card-body">

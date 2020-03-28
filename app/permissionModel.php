@@ -79,4 +79,14 @@ class permissionModel extends Model
         $data = DB::DELETE("DELETE FROM permission WHERE id in($id)");
         return $data;
     }
+
+    static function permit_count(){
+        $data = DB::select("SELECT COUNT(id)jum,MONTH(date_start)bulan FROM permission WHERE `type`='permission' AND year(date_start)=year(now()) GROUP BY MONTH(date_start)");
+        return $data;
+    }
+     static function leave_count(){
+        $data = DB::select("SELECT COUNT(id)jum,MONTH(date_start)bulan FROM permission WHERE `type`='leave' AND year(date_start)=year(now()) GROUP BY MONTH(date_start)");
+        return $data;
+        
+    }
 }

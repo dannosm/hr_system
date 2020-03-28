@@ -24,7 +24,7 @@
                            <div class="card-header d-flex">
                                         <h4 class="card-header-title language big-text">EDIT USERS</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="#" class="btn btn-primary btn-sm" id="saveAdd"><i class="fa fa-save"></i><span class="language" >Save</span></a>
+                                            <a href="#" class="btn btn-primary btn-sm " id="saveAdd"><i class="fa fa-save"></i><span class="language" >Save</span></a>
                                             <a href="{{url('/users')}}" class="btn btn-dark btn-sm "><i class="fas fa-sign-out-alt"></i> <span class="language" >Back</span></a>
                                         </div> 
                                     </div>
@@ -71,13 +71,13 @@
                                         </div>
                                        
                                          <div class="form-group row pass" style="display:none;">
-                                            <label for="inputPassword2" class="col-3 col-lg-2 col-form-label text-right">Password</label>
+                                            <label for="inputPassword2" class="col-3 col-lg-2 col-form-label text-right language">Password</label>
                                             <div class="col-9 col-lg-10">
                                                 <input id="inputPassword2" type="password" required="" placeholder="Password" class="form-control enter_tab re-password" data-repassword='1' data-min='8' data-nextTab='4' name="password">
                                             </div>
                                         </div>
                                         <div class="form-group row pass" style="display:none;">
-                                            <label for="inputWebSite" class="col-3 col-lg-2 col-form-label text-right">Re Password</label>
+                                            <label for="inputWebSite" class="col-3 col-lg-2 col-form-label text-right language">Re Password</label>
                                             <div class="col-9 col-lg-10">
                                                 <input id="repassword" type="password" data-min='8'  data-repassword='2' placeholder="Re Password" class="form-control enter_tab re-password" data-nextTab='5' name="repassword">
                                             </div>

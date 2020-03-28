@@ -6,12 +6,17 @@ use Illuminate\Http\Request;
 use App\userModel;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Session;
+use App\Http\Controllers\HomeController as hm;
 
 
 
 class userController extends Controller
 {
      public function index(){
+
+        if($this->authSession(16,'r') == 1){return redirect('home');}
+
     	 return view('users.users');
     }
 
@@ -41,12 +46,17 @@ class userController extends Controller
     }
 
     function user_add(){
+
+        if($this->authSession(16,'w') == 1){return redirect('home');}
+
          return view('users.users_add');
     }
 
     function user_save(Request $request){
         try{
            
+           if($this->authSession(16,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
            $this->validate($request,[
             'username' =>'unique:users',
             'email' =>'unique:users',
@@ -60,6 +70,8 @@ class userController extends Controller
             $add->role_group = $request->get('role');
 
             $result = $add->save();
+            $resession  = hm::resession();
+
             
             return json_encode(array('msg'=>'Sava Data Success', 'content'=>$result, 'success'=>TRUE));    
 
@@ -70,13 +82,18 @@ class userController extends Controller
 
     function user_edit($id){
 
+        if($this->authSession(16,'w') == 1){return redirect('home');}
+
          $user = userModel::user_get_by_id($id);
 
          return view('users.users_edit')->with('user',$user[0]);
     }
 
     function user_update(Request $request){
-        try{
+        try{    
+
+           if($this->authSession(16,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
              
              $add = userModel::where('id', $request->get('id'))->firstOrFail();
              $add->name = $request->get('name');
@@ -90,6 +107,8 @@ class userController extends Controller
              }
              
              $result = $add->save();
+             $resession  = hm::resession();
+
             
              return json_encode(array('msg'=>'Sava Data Success', 'content'=>$result, 'success'=>TRUE));    
 
@@ -100,6 +119,9 @@ class userController extends Controller
 
     function user_delete(Request $request){
         try{
+
+           if($this->authSession(16,'d') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $delete = userModel::user_delete($request);
             return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete, 'success'=>TRUE));    
         }catch (Exception $e) {

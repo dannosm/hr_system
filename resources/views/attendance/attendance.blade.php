@@ -43,7 +43,34 @@
                     <div style="position: absolute;top: -10px;font-size: 15px;font-weight: bold;background: white;">
                         Filter</div>
                     <div class="row">
+                         <div class="col-md-4">
+                            <div class="form-group">
+                                  <label for="division" class="language">Employee</label>
+                                <select id="employee" name="employee" class="form-control select_employee filter_field">
+                                    <option value="" class="language">Pilih</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                      
                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="tanggal" class="language">Date Range : <input type="checkbox" name="daterange" id="daterange" value="true"> </label>
+                                <input type="text" id="tanggal" name="tanggal" class="form-control datepicker filter_field">
+                            </div>
+                            <input type="hidden" id="start">
+                            <input type="hidden" id="end">
+                        </div>
+
+                         <div class="col-md-4 date_end" style="display: none;">
+                            <div class="form-group">
+                                <label for="tanggal" class="language">Date End</label>
+                                <input type="text" id="date_end" name="date_end" class="form-control datepicker filter_field">
+                            </div>
+                            <input type="hidden" id="start">
+                            <input type="hidden" id="end">
+                        </div>
+                          <div class="col-md-4">
                             <div class="form-group">
                                 <label for="shift" class="language">Shift</label>
                                 <select id="shift" name="shift" class="form-control select_shift filter_field">
@@ -51,14 +78,6 @@
                                     
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="tanggal" class="language">Date</label>
-                                <input type="text" id="tanggal" name="tanggal" class="form-control datepicker filter_field">
-                            </div>
-                            <input type="hidden" id="start">
-                            <input type="hidden" id="end">
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
@@ -72,7 +91,11 @@
                         <div class="col-md-12">
                             <button onclick="filter();" class="btn btn-primary btn-sm ">Filter</button>
                             <button onclick="clearFilter();" class="btn btn-default btn-sm ">Reset</button>
+                            @if(session()->get('roles')[1]->role_write == 1)
                              <a href="javascript:void(0)" onclick="absensi_update_data()" class="btn btn-success btn-sm "><i class="fas fa-sync-alt"></i> <span class="language">Update Data</span></a>
+                             <a href="javascript:void(0)" onclick="absensi_export_data()" class="btn btn-info btn-sm "><i class="fas fa-excel"></i> <span class="language">Export</span></a>
+
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -130,10 +153,31 @@
 
                    <form action="#" id="form2" class="form-horizontal" enctype="multipart/form-data">
                                 @csrf
-                   <div class="form-group row">
+
+                                  <div class="form-group row excel" style="display: none;">
+                                            <label class="col-12 col-sm-3 col-form-label text-sm-right language">Employee</label>
+                                            <div class="col-12 col-sm-8 col-lg-6">
+                                               <select id="employee" name="employee" class="form-control select_employee filter_field">
+                                                     <option value="" class="language">Pilih</option>
+                                    
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row excel" style="display: none;">
+                                            <label class="col-12 col-sm-3 col-form-label text-sm-right language">Division</label>
+                                            <div class="col-12 col-sm-8 col-lg-6">
+                                               <select id="division" name="division" class="form-control select_division filter_field">
+                                                     <option value="" class="language">Pilih</option>
+                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label class="col-12 col-sm-3 col-form-label text-sm-right language">Date Start</label>
                                             <div class="col-12 col-sm-8 col-lg-6">
                                                 <input type="text" name="start" placeholder="date start" class="datepicker input_validasi" value="<?php echo date('Y-m-d') ?>">
+
                                             </div>
                                         </div>
                                          <div class="form-group row">
@@ -142,7 +186,11 @@
                                                 <input type="text" name="end" placeholder="date end" class="datepicker input_validasi" value="<?php echo date('Y-m-d') ?>">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
+
+                                      
+
+
+                                        <div class="form-group row excel_no">
                                             <label class="col-12 col-sm-3 col-form-label text-sm-right">Finger Print</label>
                                             <div class="col-12 col-sm-8 col-lg-6">
                                             <input type="checkbox" id="finger_print_all" name="mesin_finger_all" value="all" checked= />&nbsp;<span class="language">All</span>
@@ -151,7 +199,7 @@
                                         </div>
                         <div id="list_finger_print">
 
-                            <div class="form-group row">
+                            <div class="form-group row excel_no">
                                             <label class="col-12 col-sm-2 col-form-label text-sm-right">&nbsp;</label>
                                             <div class="col-12 col-sm-8 col-lg-8 list_finger_print_value">
                                            
@@ -164,7 +212,9 @@
                 </div>
                 <div class="modal-footer">
                     <a href="javascript:void(0)" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                    <a href="javascript:void(0)" id="saveAdd" class="btn btn-primary">Submit</a>
+                    <a href="javascript:void(0)" id="saveAdd" class="btn btn-primary excel_no">Submit</a>
+                    <a href="javascript:void(0)" id="exportAdd" class="btn btn-primary excel" style="display: none;">Submit</a>
+
                 </div>
 
             </div>
@@ -192,8 +242,10 @@ $( function() {
 });
 
 $(document).ready(function(){
-  $(".select_shift").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Shift',token:$("input[name='_token']").val(),field:"select2_shift"});
+  $(".select_shift").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Employee',token:$("input[name='_token']").val(),field:"select2_shift"});
   $(".select_division").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Shift',token:$("input[name='_token']").val(),field:"select2_division"});
+  $(".select_employee").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Shift',token:$("input[name='_token']").val(),field:"select2_employee"});
+
 })
 
 $(document).ready(function () {
@@ -213,14 +265,28 @@ function clearFilter(){
     $(".filter_field").val("");
      $(".select_shift").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Shift',token:$("input[name='_token']").val(),field:"select2_shift"});
   $(".select_division").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Shift',token:$("input[name='_token']").val(),field:"select2_division"});
+  $(".select_employee").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Choose Employee',token:$("input[name='_token']").val(),field:"select2_employee"});
+
 }
+
+$("#daterange").click(function(){
+    if($(this).is(":checked")){
+        $(".date_end").removeAttr("style");
+    }else{
+        $(".date_end").css({'display':"none"});
+    }
+})
 
 function filter(){
  
  var shift =  $("#shift").val();
  var division = $("#division").val();
  var date = $("#tanggal").val();
-
+ var range = $("#daterange").is("checked");
+ var date_end = $("#date_end").val();
+ var employee = $("#employee").val();
+ var param = {shift:shift,division:division,date:date,range:range,employee:employee,date_end:date_end};
+ console.log(param);
 
  $('#attendace_list').DataTable().destroy();
  $('#attendace_list').DataTable({
@@ -230,7 +296,7 @@ function filter(){
     "ajax":{
         url :"{{url('/attendance/get')}}",
             type: "POST",
-            data:{'_token': $("input[name='_token']").val(),param:{shift:shift,division:division,date:date}},            
+            data:{'_token': $("input[name='_token']").val(),param:param},            
         "dataSrc": function ( json ) {
             //Make your callback here.
             if(json.token_status=='valid'){
@@ -263,8 +329,22 @@ function _nav(){
 }
 //endroot js
 function absensi_update_data(){
+    $(".modal-title").text("Update Attendance")
+    $(".excel_no").removeAttr('style');
+    $(".excel").css({'display':'none'});
+
     $("#modal_finger_print").modal('show');    
 }
+
+function absensi_export_data(){
+
+    $(".modal-title").text("Export Attendance")
+    $(".excel").removeAttr('style');
+    $(".excel_no").css({'display':'none'});
+
+    $("#modal_finger_print").modal('show');    
+}
+
 
 function select_finger_print(params){
         if($("#finger_print_all").is(":checked") == true){
@@ -352,6 +432,53 @@ $("#saveAdd").click(function(){
            });
     }
 });
+
+
+
+$("#exportAdd").click(function(){
+  
+  errors.loading({id:"#loading_alertsmodal",type:'show'});
+  var validasi1 = $(".input_validasi").input_validasi({type:'required'});
+
+ if(validasi1 == false){
+    errors.loading({id:"#loading_alerts",type:'hide'});
+    return;
+ }else{
+   
+    var formData = new FormData($("#form2")[0]);
+    var formDataSerialized = $("#form2").serialize();
+
+     $.ajax({
+                url:"{{url('/attendance/export-excel')}}",
+                dataType: 'JSON',
+                method: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+        
+                  errors.loading({id:"#loading_alertsmodal",type:'hide'});
+                  if(response.success == true){
+                     
+                     let image= "{{URL::to('/')}}/attendance.xlsx";
+                      errors.file_download(image);
+                       errors.success({id:"#massage_errors",msg:response.msg});
+                  }else{
+                        errors.failed({id:"#massage_errors",msg:response.msg});
+                  }
+                   
+                },error: function (error) {
+                    msg = JSON.stringify(error.responseJSON.message);
+                    //msg = error.responseJSON.errors.email;
+                    errors.loading({id:"#loading_alertsmodal",type:'hide'});
+                    errors.failed({id:"#massage_errors",msg:msg});
+                    $("#modal_finger_print").modal('hide');
+                }
+           });
+    }
+});
+
 </script>
 
 

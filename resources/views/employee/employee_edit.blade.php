@@ -22,10 +22,10 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">EDIT EMPLOYEE</h4>
+                                        <h4 class="card-header-title language">EDIT EMPLOYEE</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="#" class="btn btn-primary btn-sm" id="saveAdd"><i class="fa fa-save"></i> Save</a>
-                                            <a href="{{url('/employee')}}" class="btn btn-dark btn-sm "><i class="fas fa-sign-out-alt"></i> Back</a>
+                                            <a href="#" class="btn btn-primary btn-sm language" id="saveAdd"><i class="fa fa-save"></i> Save</a>
+                                            <a href="{{url('/employee')}}" class="btn btn-dark btn-sm language"><i class="fas fa-sign-out-alt"></i> Back</a>
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -40,16 +40,16 @@
                                 <div class="simple-card">
                                     <ul class="nav nav-tabs" id="myTab5" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active border-left-0" id="home-tab-simple" data-toggle="tab" href="#home-simple" role="tab" aria-controls="home" aria-selected="true">Account</a>
+                                            <a class="nav-link active border-left-0 language" id="home-tab-simple" data-toggle="tab" href="#home-simple" role="tab" aria-controls="home" aria-selected="true">Account</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="profile-tab-simple" data-toggle="tab" href="#profile-simple" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                                            <a class="nav-link" id="profile-tab-simple language" data-toggle="tab" href="#profile-simple" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="contact-tab-simple" data-toggle="tab" href="#contact-simple" role="tab" aria-controls="contact" aria-selected="false">Company</a>
+                                            <a class="nav-link" id="contact-tab-simple language" data-toggle="tab" href="#contact-simple" role="tab" aria-controls="contact" aria-selected="false">Company</a>
                                         </li>
                                          <li class="nav-item">
-                                            <a class="nav-link" id="contact-tab-simple" data-toggle="tab" href="#salary-simple" role="tab" aria-controls="salary" aria-selected="false">Salary</a>
+                                            <a class="nav-link" id="contact-tab-simple language" data-toggle="tab" href="#salary-simple" role="tab" aria-controls="salary" aria-selected="false">Salary</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content" id="myTabContent5">
@@ -57,7 +57,7 @@
                                            <!--tab account-->
                                         <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Name*</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Name*</label>
                                             <div class="col-3 col-lg-9">
                                                <input type="text" value="{{$data->name}}" class="form-control form-control-sm tab enter_tab input_validasi" data-nextTab='1' placeholder="employee" name="name" >
                                             </div>
@@ -66,7 +66,7 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Username*</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Username*</label>
                                             <div class="col-lg-9">
                                                 <input  type="text" value="{{$data->username}}" class="form-control form-control-sm enter_tab input_validasi" data-nextTab='2' placeholder="username" name="username">
                                             </div>
@@ -75,7 +75,7 @@
 
                                         <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Email</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Email</label>
                                             <div class="col-lg-9">
                                                <input  type="text" value="{{$data->email}}" class="form-control form-control-sm enter_tab" data-nextTab='3' placeholder="Email" name="email">
                                             </div>
@@ -84,7 +84,7 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Telphone*</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Telphone*</label>
                                             <div class="col-lg-9">
                                                 <input type="text" value="{{$data->telphone}}" class="form-control form-control-sm enter_tab input_validasi" data-nextTab='4' placeholder="telphone" name="telphone">
                                             </div>
@@ -93,7 +93,7 @@
 
                                         <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Password*</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Password*</label>
                                             <div class="col-lg-9">
                                                <input type="password"  class="form-control form-control-sm enter_tab" data-nextTab='5' placeholder="password" name="password" disabled>
                                             </div>
@@ -102,12 +102,12 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-3 col-lg-3 col-form-label text-right">Gender</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-3 col-form-label text-right language">Gender</label>
                                             <div class="col-lg-9">
                                                 <select class="form-control form-control-sm enter_tab" data-nextTab='6' name="gender"/>
-                                                    <option value="">Choose</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
+                                                    <option value="" class="language">Choose</option>
+                                                    <option value="male" class="language">Male</option>
+                                                    <option value="female" class="language">Female</option>
                                                 </select>
                                             </div>
                                           </div>
@@ -115,10 +115,10 @@
 
                                         <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Shift</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Shift</label>
                                             <div class="col-lg-9">
                                                 <select class="form-control form-control-sm enter_tab select_shift" data-nextTab='7' placeholder="Shift Group" name="shift" id="shift" />
-                                                    <option value="">Choose</option>
+                                                    <option value="" class="language">Choose</option>
                                                 </select>
                                             </div>
                                           </div>
@@ -126,13 +126,13 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Status</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Status</label>
                                             <div class="col-lg-9">
                                                  <select class="form-control form-control-sm enter_tab" data-nextTab='8' placeholder="status" name="status"/>
-                                                    <option value="">Choose</option>
-                                                    <option value="active">Active</option>
-                                                    <option value="nonactive">Nonactive</option>
-                                                    <option value="leave">Leave</option>
+                                                    <option value="" class="language">Choose</option>
+                                                    <option value="active" class="language">Active</option>
+                                                    <option value="nonactive" class="language">Nonactive</option>
+                                                    <option value="leave" class="language">Leave</option>
                                                 </select>
                                             </div>
                                           </div>
@@ -145,7 +145,7 @@
 
                                             <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">ID Card</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">ID Card</label>
                                             <div class="col-3 col-lg-9">
                                                <input type="text" value="{{$data->card_id}}" class="form-control form-control-sm tab enter_tab input_angka" data-nextTab='9' placeholder="id card / ktp" name="id_card" >
                                             </div>
@@ -154,7 +154,7 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Telphone 2</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Telphone 2</label>
                                             <div class="col-lg-9">
                                                 <input  type="text" value="{{$data->telephone2}}" class="form-control form-control-sm tab enter_tab input_angka" data-nextTab='10' placeholder="telphone 2" name="telphone_2">
                                             </div>
@@ -163,7 +163,7 @@
 
                                         <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Birth Place</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Birth Place</label>
                                             <div class="col-lg-9">
                                                <input  type="text" value="{{$data->birth_place}}" class="form-control form-control-sm tab enter_tab " data-nextTab='11' placeholder="Birth Place" name="birth_place">
                                             </div>
@@ -172,7 +172,7 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Birth Day</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Birth Day</label>
                                             <div class="col-lg-9">
                                                 <input  type="text" value="{{$data->birth_day}}" class="form-control form-control-sm tab enter_tab datepicker" data-nextTab='12' placeholder="Birth Day" name="birth_day">
                                             </div>
@@ -181,14 +181,14 @@
 
                                         <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Marriage</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Marriage</label>
                                             <div class="col-lg-9">
                                                <select class="form-control form-control-sm enter_tab" data-nextTab='13' placeholder="Marriage" name="marriage"/>
-                                                    <option value="">Choose</option>
-                                                    <option value="single">Single</option>
-                                                    <option value="married">Married</option>
-                                                    <option value="widow">widow</option>
-                                                    <option value="widower">widower</option>
+                                                    <option value="" class="language">Choose</option>
+                                                    <option value="single" class="language">Single</option>
+                                                    <option value="married" class="language">Married</option>
+                                                    <option value="widow" class="language">widow</option>
+                                                    <option value="widower" class="language">widower</option>
                                                 </select>
                                             </div>
                                           </div>
@@ -196,15 +196,15 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-3 col-lg-3 col-form-label text-right">Religion</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-3 col-form-label text-right language">Religion</label>
                                             <div class="col-lg-9">
                                                 <select class="form-control form-control-sm enter_tab" data-nextTab='14' placeholder="Religion" name="religion"/>
-                                                    <option value="">Choose</option>
-                                                    <option value="Islam">Islam</option>
-                                                    <option value="Katholik">Katholik</option>
-                                                    <option value="Protestan">Protestan</option>
-                                                    <option value="Hindu">Hindu</option>
-                                                    <option value="Buddha">Buddha</option>
+                                                    <option value="" class="language">Choose</option>
+                                                    <option value="Islam" class="language">Islam</option>
+                                                    <option value="Katholik" class="language">Katholik</option>
+                                                    <option value="Protestan" class="language">Protestan</option>
+                                                    <option value="Hindu" class="language">Hindu</option>
+                                                    <option value="Buddha" class="language">Buddha</option>
                                                 </select>
                                             </div>
                                           </div>
@@ -221,7 +221,7 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Bank Account</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Bank Account</label>
                                             <div class="col-lg-9">
                                                  <input  type="text" value="{{$data->bank_account}}" class="form-control form-control-sm tab enter_tab input_angka" data-nextTab='16' placeholder="Bank Account" name="bank_account">
                                             </div>
@@ -230,7 +230,7 @@
 
                                         <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Country</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Country</label>
                                             <div class="col-lg-9">
                                                 <input  type="text" value="{{$data->country}}" class="form-control form-control-sm tab enter_tab " data-nextTab='17' placeholder="Country" name="country">
                                             </div>
@@ -239,7 +239,7 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Avatar</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Avatar</label>
                                             <div class="col-lg-9">
                                                  <input type="file" value="" class="form-control form-control-sm tab enter_tab"  name="avatar" data-nextTab='18'>
                                             </div>
@@ -247,7 +247,7 @@
                                         </div>
                                         <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Address</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Address</label>
                                             <div class="col-lg-9">
                                                 <textarea class="form-control form-control-sm tab enter_tab " data-nextTab='19' placeholder="Address" name="address">{{$data->address}}</textarea>
                                             </div>
@@ -256,7 +256,7 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Description</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Description</label>
                                             <div class="col-lg-9">
                                                   <textarea class="form-control form-control-sm tab enter_tab " data-nextTab='20' placeholder="Description" name="description">{{$data->description}}</textarea>
                                           </div>
@@ -269,10 +269,10 @@
 
                                         <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right">Division</label>
+                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right language">Division</label>
                                             <div class="col-lg-8">
                                                  <select class="form-control form-control-sm enter_tab select_division" data-nextTab='21' name="division"/>
-                                                    <option value="">Choose</option>
+                                                    <option value="" class="language">Choose</option>
                                                 </select>
                                             </div>
                                           </div>
@@ -280,10 +280,10 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right">Position</label>
+                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right language">Position</label>
                                             <div class="col-lg-8">
                                                  <select class="form-control form-control-sm enter_tab select_position" data-nextTab='22' name="position"/>
-                                                    <option value="">Choose</option>
+                                                    <option value="" class="language">Choose</option>
                                                 </select>
                                           </div>
                                         </div>
@@ -291,7 +291,7 @@
 
                                       <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right">Joint At</label>
+                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right language">Joint At</label>
                                             <div class="col-lg-8">
                                                  <input type="text" value="{{$data->join_at}}" class="form-control form-control-sm tab enter_tab datepicker" data-nextTab='23' placeholder="Join At" name="join_at">
                                             </div>
@@ -300,7 +300,7 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right">Date Contract</label>
+                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right language">Date Contract</label>
                                             <div class="col-lg-8">
                                                  <input  type="text" value="{{$data->date_last_contract}}" class="form-control form-control-sm tab enter_tab datepicker" data-nextTab='24' placeholder="Date Last Contract" name="date_contract">
                                           </div>
@@ -309,14 +309,14 @@
 
                                       <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right">Employment</label>
+                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right language">Employment</label>
                                             <div class="col-lg-8">
                                                   <select class="form-control form-control-sm enter_tab" data-nextTab='25' name="employment"/>
-                                                    <option value="contract">Contract</option>
-                                                    <option value="permanent">Permanent</option>
-                                                    <option value="freelance">FreeLance</option>
-                                                    <option value="trial">Trial</option>
-                                                    <option value="parttime">Parttime</option>
+                                                    <option value="contract" class="language">Contract</option>
+                                                    <option value="permanent" class="language">Permanent</option>
+                                                    <option value="freelance" class="language">FreeLance</option>
+                                                    <option value="trial" class="language">Trial</option>
+                                                    <option value="parttime" class="language">Parttime</option>
                                                 </select>
                                             </div>
                                           </div>
@@ -324,7 +324,7 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right">Leave</label>
+                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right language">Leave</label>
                                             <div class="col-lg-8">
                                                  <input  type="text" value="{{$data->leave}}" class="form-control form-control-sm tab enter_tab input_angka" data-nextTab='26' placeholder="Leave" name="leave">
                                           </div>
@@ -333,7 +333,7 @@
 
                                        <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right">Bpjs Tenaker</label>
+                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right language">Bpjs Tenaker</label>
                                             <div class="col-lg-8">
                                                   <input  type="text" value="{{$data->bpjs_ketenaga_kerjaan}}" class="form-control form-control-sm tab enter_tab input_angka" data-nextTab='27' placeholder="Account Number Bpjs" name="bpjs_ketenaga_kerjaan">
                                             </div>
@@ -342,7 +342,7 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right">Bpjs Kesehatan</label>
+                                            <label for="inputEmail2" class="col-lg-4 col-form-label text-right language">Bpjs Kesehatan</label>
                                             <div class="col-lg-8">
                                                  <input  type="text" value="{{$data->bpjs_kesehatan}}" class="form-control form-control-sm tab enter_tab input_angka" data-nextTab='28' placeholder="Account Number" name="bpjs_kesehatan">
                                           </div>

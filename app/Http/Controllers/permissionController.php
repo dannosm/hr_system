@@ -9,7 +9,10 @@ use Auth;
 class permissionController extends Controller
 {
      public function index(){
-    	 return view('permission.permission');
+
+        if($this->authSession(2,'r') == 1){return redirect('home');}
+
+    	return view('permission.permission');
     }
 
     function permission_get(Request $request){
@@ -39,12 +42,17 @@ class permissionController extends Controller
     }
 
     function permission_add(){
+
+        if($this->authSession(2,'w') == 1){return redirect('home');}
+
          return view('permission.permission_add');
     }
 
      function permission_save(Request $request){
         try{
             
+           if($this->authSession(2,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $user = Auth::user();
 
             $add = new permissionModel;
@@ -67,6 +75,8 @@ class permissionController extends Controller
 
     function permission_edit($id){
 
+        if($this->authSession(2,'w') == 1){return redirect('home');}
+
          $data = permissionModel::permission_get_by_id($id);
 
          return view('permission.permission_edit')->with('data',$data[0]);
@@ -74,6 +84,9 @@ class permissionController extends Controller
 
     function permission_update(Request $request){
         try{
+
+           if($this->authSession(5,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
              
             $user = Auth::user();
             $add = permissionModel::where('id', $request->get('id'))->firstOrFail();
@@ -96,8 +109,41 @@ class permissionController extends Controller
 
     function permission_delete(Request $request){
         try{
+
+           if($this->authSession(2,'d') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $delete = permissionModel::permission_delete($request);
             return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete, 'success'=>TRUE));    
+        }catch (Exception $e) {
+            return json_encode(array('msg'=>'gagal', 'content'=>$e->getMessage(), 'success'=>FALSE, 'token_status'=>'invalid'));          
+        }  
+    }
+
+
+     function permit_count(){
+        try{
+
+                $permit = permissionModel::permit_count();
+                $leave = permissionModel::leave_count();
+                $per = [];
+                $per2 = [];
+                $lev = [];
+
+                for ($i=0; $i < count($permit); $i++) { 
+                     $per[@$permit[$i]->bulan]= @$permit[$i]->jum;
+                 } 
+                 for ($i=1; $i < 13 ; $i++) { 
+                    $per2[$i] =empty(@$per[$i]) ? 10:@$per[$i];
+                 }
+                 $per = array();
+                 for ($i=0; $i < count($permit); $i++) { 
+                     $per[@$leave[$i]->bulan]= @$leave[$i]->jum;
+                 } 
+                 for ($i=1; $i < 13 ; $i++) { 
+                    $lev[$i] =empty(@$per[$i]) ? 10:@$per[$i];
+                 }
+
+            return json_encode(array('msg'=>'Delete Data Success', 'content'=> array(implode(',', $per2),implode(',', $lev) ), 'success'=>TRUE));    
         }catch (Exception $e) {
             return json_encode(array('msg'=>'gagal', 'content'=>$e->getMessage(), 'success'=>FALSE, 'token_status'=>'invalid'));          
         }  

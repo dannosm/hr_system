@@ -5,28 +5,33 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\attendanceModel;
 use App\masterFingerprintModel as fingerPrint;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class attendanceController extends Controller
 {
      public function __construct()
     {
          function Parse_Data($data,$p1,$p2){
-    $data=" ".$data;
-    $hasil="";
-    $awal=strpos($data,$p1);
-    if($awal!=""){
-        $akhir=strpos(strstr($data,$p1),$p2);
-        if($akhir!=""){
-            $hasil=substr($data,$awal+strlen($p1),$akhir-strlen($p1));
-        }
-    }
-    return $hasil; 
+          $data=" ".$data;
+          $hasil="";
+          $awal=strpos($data,$p1);
+          if($awal!=""){
+              $akhir=strpos(strstr($data,$p1),$p2);
+              if($akhir!=""){
+                  $hasil=substr($data,$awal+strlen($p1),$akhir-strlen($p1));
+              }
+          }
+          return $hasil; 
 
-        }
+              }
     }
 
     public function index(){
-
-    	 return view('attendance.attendance');
+       
+       if($this->authSession(1,'r') == 1){return redirect('home');}
+    	 
+       return view('attendance.attendance');
     }
 
       function attendance_get(Request $request){
@@ -61,6 +66,8 @@ class attendanceController extends Controller
 
     public function attendance_update_data(Request $request){
     try {
+
+          if($this->authSession(1,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
          date_default_timezone_set('Asia/Jakarta');
         //$ip="3a6a022db65b.sn.mynetname.net:8080";
@@ -148,11 +155,55 @@ class attendanceController extends Controller
 
 
     function dummy_data(){
+      
          date_default_timezone_set('Asia/Jakarta');
         for ($i=0; $i < 10 ; $i++) { 
             $data []=array('id' => $i+1,'datetime'=>date("Y-m-d H:i:s"));
         }
         return $data ;
+    }
+
+
+     public function attendance_export_excel(Request $request){
+
+        $end = $request->get('end');
+        $start = $request->get('start');
+        unset($request['start']);
+        unset($request['end']);
+        $request['start'] =0;
+        $request['length']=1000;
+        $request['param'] =array('date_end' => $end,'date'=>$start,'range'=> true);
+
+        $att =  attendanceModel::attendance_get($request);
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'NIK');
+        $sheet->setCellValue('B1', 'NAME');
+        $sheet->setCellValue('C1', 'CHECK IN');
+        $sheet->setCellValue('D1', 'CHECK OUT');
+        $sheet->setCellValue('E1', 'DESCRIPTION');
+
+        $i = 1;
+
+        foreach ($att as $key => $value) {
+                $i++;
+                $sheet->setCellValue('A'.$i,$value->user_id);
+                $sheet->setCellValue('B'.$i, $value->name);
+                $sheet->setCellValue('C'.$i, $value->check_in);
+                $sheet->setCellValue('D'.$i, $value->check_out);
+                $sheet->setCellValue('E'.$i, $value->description);
+
+
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('attendance.xlsx');
+
+     
+        return json_encode(array('msg'=>'Sava Data Success', 'content'=>"", 'success'=>TRUE));    
+
+
+    
     }
 
 

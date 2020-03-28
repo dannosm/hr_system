@@ -24,6 +24,8 @@ Route::get('/home', 'HomeController@index');
 Route::get('/attendance', 'attendanceController@index');
 Route::post('/attendance/get', 'attendanceController@attendance_get');
 Route::post('/attendance/update-data', 'attendanceController@attendance_update_data');
+Route::post('/attendance/export-excel', 'attendanceController@attendance_export_excel');
+
 
 
 //usermaster
@@ -127,6 +129,8 @@ Route::post('/permission/get', 'permissionController@permission_get');
 Route::post('/permission/save', 'permissionController@permission_save');
 Route::post('/permission/update', 'permissionController@permission_update');
 Route::post('/permission/delete', 'permissionController@permission_delete');
+Route::get('/permission/permit-count', 'permissionController@permit_count');
+
 
 //application letter
 Route::get('/application-letter', 'applicationLetterController@index');

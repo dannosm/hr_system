@@ -20,10 +20,16 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">POSITION</h4>
+                                        <h4 class="card-header-title language">POSITION</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm" id="deleteBtn">Delete</a>
-                                            <a href="{{url('/position/add')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i> Add</a>
+                                            @if(session()->get('roles')[15]->role_delete == 1)
+                                             <a href="javascript:void(0)" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a>
+                                            @endif
+
+                                            @if(session()->get('roles')[15]->role_write == 1)
+                                              <a href="{{url('/position/add')}}" class="btn btn-primary btn-sm language"><i class="fa fa-plus"></i> Add</a>
+                                            @endif
+
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -34,9 +40,9 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="select_all" name="select_all" title="checked all" ></th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Option</th>
+                            <th class="language">Name</th>
+                            <th class="language">Description</th>
+                            <th class="language">Option</th>
                         </tr>
                     </thead>
                     <tbody id="list-ready">

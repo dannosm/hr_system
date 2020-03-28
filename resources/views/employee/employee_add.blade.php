@@ -64,7 +64,7 @@
                                             &nbsp;
                                           </div>
                                           <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Username*</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Username*</label>
                                             <div class="col-lg-9">
                                                 <input  type="text" value="" class="form-control form-control-sm enter_tab input_validasi" data-nextTab='2' placeholder="username" name="username">
                                             </div>
@@ -91,7 +91,7 @@
 
                                         <div class="form-row">
                                          <div class="form-group row col-lg-5">
-                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right">Password*</label>
+                                            <label for="inputEmail2" class="col-lg-3 col-form-label text-right language">Password*</label>
                                             <div class="col-lg-9">
                                                <input type="password" value="" class="form-control form-control-sm enter_tab input_validasi" data-nextTab='5' placeholder="password" name="password">
                                             </div>

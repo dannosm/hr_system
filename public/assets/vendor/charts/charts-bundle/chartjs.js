@@ -62,7 +62,7 @@
             }
 
 
-            if ($('#chartjs_bar').length) {
+           /* if ($('#chartjs_bar').length) {
                 var ctx = document.getElementById("chartjs_bar").getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'bar',
@@ -119,7 +119,7 @@
 
                     
                 });
-            }
+            }*/
 
             if ($('#chartjs_radar').length) {
                 var ctx = document.getElementById("chartjs_radar");

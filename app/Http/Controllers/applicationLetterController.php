@@ -9,6 +9,9 @@ use Auth;
 class applicationLetterController extends Controller
 {
      public function index(){
+
+        if($this->authSession(11,'r') == 1){return redirect('home');}
+
     	 return view('application_letter.application_letter');
     }
 
@@ -38,12 +41,18 @@ class applicationLetterController extends Controller
     }
 
     function application_letter_add(){
+
+        if($this->authSession(11,'w') == 1){return redirect('home');}
+
          return view('application_letter.application_letter_add');
     }
 
     function application_letter_save(Request $request){
         try{
-           
+            
+           if($this->authSession(11,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
+
             $user = Auth::user();
             $add = new applicationLetterModel;
               if($request->file('files') !=''){
@@ -70,6 +79,8 @@ class applicationLetterController extends Controller
 
     function application_letter_edit($id){
 
+        if($this->authSession(11,'w') == 1){return redirect('home');}
+
          $data = applicationLetterModel::application_letter_get_by_id($id);
 
          return view('application_letter.application_letter_edit')->with('data',$data[0]);
@@ -77,6 +88,8 @@ class applicationLetterController extends Controller
 
     function application_letter_update(Request $request){
         try{
+
+           if($this->authSession(11,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
               $user = Auth::user();
               $add = applicationLetterModel::where('id', $request->get('id'))->firstOrFail();
@@ -104,6 +117,9 @@ class applicationLetterController extends Controller
 
     function application_letter_delete(Request $request){
         try{
+
+           if($this->authSession(11,'d') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $delete =  applicationLetterModel::application_letter_delete($request);
             return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete, 'success'=>TRUE));    
         }catch (Exception $e) {

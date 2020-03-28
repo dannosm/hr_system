@@ -21,10 +21,10 @@
                            <div class="card-header d-flex">
                                         <h4 class="card-header-title language">REKRUITMEN</h4>
                                         <div class="toolbar ml-auto">
-                                            @if(session()->get('roles')[5]->role_delete == 1)
+                                            @if(session()->get('roles')[4]->role_delete == 1)
                                             <a href="javascript:void(0)" class="btn btn-danger btn-sm language" id="deleteBtn">Delete</a>
                                             @endif
-                                            @if(session()->get('roles')[5]->role_write == 1)
+                                            @if(session()->get('roles')[4]->role_write == 1)
                                             <a href="{{url('/rekruitmen/add')}}" class="btn btn-primary btn-sm language"><i class="fa fa-plus"></i> Add</a>
                                             @endif
                                         </div>

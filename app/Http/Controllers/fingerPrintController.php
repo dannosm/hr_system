@@ -30,6 +30,9 @@ class fingerPrintController extends Controller
 
    //start crud fingeerprint
      public function index(){
+        
+        if($this->authSession(3,'r') == 1){return redirect('home');}
+
          return view('finger_print.finger_print');
     }
 
@@ -59,12 +62,16 @@ class fingerPrintController extends Controller
     }
 
     function finger_print_add(){
+
+        if($this->authSession(3,'2') == 1){return redirect('home');}
+
          return view('finger_print.finger_print_add');
     }
 
     function finger_print_save(Request $request){
         try{
            
+           if($this->authSession(3,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
          
             $user = Auth::user();
             $add = new fingerprint;
@@ -85,6 +92,9 @@ class fingerPrintController extends Controller
 
     function finger_print_edit($id){
 
+        if($this->authSession(3,'w') == 1){return redirect('home');}
+
+
          $data = fingerprint::finger_print_get_by_id($id);
 
          return view('finger_print.finger_print_edit')->with('data',$data[0]);
@@ -92,6 +102,8 @@ class fingerPrintController extends Controller
 
     function finger_print_update(Request $request){
         try{
+
+           if($this->authSession(3,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
              $user = Auth::user();
              $add = fingerprint::where('id', $request->get('id'))->firstOrFail();
@@ -111,6 +123,9 @@ class fingerPrintController extends Controller
 
     function finger_print_delete(Request $request){
         try{
+
+           if($this->authSession(3,'d') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $delete = fingerprint::finger_print_delete($request);
             return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete, 'success'=>TRUE));    
         }catch (Exception $e) {
@@ -124,6 +139,7 @@ class fingerPrintController extends Controller
 
     public function finger_print_upload_user(){
 
+           if($this->authSession(3,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
 
     	$IP = "192.168.100.206";
@@ -162,6 +178,8 @@ class fingerPrintController extends Controller
 
      public function finger_print_export_absen()
     {
+
+           if($this->authSession(3,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
     	exit();
         #date zona
@@ -228,6 +246,8 @@ class fingerPrintController extends Controller
     public function finger_print_get_all_mesin(Request $request){
         try {
             
+           if($this->authSession(5,'r') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $fingerprint = fingerprint::all();
 
                 if($fingerprint->count() > 0){

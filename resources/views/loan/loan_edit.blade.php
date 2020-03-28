@@ -22,10 +22,10 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card chd">
                            <div class="card-header d-flex">
-                                        <h4 class="card-header-title">EDIT LOAN</h4>
+                                        <h4 class="card-header-title language">EDIT LOAN</h4>
                                         <div class="toolbar ml-auto">
-                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm" id="saveAdd"><i class="fa fa-save"></i> Save</a>
-                                            <a href="{{url('/loan')}}" class="btn btn-dark btn-sm "><i class="fas fa-sign-out-alt"></i> Back</a>
+                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm language" id="saveAdd"><i class="fa fa-save"></i> Save</a>
+                                            <a href="{{url('/loan')}}" class="btn btn-dark btn-sm language"><i class="fas fa-sign-out-alt"></i> Back</a>
                                         </div>
                                     </div>
                             <div class="card-body">
@@ -33,7 +33,7 @@
                             <div id="loading_alerts" class="col-md-12" align="center"></div>
                             <!--card-body-->
                                           <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Employee Name*</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Employee Name*</label>
                                             <div class="col-9 col-lg-10">
                                                <select class="form-control enter_tab input_validasi select_data" data-nextTab='1' name="employee">
                                                    <option>Choose</option>
@@ -41,15 +41,15 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Amount*</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Amount*</label>
                                             <div class="col-9 col-lg-10">
                                                 <input id="amountrup" type="text" placeholder="Amount" class="form-control enter_tab input_validasi" name="amount"  oninput="errors.rupiah(this)">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right">Description*</label>
+                                            <label for="inputEmail2" class="col-3 col-lg-2 col-form-label text-right language">Description*</label>
                                             <div class="col-9 col-lg-10">
-                                              <textarea class="form-control enter_tab input_validasi" name="description">{{$data->description}}</textarea>
+                                              <textarea class="form-control enter_tab input_validasi language" name="description">{{$data->description}}</textarea>
                                             </div>
                                         </div>
                                        

@@ -9,6 +9,9 @@ use Auth;
 class rekruitmenController extends Controller
 {
      public function index(){
+
+        if($this->authSession(4,'r') == 1){return redirect('home');}
+
     	 return view('rekruitmen.rekruitmen');
     }
 
@@ -38,12 +41,17 @@ class rekruitmenController extends Controller
     }
 
     function rekruitmen_add(){
+
+        if($this->authSession(4,'w') == 1){return redirect('home');}
+
          return view('rekruitmen.rekruitmen_add');
     }
 
     function rekruitmen_save(Request $request){
         try{
            
+           if($this->authSession(4,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $user = Auth::user();
             $add = new rekruitmenModel;
               if($request->file('files') !=''){
@@ -68,6 +76,8 @@ class rekruitmenController extends Controller
 
     function rekruitmen_edit($id){
 
+        if($this->authSession(4,'w') == 1){return redirect('home');}
+
          $data = rekruitmenModel::rekruitmen_get_by_id($id);
 
          return view('rekruitmen.rekruitmen_edit')->with('data',$data[0]);
@@ -75,6 +85,8 @@ class rekruitmenController extends Controller
 
     function rekruitmen_update(Request $request){
         try{
+
+           if($this->authSession(4,'w') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
 
               $user = Auth::user();
               $add = rekruitmenModel::where('id', $request->get('id'))->firstOrFail();
@@ -99,6 +111,9 @@ class rekruitmenController extends Controller
 
     function rekruitmen_delete(Request $request){
         try{
+
+           if($this->authSession(4,'d') == 1){return json_encode(array('msg'=>'Your Not Have Permission', 'content'=>"Your Not Have Permission", 'success'=>FALSE));}
+
             $delete =  rekruitmenModel::rekruitmen_delete($request);
             return json_encode(array('msg'=>'Delete Data Success', 'content'=>$delete, 'success'=>TRUE));    
         }catch (Exception $e) {

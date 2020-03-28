@@ -18,6 +18,9 @@ class Controller extends BaseController
 
 
     	$datasession = Session::get('roles');
+
+    	//print_r($datasession);
+    	//exit();
     	if(!isset($datasession[$id])){
     		return 0;
     	}
