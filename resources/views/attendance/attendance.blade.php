@@ -55,7 +55,7 @@
                       
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="tanggal" class="language">Date Range : <input type="checkbox" name="daterange" id="daterange" value="true"> </label>
+                                <label for="tanggal" ><span class="language">Date Range</span> : <input type="checkbox" name="daterange" id="daterange" value="true"> </label>
                                 <input type="text" id="tanggal" name="tanggal" class="form-control datepicker filter_field">
                             </div>
                             <input type="hidden" id="start">
@@ -117,7 +117,7 @@
                             <th class="language">Name</th>
                             <th class="language">Check In</th>
                             <th class="language">Check Out</th>
-                            <th class="language">Breack</th>
+                            <th class="language">Break</th>
                             <th class="language">Description</th>
                         </tr>
                     </thead>

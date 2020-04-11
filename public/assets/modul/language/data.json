@@ -34,7 +34,7 @@
 ,{"id":"Addition","value":"Penambah"},{"id":"Deduction","value":"Pengurang"}
 ,{"id":"Salary Attribute","value":"Atribut Gaji"}
 ,{"id":"Update By Date","value":"Perbarui Dgn Tanggal"}
-,{"id":"Break","value":"Istirahat"}
+,{"id":"Break","value":"Jam Istirahat"}
 ,{"id":"Image","value":"Gambar"}
 ,{"id":"Height","value":"Tinggi"}
 ,{"id":"Widht","value":"Lebar"}
@@ -50,6 +50,10 @@
 ,{"id":"Late Reduction","value":"Potongan Telat"}
 ,{"id":"Late Break Reduction","value":"Potongan Telat Istirahat"}
 ,{"id":"ALl In One","value":"Semua Jadi Satu"}
+,{"id":"ALl In One","value":"Semua Jadi Satu"}
+,{"id":"Date Range","value":"Rentang Tanggal"}
+
+
 
 
 
@@ -106,7 +110,7 @@
 ,{"id":"Penambah","value":"Addition"},{"id":"Pengurang","value":"Deduction"},
 {"id":"Atribut Gaji","value":"Salary Attribute"}
 ,{"id":"Perbarui Dgn Tanggal","value":"Update By Date"}
-,{"id":"Istirahat","value":"Break"}
+,{"id":"Jam Istirahat","value":"Break"}
 ,{"id":"Gambar","value":"Image"}
 ,{"id":"Tinggi","value":"Height"}
 ,{"id":"Lebar","value":"Widht"}
@@ -121,6 +125,8 @@
 ,{"id":"Potongan Telat","value":"Late Reduction"}
 ,{"id":"Potongan Telat Istirahat","value":"Late Break Deduction"}
 ,{"id":"Semua Jadi Satu","value":"All In One"}
+,{"id":"Rentang Tanggal","value":"Date Range"}
+
 
 
 
