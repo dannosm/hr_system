@@ -50,8 +50,21 @@
 ,{"id":"Late Reduction","value":"Potongan Telat"}
 ,{"id":"Late Break Reduction","value":"Potongan Telat Istirahat"}
 ,{"id":"ALl In One","value":"Semua Jadi Satu"}
-,{"id":"ALl In One","value":"Semua Jadi Satu"}
+,{"id":"Shifting","value":"Pergantian Shift"}
 ,{"id":"Date Range","value":"Rentang Tanggal"}
+,{"id":"Setting","value":"Pengaturan"}
+,{"id":"Print","value":"Cetak"}
+,{"id":"Delete","value":"Hapus"}
+,{"id":"Late Limit","value":"Batas Telat"}
+,{"id":"Year","value":"Tahun"}
+,{"id":"Period","value":"Periode"}
+
+
+
+
+
+
+
 
 
 
@@ -126,6 +139,20 @@
 ,{"id":"Potongan Telat Istirahat","value":"Late Break Deduction"}
 ,{"id":"Semua Jadi Satu","value":"All In One"}
 ,{"id":"Rentang Tanggal","value":"Date Range"}
+,{"id":"Pergantian Shift","value":"Shifting"}
+,{"id":"Pengaturan","value":"Setting"}
+,{"id":"Cetak","value":"Print"}
+,{"id":"Hapus","value":"Delete"}
+,{"id":"Batas Telat","value":"Late Limit"}
+,{"id":"Tahun","value":"Year"}
+,{"id":"Periode","value":"Period"}
+
+
+
+
+
+
+
 
 
 

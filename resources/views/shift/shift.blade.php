@@ -48,11 +48,11 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="select_all" name="select_all" title="checked all" ></th>
-                            <th>Name</th>
-                            <th>Check In</th>
-                            <th>Check out</th>
-                            <th>Late Limit</th>
-                            <th>Option</th>
+                            <th class="language">Name</th>
+                            <th class="language">Check In</th>
+                            <th class="language">Check out</th>
+                            <th class="language">Late Limit</th>
+                            <th class="language">Option</th>
                         </tr>
                     </thead>
                     <tbody id="list-ready">
@@ -207,7 +207,7 @@ function load_data(){
     { data: null, render: function ( data, type, row ) {
             // Combine the first and last names into a single table field
             let id = "{{URL::to('/')}}/shift/edit/"+data['id'];
-            return '<a href="'+id+'" class="btn btn-rounded btn-primary">Edit</a>';
+            return '<a href="'+id+'" class="btn btn-rounded btn-primary language">Edit</a>';
         } },
     ],
     "columnDefs": [ {
